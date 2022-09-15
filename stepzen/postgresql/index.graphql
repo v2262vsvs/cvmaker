@@ -1,0 +1,457 @@
+type Cv {
+  created_at: DateTime
+  educationList: [Education] @materializer(query: "getEducationUsingCv_id")
+  experienceList: [Experience] @materializer(query: "getExperienceUsingCv_id")
+  id: ID!
+  interestsList: [Interests] @materializer(query: "getInterestsUsingCv_id")
+  languagesList: [Languages] @materializer(query: "getLanguagesUsingCv_id")
+  profileList: [Profile] @materializer(query: "getProfileUsingCv_id")
+  sample: Int
+  skillsList: [Skills] @materializer(query: "getSkillsUsingCv_id")
+  userList: [User] @materializer(query: "getUserUsingCv_id")
+}
+
+type Education {
+  city: String
+  created_at: DateTime
+  cv: Cv
+    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+  cv_id: ID
+  degree: String
+  description: String
+  enddate: Date
+  id: ID!
+  school: String
+  startdate: Date
+}
+
+type Experience {
+  city: String
+  created_at: DateTime
+  cv: Cv
+    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+  cv_id: ID
+  description: String
+  employer: String
+  enddate: Date
+  id: ID!
+  position: String
+  startdate: Date
+}
+
+type Interests {
+  created_at: DateTime
+  cv: Cv
+    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+  cv_id: ID
+  hobby: String
+  id: ID!
+}
+
+type Languages {
+  created_at: DateTime
+  cv: Cv
+    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+  cv_id: ID
+  id: ID!
+  language: String
+  level: String
+}
+
+type Profile {
+  created_at: DateTime
+  cv: Cv
+    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+  cv_id: ID
+  description: String
+  id: ID!
+}
+
+type Skills {
+  created_at: DateTime
+  cv: Cv
+    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+  cv_id: ID
+  habit: String
+  id: ID!
+  level: String
+}
+
+type User {
+  city: String
+  country: String
+  created_at: DateTime
+  cv: Cv
+    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+  cv_id: ID
+  id: ID!
+  image: String
+  name: String
+  phone: String
+  postalcode: String
+  surname: String
+}
+
+"""
+These are some examples of queries generated from the schema. Feel free to modify them or add your own.
+"""
+type Query {
+  getCvList: [Cv]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "cv"
+      configuration: "postgresql_config"
+    )
+  getCv(id: ID!): Cv
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "cv"
+      configuration: "postgresql_config"
+    )
+  getEducationUsingCv_id(id: ID!): [Education]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      SELECT T."city", T."created_at", T."cv_id", T."degree", T."description", T."enddate", T."id", T."school", T."startdate"
+        FROM "public"."education" T
+        WHERE T."cv_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  getExperienceUsingCv_id(id: ID!): [Experience]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      SELECT T."city", T."created_at", T."cv_id", T."description", T."employer", T."enddate", T."id", T."position", T."startdate"
+        FROM "public"."experience" T
+        WHERE T."cv_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  getInterestsUsingCv_id(id: ID!): [Interests]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      SELECT T."created_at", T."cv_id", T."hobby", T."id"
+        FROM "public"."interests" T
+        WHERE T."cv_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  getLanguagesUsingCv_id(id: ID!): [Languages]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      SELECT T."created_at", T."cv_id", T."id", T."language", T."level"
+        FROM "public"."languages" T
+        WHERE T."cv_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  getProfileUsingCv_id(id: ID!): [Profile]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      SELECT T."created_at", T."cv_id", T."description", T."id"
+        FROM "public"."profile" T
+        WHERE T."cv_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  getSkillsUsingCv_id(id: ID!): [Skills]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      SELECT T."created_at", T."cv_id", T."habit", T."id", T."level"
+        FROM "public"."skills" T
+        WHERE T."cv_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  getUserUsingCv_id(id: ID!): [User]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      SELECT T."city", T."country", T."created_at", T."cv_id", T."id", T."image", T."name", T."phone", T."postalcode", T."surname"
+        FROM "public"."user" T
+        WHERE T."cv_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  getEducationList: [Education]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "education"
+      configuration: "postgresql_config"
+    )
+  getEducation(id: ID!): Education
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "education"
+      configuration: "postgresql_config"
+    )
+  getExperienceList: [Experience]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "experience"
+      configuration: "postgresql_config"
+    )
+  getExperience(id: ID!): Experience
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "experience"
+      configuration: "postgresql_config"
+    )
+  getInterestsList: [Interests]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "interests"
+      configuration: "postgresql_config"
+    )
+  getInterests(id: ID!): Interests
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "interests"
+      configuration: "postgresql_config"
+    )
+  getLanguagesList: [Languages]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "languages"
+      configuration: "postgresql_config"
+    )
+  getLanguages(id: ID!): Languages
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "languages"
+      configuration: "postgresql_config"
+    )
+  getProfileList: [Profile]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "profile"
+      configuration: "postgresql_config"
+    )
+  getProfile(id: ID!): Profile
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "profile"
+      configuration: "postgresql_config"
+    )
+  getSkillsList: [Skills]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "skills"
+      configuration: "postgresql_config"
+    )
+  getSkills(id: ID!): Skills
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "skills"
+      configuration: "postgresql_config"
+    )
+  getUserList: [User]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "user"
+      configuration: "postgresql_config"
+    )
+  getUser(id: ID!): User
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "user"
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+These are some examples of mutations generated from the schema. Feel free to modify them or add your own.
+"""
+type Mutation {
+  insertCv(created_at: DateTime!, sample: Int!): Cv
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "cv"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  deleteCv(id: ID!): Cv
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "cv"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertEducation(
+    startdate: Date!
+    city: String!
+    created_at: DateTime!
+    enddate: Date!
+    description: String!
+    school: String!
+    cv_id: ID!
+    degree: String!
+  ): Education
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "education"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  deleteEducation(id: ID!): Education
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "education"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertExperience(
+    startdate: Date!
+    city: String!
+    created_at: DateTime!
+    enddate: Date!
+    description: String!
+    position: String!
+    cv_id: ID!
+    employer: String!
+  ): Experience
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "experience"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  deleteExperience(id: ID!): Experience
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "experience"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertInterests(created_at: DateTime!, hobby: String!, cv_id: ID!): Interests
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "interests"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  deleteInterests(id: ID!): Interests
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "interests"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertLanguages(
+    language: String!
+    created_at: DateTime!
+    level: String!
+    cv_id: ID!
+  ): Languages
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "languages"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  deleteLanguages(id: ID!): Languages
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "languages"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertProfile(
+    created_at: DateTime!
+    description: String!
+    cv_id: ID!
+  ): Profile
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "profile"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  deleteProfile(id: ID!): Profile
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "profile"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertSkills(
+    created_at: DateTime!
+    level: String!
+    habit: String!
+    cv_id: ID!
+  ): Skills
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "skills"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  deleteSkills(id: ID!): Skills
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "skills"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertUser(
+    image: String!
+    surname: String!
+    city: String!
+    created_at: DateTime!
+    country: String!
+    name: String!
+    postalcode: String!
+    phone: String!
+    cv_id: ID!
+  ): User
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "user"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  deleteUser(id: ID!): User
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "user"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+}
