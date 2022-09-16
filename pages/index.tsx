@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
 import Script from "next/script";
-import CVList from "../components/CVList";
 
 export default function Home() {
   return (
@@ -12,7 +11,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <CVList/>
       </div>
       <div className="bg-white pb-5 pt-2">
       <div className="ml-auto mr-auto mt-12 items-center text-center max-w-[500px] lg:max-w-[650px] space-y-3">
