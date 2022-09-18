@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import CVpdfBerkeley from "../../components/CVpdfBerkeley";
 import CVpdfOtago from "../../components/CVpdfOtago";
+import CvSampleCard from "../../components/CvSampleCard";
 
 function sample() {
   const pdfExportComponent = React.useRef<PDFExport>(null);
@@ -74,10 +75,16 @@ function sample() {
       </div>
 
       <div className="bg-gray-100 rounded-t-md h-full shadow-2xl space-y-10 ">
+        
+      
+      <CvSampleCard/>
+      
+
+      
         <PDFExport ref={pdfExportComponent} paperSize="A4">
-        <CVpdfOtago/>
+       
         </PDFExport>
-        <CVpdfBerkeley />
+
 
         <div className="items-center text-center pt-10">
           <button onClick={() => exportPDFWithComponent()} className="bg-indigo-500 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto">

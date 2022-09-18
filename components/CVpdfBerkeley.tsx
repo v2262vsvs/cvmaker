@@ -149,7 +149,7 @@ function CVpdfBerkeley() {
   }, []);
   return (
     <div>
-        <div className="bg-white w-[595px] h-[842px]  shadow-xl rounded-md  mr-auto ml-auto ">
+        <div className="bg-white w-[595px] h-[842px] scale-60 shadow-xl rounded-md  mr-auto ml-auto ">
           <div className="flex justify-start space-x-3 px-7 pt-4 pb-4">
             <div className="">
               <Image

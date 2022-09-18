@@ -12,6 +12,9 @@
     .postButtons {
         @apply flex items-center space-x-1 text-sm font-semibold opacity-70 hover:opacity-100 cursor-pointer rounded-sm
     }
+    .sampleScale50 {
+        @apply bg-white w-[595px] h-[842px] scale-50 shadow-xl rounded-md  -mr-72 -mt-48 -mb-52
+    }
     .mainbg{
         @apply 
     }
