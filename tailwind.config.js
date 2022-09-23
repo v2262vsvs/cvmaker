@@ -37,10 +37,10 @@ module.exports = {
       height: {
         '842': '52rem',
         '595': '37rem',
-      }
+      },
 
     },
-    
+
   },
   plugins: [],
 };
