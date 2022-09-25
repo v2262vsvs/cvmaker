@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, {useEffect, useState} from "react";
 import {PDFExport} from "@progress/kendo-react-pdf";
-import CvSampleCard from "../../components/resumeComponents/CvSampleCard";
+import CvSampleCards from "../../components/resumeComponents/CvSampleCards";
 import HeadMeta from "../../components/pageSections/HeadMeta";
 import StepProgressBar from "../../components/elementsUI/StepProgressBar";
 
@@ -35,7 +35,7 @@ function sample() {
 
                 <div className="bg-gray-100 rounded-t-md h-full shadow-2xl space-y-10 ">
 
-                    <CvSampleCard/>
+                    <CvSampleCards/>
 
                     <PDFExport ref={pdfExportComponent} paperSize="A4">
 
