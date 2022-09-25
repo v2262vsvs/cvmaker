@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import Image from "next/image";
-import CvSampleCard from "./CvSampleCard";
+import CvSampleCards from "./CvSampleCards";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 type Personal = {
