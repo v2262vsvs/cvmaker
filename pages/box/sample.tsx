@@ -27,60 +27,32 @@ function sample() {
         <>
             <HeadMeta title={'CV - Template'} content={'add later some text'}/>
             <div className="h-full w-full bg-greenn-500 space-y-10">
-                <div className="pt-10">
-                    <div className="text-center text-white font-semibold text-4xl">
-                        Choose a template
-                    </div>
+                <div className="text-center text-white font-semibold text-4xl pt-10">
+                    Choose a template
                 </div>
-                <StepProgressBar percent={percent}/>
 
+                <StepProgressBar percent={percent}/>
 
                 <div className="bg-gray-100 rounded-t-md h-full shadow-2xl space-y-10 ">
 
-
                     <CvSampleCard/>
-
 
                     <PDFExport ref={pdfExportComponent} paperSize="A4">
 
                     </PDFExport>
 
-
                     <div className="items-center text-center pt-10">
                         <button onClick={() => exportPDFWithComponent()}
-                                className="bg-indigo-500 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto">
-                            <div className="text-white text-lg font-semibold">Download PDF</div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 text-white text-center mt-auto mb-auto font-semibold"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M9 5l7 7-7 7"
-                                />
-                            </svg>
+                                className="bg-indigo-500 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto"
+                        >
+                            <div className="text-white text-lg font-semibold">
+                                Download PDF
+                            </div>
+                            <img src='/ChevronNext.svg' alt='next' className="h-6 w-6 text-center mt-auto mb-auto"/>
                         </button>
                         <Link href="/box/experience">
-                            <button className="bg-gray-100 px-12 py-3 rounded-md mt-5 flex ml-auto mr-auto  ">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5  text-gray-400 text-center mt-auto mb-auto font-semibold"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth={2}
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M15 19l-7-7 7-7"
-                                    />
-                                </svg>
+                            <button className="bg-gray-100 px-12 py-3 rounded-md mt-5 flex ml-auto mr-auto">
+                                <img src='/ChevronPrevious.svg' alt='previous' className="h-6 w-6 mt-auto mb-auto"/>
                                 <div className="text-gray-400 text-md hover:text-gray-500">
                                     Previous step
                                 </div>
