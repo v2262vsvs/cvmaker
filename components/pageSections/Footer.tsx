@@ -9,14 +9,14 @@ const Footer = () => {
                                                                                                     className="hover:underline">CV - online constructor™</a>.   All Rights Reserved.
                 </span>
                 <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
-                    <a href="#" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    <a href="components/pageSections/Footer#" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                         <img src='/facebook.svg' alt='facebook'/>
                     </a>
-                    <a href="#" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    <a href="components/pageSections/Footer#" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                         <img src='/twitter.svg' alt='twitter'/>
 
                     </a>
-                    <a href="#" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    <a href="components/pageSections/Footer#" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                         <img src='/github.svg' alt='github'/>
                     </a>
                 </div>

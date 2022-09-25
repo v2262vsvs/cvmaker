@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import {supabase} from "../../utils/supabaseClient";
 import {useSession} from "next-auth/react";
-import HeadMeta from "../../components/HeadMeta";
-import NewProgressBar from "../../components/NewProgressBar";
+import HeadMeta from "../../components/pageSections/HeadMeta";
+import StepProgressBar from "../../components/elementsUI/StepProgressBar";
 
 
 type Personal = {
@@ -135,7 +135,7 @@ function personal() {
                         Personal data
                     </div>
                 </div>
-                <NewProgressBar percent={percent}/>
+                <StepProgressBar percent={percent}/>
 
                 <div className="bg-gray-100 rounded-t-md h-full shadow-t-xl space-y-10 pt-10 ">
                     <div style={{height: '600px'}}

@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
-import Skills from "../../components/Skills";
-import Experience from "../../components/Experience";
-import Profile from "../../components/Profile";
-import Education from "../../components/Education";
-import Languages from "../../components/Languages";
-import HeadMeta from "../../components/HeadMeta";
-import NewProgressBar from "../../components/NewProgressBar";
-import ToTopButton from "../../components/ToTopButton";
+import Skills from "../../components/resumeComponents/Skills";
+import Experience from "../../components/resumeComponents/Experience";
+import Profile from "../../components/resumeComponents/Profile";
+import Education from "../../components/resumeComponents/Education";
+import Languages from "../../components/resumeComponents/Languages";
+import HeadMeta from "../../components/pageSections/HeadMeta";
+import StepProgressBar from "../../components/elementsUI/StepProgressBar";
+import ToTopButton from "../../components/elementsUI/ToTopButton";
 
 
 function experience() {
@@ -31,7 +31,7 @@ function experience() {
                         My experience
                     </div>
                 </div>
-                <NewProgressBar percent={percent}/>
+                <StepProgressBar percent={percent}/>
 
                 <div className="bg-gray-100 rounded-t-md h-full shadow-t-xl space-y-10 pt-10 ">
 

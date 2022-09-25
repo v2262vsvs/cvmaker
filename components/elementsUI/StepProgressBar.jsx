@@ -3,7 +3,7 @@ import { ProgressBar, Step } from "react-step-progress-bar";
 import Link from "next/link";
 
 
-export default function NewProgressBar(props) {
+export default function StepProgressBar(props) {
 
     const {percent} = props
 

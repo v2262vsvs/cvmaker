@@ -1,9 +1,9 @@
 import Link from "next/link";
 import React, {useEffect, useState} from "react";
 import {PDFExport} from "@progress/kendo-react-pdf";
-import CvSampleCard from "../../components/CvSampleCard";
-import HeadMeta from "../../components/HeadMeta";
-import NewProgressBar from "../../components/NewProgressBar";
+import CvSampleCard from "../../components/resumeComponents/CvSampleCard";
+import HeadMeta from "../../components/pageSections/HeadMeta";
+import StepProgressBar from "../../components/elementsUI/StepProgressBar";
 
 function sample() {
     const pdfExportComponent = React.useRef<PDFExport>(null);
@@ -28,11 +28,11 @@ function sample() {
             <HeadMeta title={'CV - Template'} content={'add later some text'}/>
             <div className="h-full w-full bg-greenn-500 space-y-10">
                 <div className="pt-10">
-                    <div className="text-center text-white font-semibold text-4xl ">
+                    <div className="text-center text-white font-semibold text-4xl">
                         Choose a template
                     </div>
                 </div>
-                <NewProgressBar percent={percent}/>
+                <StepProgressBar percent={percent}/>
 
 
                 <div className="bg-gray-100 rounded-t-md h-full shadow-2xl space-y-10 ">

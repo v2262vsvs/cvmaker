@@ -1,7 +1,7 @@
-import HomeContent from "../components/HomeContent";
-import Footer from "../components/Footer";
-import HeadMeta from "../components/HeadMeta";
-import ToTopButton from "../components/ToTopButton";
+import HomeContent from "../components/pageSections/HomeContent";
+import Footer from "../components/pageSections/Footer";
+import HeadMeta from "../components/pageSections/HeadMeta";
+import ToTopButton from "../components/elementsUI/ToTopButton";
 
 
 export default function Home() {

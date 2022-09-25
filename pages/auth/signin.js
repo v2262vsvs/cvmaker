@@ -1,5 +1,5 @@
 import {getProviders, getSession, signIn} from "next-auth/react"
-import HeadMeta from "../components/HeadMeta";
+import HeadMeta from "/components/pageSections/HeadMeta";
 import React from "react";
 
 export default function SignIn({ providers }) {
@@ -37,4 +37,3 @@ export async function getServerSideProps(context) {
         props: { providers },
     }
 }
-
