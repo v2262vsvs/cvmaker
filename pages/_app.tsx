@@ -2,8 +2,8 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from "next-auth/react"
 
-import Header from '../components/Header'
-import Loading from '../components/Loading'
+import Header from '../components/pageSections/Header'
+import Loading from '../components/elementsUI/Loading'
 
 import { ApolloProvider } from '@apollo/client'
 import client from "../apolo-client"

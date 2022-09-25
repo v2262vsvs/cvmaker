@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import HeadMeta from "../components/HeadMeta";
+import HeadMeta from "../components/pageSections/HeadMeta";
 
 export default function Custom404() {
     return (

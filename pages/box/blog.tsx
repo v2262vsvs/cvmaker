@@ -1,6 +1,5 @@
 import React from 'react';
-import HeadMeta from "../../components/HeadMeta";
-
+import HeadMeta from "../../components/pageSections/HeadMeta";
 
 function blog() {
     return (
