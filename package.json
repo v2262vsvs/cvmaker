@@ -25,7 +25,8 @@
     "react": "^18.2.0",
     "react-date-range": "^1.4.0",
     "react-dom": "18.2.0",
-    "react-hot-toast": "^2.3.0"
+    "react-hot-toast": "^2.3.0",
+    "react-step-progress-bar": "^1.0.3"
   },
   "devDependencies": {
     "@types/node": "18.7.14",
