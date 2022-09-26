@@ -16,6 +16,120 @@
         @apply bg-white w-[595px] h-[842px] scale-50 shadow-xl rounded-md  -mr-72 -mt-48 -mb-52
     }
     .mainbg{
-        @apply 
+        @apply
     }
 }
+
+/*loading style*/
+
+
+.spinner-wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    z-index: 9999;
+
+}
+.spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height:60px;
+    width:60px;
+    margin:0 auto;
+    -webkit-animation: rotation .6s infinite linear;
+    -moz-animation: rotation .6s infinite linear;
+    -o-animation: rotation .6s infinite linear;
+    animation: rotation .6s infinite linear;
+    border-left:6px solid rgba(115, 5, 201, 0.15);
+    border-right:6px solid rgba(115, 5, 201, 0.15);
+    border-bottom:6px solid rgba(115, 5, 201, 0.15);
+    border-top:6px solid rgba(109,40, 217,.8);
+    border-radius:100%;
+}
+
+@-webkit-keyframes rotation {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(359deg);}
+}
+@-moz-keyframes rotation {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(359deg);}
+}
+@-o-keyframes rotation {
+    from {-o-transform: rotate(0deg);}
+    to {-o-transform: rotate(359deg);}
+}
+@keyframes rotation {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(359deg);}
+}
+/*end loading style*/
+
+
+/*background squares */
+@keyframes backgroundshift {
+    49.99% {
+        background: rgb(245,243,255);
+    }
+    50% {
+        background: rgb(109,40, 217);
+    }
+    100% {
+        background: rgb(109,40, 217);
+    }
+}
+
+@keyframes scaleshift {
+    0% {
+        transform: scale(.001);
+        rx: 50;
+    }
+    35% {
+        rx: 40;
+    }
+    50% {
+        transform: scale(1);
+        rx: 0;
+    }
+    100% {
+        transform: scale(1);
+        rx: 0;
+    }
+}
+.animation {
+    animation: backgroundshift 7s alternate infinite;
+}
+.animation-svg { min-height: 50vh; }
+
+pattern rect {
+    animation: scaleshift 7s infinite cubic-bezier(.36,.17,.86,.67);
+}
+.black {
+    fill: rgb(109,40, 217);
+    animation-direction: alternate;
+}
+.white {
+    fill: rgb(245,243,255);
+    animation-direction: alternate-reverse;
+}
+.topleft {
+    transform-origin: 50px 50px;
+}
+.bottomleft {
+    transform-origin: 50px 150px;
+}
+.topright {
+    transform-origin: 150px 50px;
+}
+.bottomright {
+    transform-origin: 150px 150px;
+}
+/*end background squares styles*/
+
