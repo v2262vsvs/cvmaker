@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import Image from "next/image"
+import { useSelector } from 'react-redux';
+import { selectChoose, setChoose } from '../../../slices/navSlice';
+import { RootState } from '../../../store';
 type Props={
     personal:Personal,
     profileDescription:string,
@@ -22,19 +25,40 @@ const mont = [
     "Nov",
     "Dec",
   ];
+  function classNames(...classes: any) {
+    return classes.filter(Boolean).join(' ')
+}
 export default function CVpdfStanford({personal,profileDescription,educationList,experienceList,skillsList,languagesList}:Props) {
     const [scale,setScale] = useState(true)
+    
+    let img = personal.image
+    if (img === undefined) {
+      img = 'https://cdn2.iconfinder.com/data/icons/badge-set-2/100/User_Profile-512.png'
+    }
+//bg-white w-[595px] h-[842px] scale-100 shadow-xl rounded-md  mr-auto ml-auto -mb-48 -pb-48
+{/*
 
-  return (
-    <div
-       
-        className={`${
+  className={`${
           scale
             ? "sampleScale50"
             : "bg-white w-[595px] h-[842px] scale-100 shadow-xl rounded-md  mr-auto ml-auto -mb-48 -pb-48"
         } `}
+
+*/}
+  const choose = useSelector((state : RootState) => state.nav.choose); 
+
+  return (
+    <div
+       
+        
+    className={classNames(
+      (choose == 1) ? ' ring-2 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50' : 'sampleScale50 '
+    )}
+        
       >
-        <div className="   ">
+        <div 
+        
+        >
           <div className="flex justify-between">
             <div className="flex px-5 pt-3 space-x-3">
               <div className=" pt-1">
@@ -42,7 +66,7 @@ export default function CVpdfStanford({personal,profileDescription,educationList
                   className="rounded-full"
                   height={25}
                   width={25}
-                  src={personal.image}
+                  src={img}
                   alt=""
                 />
               </div>

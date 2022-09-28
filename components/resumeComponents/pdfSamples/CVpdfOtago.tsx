@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import Image from "next/image";
-import CvSampleCard from "./CvSampleCard";
+import CvSampleCards from "../CvSampleCards";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 type Personal = {
@@ -66,106 +66,30 @@ const mont = [
   "Nov",
   "Dec",
 ];
-type Props = {
-  open?: boolean;
-};
 
-function CVpdfOtago() {
+type Props={
+  personal:Personal,
+  profileDescription:string,
+  educationList:Education[],
+  experienceList:Experience[],
+  skillsList:Skills[],
+  languagesList:Languages[],
+}
+function CVpdfOtago({personal,profileDescription,educationList,experienceList,skillsList,languagesList}:Props) {
   const [scale, setScale] = useState(true);
-  let [isOpen, setIsOpen] = useState<boolean | undefined>(false);
 
-  function closeModal() {
-    setIsOpen(false);
+  let img = personal.image
+  if (img === undefined) {
+    img = 'https://cdn2.iconfinder.com/data/icons/badge-set-2/100/User_Profile-512.png'
   }
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  
 
-  const [personal, setPersonal] = useState<Personal>({});
-  const [profileDescription, setProfileDescription] = useState<string>("");
-  const [educationList, setEducationList] = useState<Education[]>([]);
-  const [experienceList, setExperienceList] = useState<Experience[]>([]);
-  const [skillsList, setSkillsList] = useState<Skills[]>([]);
-  const [languagesList, setLanguagesList] = useState<Languages[]>([]);
-
-  useEffect(() => {
-    const data = window.localStorage.getItem("PERSONAL_STATE");
-    console.log("from storage", data);
-    if (data !== null) {
-      const formated: Personal = JSON.parse(data);
-      console.log("name", formated.name);
-      setPersonal((personal) => ({
-        ...personal,
-        name: formated.name,
-        syrname: formated.syrname,
-        image: formated.image,
-        phone: formated.phone,
-        postalcode: formated.postalcode,
-        address: formated.address,
-        city: formated.city,
-        email: formated.email,
-      }));
-    }
-    const data2 = window.localStorage.getItem("PROFILE_DESCRIPTION_STATE");
-    let formated2 = null;
-    if (data2 !== null) {
-      formated2 = JSON.parse(data2);
-      setProfileDescription(formated2);
-      console.log("profileDescription ", profileDescription);
-    }
-    const data3 = window.localStorage.getItem("EDUCATION_STATE");
-    console.log("from storage", data3);
-    let formated3 = null;
-    if (data3 !== null) {
-      formated3 = JSON.parse(data3);
-      setEducationList(formated3);
-      console.log("education ", educationList);
-    }
-
-    const data4 = window.localStorage.getItem("EXPERIENCE_STATE");
-    console.log("from storage", data4);
-    let formated4 = null;
-    if (data4 !== null) {
-      formated4 = JSON.parse(data4);
-      setExperienceList(formated4);
-      console.log("experience ", experienceList);
-    }
-    const data5 = window.localStorage.getItem("SKILLS_STATE");
-    console.log("from storage", data5);
-    let formated5 = null;
-    if (data5 !== null) {
-      formated5 = JSON.parse(data5);
-      setSkillsList(formated5);
-      console.log("skills ", skillsList);
-    } else {
-      setSkillsList([
-        {
-          habit: "",
-          level: "",
-        },
-      ]);
-    }
-    const data6 = window.localStorage.getItem("LANGUAGES_STATE");
-    console.log("from storage", data6);
-    let formated6 = null;
-    if (data6 !== null) {
-      formated6 = JSON.parse(data6);
-      setLanguagesList(formated6);
-      console.log("languages ", languagesList);
-    } else {
-      setLanguagesList([
-        {
-          language: "",
-          level: "",
-        },
-      ]);
-    }
-  }, []);
+  
   return (
     <div>
       <div
-        onClick={openModal}
+        
         className={`${
           scale
             ? "sampleScale50"
@@ -180,7 +104,7 @@ function CVpdfOtago() {
                   className="rounded-full"
                   height={25}
                   width={25}
-                  src={personal.image}
+                  src={img}
                   alt=""
                 />
               </div>
@@ -336,51 +260,7 @@ function CVpdfOtago() {
           </div>
         </div>
       </div>
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-25">
-              <div className="text-center absolute inset-x-0 bottom-16">
-                <button
-                  type="button"
-                  className="inline-flex justify-center rounded-md border border-transparent bg-bluee-500 px-4 py-2 text-sm font-medium bg-opacity-100 text-white hover:shadow-md hover:bg-opacity-90 focus:outline-none "
-                  onClick={closeModal}
-                >
-                  Select Sample
-                </button>
-              </div>
-            </div>
-          </Transition.Child>
-
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <div className="-ml-24">
-                    <CVpdfOtago />
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
+      
     </div>
   );
 }
