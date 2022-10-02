@@ -8,6 +8,7 @@ import Languages from "../../components/resumeComponents/Languages";
 import HeadMeta from "../../components/pageSections/HeadMeta";
 import StepProgressBar from "../../components/elementsUI/StepProgressBar";
 import ToTopButton from "../../components/elementsUI/ToTopButton";
+import MyModal from "../../components/resumeComponents/MyModal";
 
 
 function experience() {
@@ -59,6 +60,24 @@ function experience() {
                             </button>
                         </Link>
                     </div>
+                </div>
+                <div
+                    className='shadow-2xl shadow-violet-500'
+                    style={{
+                        position: 'fixed',
+                        bottom: '80px',
+                        right: '180px',
+                        height: 80,
+                        width: 80,
+                        background: 'white',
+                        display: "flex",
+                        justifyContent: 'center',
+                        borderRadius: 40
+                    }}>
+                    <MyModal
+                        type='hint'
+                        advice={'Что думаешь по поводу тут подсказок общих???'}
+                    />
                 </div>
             </div>
             <ToTopButton/>

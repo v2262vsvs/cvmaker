@@ -16,6 +16,7 @@
     "@progress/kendo-licensing": "^1.2.2",
     "@progress/kendo-react-buttons": "^5.7.0",
     "@progress/kendo-react-pdf": "^5.7.0",
+    "@reduxjs/toolkit": "^1.8.5",
     "@supabase/supabase-js": "^2.0.0-rc.8",
     "@types/react": "^18.0.21",
     "date-fns": "^2.29.2",
