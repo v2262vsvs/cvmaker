@@ -65,7 +65,7 @@ const HomeContent = () => {
 
             <svg xmlns="http://www.w3.org/2000/svg" width="100%"  className='animation-svg animation'>
                 <defs>
-                    <pattern id="blocks" patternUnits="userSpaceOnUse" width="200" height="200">
+                    <pattern id="blocks" patternUnits="userSpaceOnUse" width="200" height="196">
                         <rect width="100" height="100" className="topleft black"/>
                         <rect width="100" height="100" className="topright white" x="100"/>
                         <rect width="100" height="100" className="bottomleft white" y="100"/>
