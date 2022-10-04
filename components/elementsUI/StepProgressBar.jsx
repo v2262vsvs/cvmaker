@@ -1,9 +1,13 @@
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import Link from "next/link";
+// import {useEffect, useState} from "react";
+// import personal from "../../pages/box/personal";
 
 
 export default function StepProgressBar(props) {
+
+    //const [isActive, setIsActive] = useState(false);
 
     const {percent} = props
 
@@ -21,7 +25,7 @@ export default function StepProgressBar(props) {
             <ProgressBar
                 percent={percent}
                 width={600}
-                filledBackground="linear-gradient(to right, #e9eaec, #ffffff)"
+                filledBackground="linear-gradient(to right, #C4B5FD, #ffffff)"
             >
                 <Step transition="scale">
                     {({ accomplished }) => (
@@ -39,7 +43,10 @@ export default function StepProgressBar(props) {
                 </Step>
                 <Step transition="scale">
                     {({ accomplished }) => (
-                        <Link href="/box/experience">
+                        <Link
+                            //href={isActive ? '/box/experience' : ''}
+                            href="/box/experience"
+                        >
                             <div style={circleStyle}>
                                 <img
                                     alt="img"

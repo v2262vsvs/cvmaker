@@ -27,7 +27,7 @@ function personal() {
 
                 <StepProgressBar percent={percent}/>
 
-                <div className="bg-gray-100 rounded-t-md h-full shadow-t-xl space-y-10 pt-10 ">
+                <div className="bg-violet-50 rounded-t-md h-full shadow-t-xl space-y-10 pt-10 ">
 
                     <PersonalForm/>
 
