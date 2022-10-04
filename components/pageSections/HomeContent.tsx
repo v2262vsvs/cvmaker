@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import CvCard from "../resumeComponents/CvCard";
+import CvCards from "../resumeComponents/CvCards";
 
 const HomeContent = () => {
     return (
@@ -52,13 +52,8 @@ const HomeContent = () => {
                         {/*<h2 style={{border: '1px solid black'}}>TEXT</h2>*/}
                 </div>
                 <Link href={'/box/personal'}>
-                    <div className='mt-28 grid grid-cols-3 mx-auto' style={{width: '70%', height: '1040px'}}>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
+                    <div className='ml-10' >
+                        <CvCards/>
                     </div>
                 </Link>
             </div>

@@ -306,7 +306,7 @@ const PersonalForm = () => {
                 <Link href={"/box/experience"}>
                     <button
                         disabled={!personal.name || !personal.syrname || !personal.email}
-                        className="bg-indigo-500 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto">
+                        className="bg-violet-700 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto">
                         <div className="text-white text-lg font-semibold">
                             The next step
                         </div>
