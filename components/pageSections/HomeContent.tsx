@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import CvCard from "../resumeComponents/CvCard";
+import CvCards from "../resumeComponents/CvCards";
 
 const HomeContent = () => {
     return (
@@ -23,7 +23,7 @@ const HomeContent = () => {
                     </p>
                     <Link href="/box/personal">
                         <button
-                            className="bg-green-500 text-white text-lg xl:text-xl font-semibold rounded-md py-2 px-4 xl:py-4 xl:px-7 hover:bg-green-600">
+                            className="bg-violet-700 text-white text-lg xl:text-xl font-semibold rounded-md py-2 px-4 xl:py-4 xl:px-7 hover:shadow-lg">
                             Create My Resume
                         </button>
                     </Link>
@@ -52,20 +52,15 @@ const HomeContent = () => {
                         {/*<h2 style={{border: '1px solid black'}}>TEXT</h2>*/}
                 </div>
                 <Link href={'/box/personal'}>
-                    <div className='mt-28 grid grid-cols-3 mx-auto' style={{width: '70%', height: '1040px'}}>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
+                    <div className='ml-10' >
+                        <CvCards/>
                     </div>
                 </Link>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" width="100%"  className='animation-svg animation'>
                 <defs>
-                    <pattern id="blocks" patternUnits="userSpaceOnUse" width="200" height="200">
+                    <pattern id="blocks" patternUnits="userSpaceOnUse" width="200" height="196">
                         <rect width="100" height="100" className="topleft black"/>
                         <rect width="100" height="100" className="topright white" x="100"/>
                         <rect width="100" height="100" className="bottomleft white" y="100"/>
@@ -75,7 +70,7 @@ const HomeContent = () => {
                 <rect width="100%" height="100%" fill="url(#blocks)"/>
             </svg>
 
-            <div className=" pb-5 pt-2 container mx-auto mb-16 mt-16" style={{marginTop: '-465px'}}>
+            <div className=" pb-5 pt-2 container mx-auto mb-16 mt-16" style={{marginTop: '2px'}}>
                 <div
                     style={{width: '850px', height: '325px'}}
                     className="ml-auto mr-auto mt-12 items-center text-center max-w-[887px] lg:max-w-[887px] space-y-3"
@@ -91,8 +86,8 @@ const HomeContent = () => {
                     </p>
                     <Link href="/box/personal">
                         <button
-                            className="bg-violet-900 text-white text-lg xl:text-xl font-semibold rounded-md py-2 px-4 xl:py-4 xl:px-7 hover:bg-green-600 ">Create
-                            My Resume
+                            className="bg-violet-700 text-white text-lg xl:text-xl font-semibold rounded-md py-2 px-4 xl:py-4 xl:px-7 hover:shadow-lg">
+                            Create My Resume
                         </button>
                     </Link>
                 </div>

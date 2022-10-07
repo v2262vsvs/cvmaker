@@ -1,7 +1,21 @@
 import {Dialog, Transition} from '@headlessui/react'
-import {Fragment, useEffect, useState} from 'react'
-import CVpdfOtago from './CVpdfOtago'
-import CVpdfStanford from './CVpdfStanford';
+import React, {Fragment, useEffect, useState} from 'react'
+import Link from "next/link";
+import Confetti from 'react-confetti'
+
+import { useSelector,useDispatch } from 'react-redux';
+import {selectChoose, setChoose, setColor} from '../../slices/navSlice';
+
+import {PDFExport} from "@progress/kendo-react-pdf";
+
+import CVpdfBerkeley from './pdfSamples/CVpdfBerkeley';
+import CVpdfOtago from './pdfSamples/CVpdfOtago'
+import CVpdfStanford from './pdfSamples/CVpdfStanford';
+import CVpdfErling from "./pdfSamples/CVpdfErling";
+import CVpdfTwilight from "./pdfSamples/CVpdfTwilight";
+import CVpdfSparkle from "./pdfSamples/CVpdfSparkle";
+
+
 
 type Personal = {
     name?: string;
@@ -37,103 +51,41 @@ type Languages = {
     language: string;
     level: string;
 };
-const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-];
-const mont = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-];
-type Props = {
-    open?: boolean
-}
-export default function CvSampleCards() {
-    // let [isOpen1, setIsOpen1] = useState<boolean>(false)
-    // let [isOpen2, setIsOpen2] = useState<boolean>(false)
-    // let [isOpen3, setIsOpen3] = useState<boolean>(false)
-    // let [isOpen4, setIsOpen4] = useState<boolean>(false)
-    // let [isOpen5, setIsOpen5] = useState<boolean>(false)
-    // let [isOpen6, setIsOpen6] = useState<boolean>(false)
 
-    let [isOpen, setIsOpen] = useState<boolean>(false)
+export default function CvSampleCards() {
+
+    const [isConfetti, setIsConfetti] = useState<boolean>(false)
+
+    const [isOpen, setIsOpen] = useState<number>(0)
+    const dispatch = useDispatch();
+
+    const [isChoose, setIsChoose] = useState<number>(1)
+    const [isColor, setIsColor] = useState<string>('black')
 
     function closeModal() {
-        setIsOpen(false)
+        setIsOpen(0)
+    }
+    function openModal(n:number) {
+        setIsOpen(n)
+        setIsChoose(n)
+        dispatch(setChoose(n));
+    }
+    function changeCV(num : number) {
+        setIsChoose(num)
+        setIsOpen(0)
+    }
+    function changeColor(color: string) {
+        setIsColor(color)
+        dispatch(setColor(color))
     }
 
-    function openModal() {
-        setIsOpen(true)
-    }
-
-    // function closeModal1() {
-    //     setIsOpen1(false)
-    // }
-    //
-    // function closeModal2() {
-    //     setIsOpen2(false)
-    // }
-    //
-    // function closeModal3() {
-    //     setIsOpen3(false)
-    // }
-    //
-    // function closeModal4() {
-    //     setIsOpen4(false)
-    // }
-    //
-    // function closeModal5() {
-    //     setIsOpen5(false)
-    // }
-    //
-    // function closeModal6() {
-    //     setIsOpen6(false)
-    // }
-    //
-    // function openModal1() {
-    //     setIsOpen1(true)
-    // }
-    //
-    // function openModal2() {
-    //     setIsOpen2(true)
-    // }
-    //
-    // function openModal3() {
-    //     setIsOpen3(true)
-    // }
-    //
-    // function openModal4() {
-    //     setIsOpen4(true)
-    // }
-    //
-    // function openModal5() {
-    //     setIsOpen5(true)
-    // }
-    //
-    // function openModal6() {
-    //     setIsOpen6(true)
-    // }
-
+    const pdfExportComponent = React.useRef<PDFExport>(null);
+    const exportPDFWithComponent = () => {
+        if (pdfExportComponent.current) {
+            pdfExportComponent.current.save();
+        }
+        setIsConfetti(true)
+    };
 
     const [personal, setPersonal] = useState<Personal>({});
     const [profileDescription, setProfileDescription] = useState<string>("");
@@ -216,43 +168,44 @@ export default function CvSampleCards() {
         }
     }, []);
 
+
     return (
         <>
-            <div className='flex items-center space-x-3 overflow-x-scroll overflow-y-hidden overflow-clip scrollbar-hide w-[1200px] py-5 px-3 ml-auto mr-auto'>
-                <div onClick={openModal} className="  flex items-center justify-center -ml-40">
-                    <CVpdfStanford personal={personal} profileDescription={profileDescription}
+            <div className='flex items-center space-x-3 overflow-x-scroll overflow-y-hidden overflow-clip scrollbar-hide w-[1400px] py-5 px-3 ml-auto mr-auto'>
+                {/*<div onClick={()=>openModal(1)} >*/}
+                {/*    <CVpdfStanford personal={personal} profileDescription={profileDescription}*/}
+                {/*                   educationList={educationList} experienceList={experienceList} skillsList={skillsList}*/}
+                {/*                   languagesList={languagesList} />*/}
+                {/*</div>*/}
+                <div onClick={()=>openModal(2)} className="  flex items-center justify-center">
+                    <CVpdfOtago personal={personal} profileDescription={profileDescription}
                                    educationList={educationList} experienceList={experienceList} skillsList={skillsList}
                                    languagesList={languagesList}/>
                 </div>
-                <div onClick={openModal} className="  flex items-center justify-center">
-                    <CVpdfStanford personal={personal} profileDescription={profileDescription}
+                <div onClick={()=>openModal(3)} className="  flex items-center justify-center">
+                    <CVpdfBerkeley personal={personal} profileDescription={profileDescription}
                                    educationList={educationList} experienceList={experienceList} skillsList={skillsList}
                                    languagesList={languagesList}/>
                 </div>
-                <div onClick={openModal} className="  flex items-center justify-center">
-                    <CVpdfStanford personal={personal} profileDescription={profileDescription}
+                <div onClick={()=>openModal(4)} className="  flex items-center justify-center">
+                    <CVpdfErling personal={personal} profileDescription={profileDescription}
                                    educationList={educationList} experienceList={experienceList} skillsList={skillsList}
                                    languagesList={languagesList}/>
                 </div>
-                <div onClick={openModal} className="  flex items-center justify-center">
-                    <CVpdfStanford personal={personal} profileDescription={profileDescription}
+                <div onClick={()=>openModal(5)} className="  flex items-center justify-center">
+                    <CVpdfTwilight personal={personal} profileDescription={profileDescription}
                                    educationList={educationList} experienceList={experienceList} skillsList={skillsList}
                                    languagesList={languagesList}/>
                 </div>
-                <div onClick={openModal} className="  flex items-center justify-center">
-                    <CVpdfStanford personal={personal} profileDescription={profileDescription}
-                                   educationList={educationList} experienceList={experienceList} skillsList={skillsList}
-                                   languagesList={languagesList}/>
-                </div>
-                <div onClick={openModal} className="  flex items-center justify-center">
-                    <CVpdfStanford personal={personal} profileDescription={profileDescription}
+                <div onClick={()=>openModal(6)} className="  flex items-center justify-center ">
+                    <CVpdfSparkle personal={personal} profileDescription={profileDescription}
                                    educationList={educationList} experienceList={experienceList} skillsList={skillsList}
                                    languagesList={languagesList}/>
                 </div>
             </div>
 
 
-            <Transition appear show={isOpen} as={Fragment}>
+            <Transition appear show={isOpen == 1} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>
                     <Transition.Child
                         as={Fragment}
@@ -267,30 +220,31 @@ export default function CvSampleCards() {
 
                     </Transition.Child>
 
-                    <div className="fixed inset-0 overflow-y-auto">
+                    <div className="fixed inset-0 overflow-y-auto mt-8">
                         <div className="flex min-h-full items-center justify-center p-4 text-center">
                             <Transition.Child
                                 as={Fragment}
                                 enter="ease-out duration-300"
                                 enterFrom="opacity-0 scale-95"
-                                enterTo="opacity-100 scale-100"
+                                enterTo="opacity-100 scale-125"
                                 leave="ease-in duration-200"
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel
-                                    className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                                    <div className='-ml-24'>
+                                    className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-2 text-left align-middle shadow-xl transition-all">
+                                    <div className=''>
                                         <CVpdfStanford personal={personal} profileDescription={profileDescription}
                                                        educationList={educationList} experienceList={experienceList}
-                                                       skillsList={skillsList} languagesList={languagesList}/>
+                                                       skillsList={skillsList} languagesList={languagesList} type={'modalSample'}/>
                                     </div>
 
-                                    <div className="mt-4 text-center ">
+                                    <div className="-mt-2 text-center p-2 ">
                                         <button
                                             type="button"
-                                            className="inline-flex justify-center rounded-md border border-transparent bg-bluee-500 px-4 py-2 text-sm font-medium bg-opacity-95 text-white hover:shadow-md hover:bg-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
-                                            onClick={closeModal}
+                                            className="inline-flex justify-center rounded-md border border-transparent bg-bluee-500 px-4 py-2 text-sm font-medium bg-opacity-95 text-white hover:shadow-md hover:bg-opacity-100 focus:outline-none "
+                                            //onClick={closeModal }
+                                            onClick={()=>changeCV(1)}
                                         >
                                             Select Sample
                                         </button>
@@ -304,6 +258,453 @@ export default function CvSampleCards() {
                 </Dialog>
 
             </Transition>
+            <Transition appear show={isOpen == 2} as={Fragment}>
+                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black bg-opacity-25"/>
+
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto mt-8">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-125"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel
+                                    className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-2 text-left align-middle shadow-xl transition-all">
+                                    <div className={'flex'}>
+                                        <div className='w-10/12'>
+                                            <CVpdfOtago personal={personal} profileDescription={profileDescription}
+                                                           educationList={educationList} experienceList={experienceList}
+                                                           skillsList={skillsList} languagesList={languagesList} type={'modalSample'}/>
+                                        </div>
+                                        <div className='w-7/12 mt-7'>
+                                            <div
+                                                className={'rounded-full bg-gray-800'}
+                                                onClick={()=>changeColor('black')}>{isColor}</div>
+                                            <div
+                                                onClick={()=>changeColor('violet')}
+                                                className={'rounded-full bg-violet-800'}>violet</div>
+                                            <div
+                                                onClick={()=>changeColor('blue')}
+                                                className={'rounded-full bg-blue-500'}>blue</div>
+                                            <div
+                                                onClick={()=>changeColor('green')}
+                                                className={'rounded-full bg-green-500'}>green</div>
+                                            <div
+                                                onClick={()=>changeColor('yellow')}
+                                                className={'rounded-full bg-yellow-400'}>yellow</div>
+                                            <div
+                                                onClick={()=>changeColor('red')}
+                                                className={'rounded-full bg-red-700'}>red</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="-mt-2 text-center p-2">
+                                        <button
+                                            type="button"
+                                            className="inline-flex justify-center rounded-md border border-transparent bg-bluee-500 px-4 py-2 text-sm font-medium bg-opacity-95 text-white hover:shadow-md hover:bg-opacity-100 focus:outline-none "
+                                            onClick={()=>changeCV(2)}
+                                        >
+                                            Select Sample
+                                        </button>
+                                    </div>
+                                </Dialog.Panel>
+
+                            </Transition.Child>
+                        </div>
+
+                    </div>
+                </Dialog>
+
+            </Transition>
+            <Transition appear show={isOpen == 3} as={Fragment}>
+                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black bg-opacity-25"/>
+
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto mt-8">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-125"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel
+                                    className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-2 text-left align-middle shadow-xl transition-all">
+                                    <div className={'flex'}>
+                                        <div className='w-10/12'>
+                                            <CVpdfBerkeley personal={personal} profileDescription={profileDescription}
+                                                           educationList={educationList} experienceList={experienceList}
+                                                           skillsList={skillsList} languagesList={languagesList} type={'modalSample'}/>
+                                        </div>
+                                        <div className='w-7/12 mt-7'>
+                                            <div
+                                                className={'rounded-full bg-gray-800'}
+                                                onClick={()=>changeColor('black')}>{isColor}</div>
+                                            <div
+                                                onClick={()=>changeColor('violet')}
+                                                className={'rounded-full bg-violet-800'}>violet</div>
+                                            <div
+                                                onClick={()=>changeColor('blue')}
+                                                className={'rounded-full bg-blue-500'}>blue</div>
+                                            <div
+                                                onClick={()=>changeColor('green')}
+                                                className={'rounded-full bg-green-500'}>green</div>
+                                            <div
+                                                onClick={()=>changeColor('yellow')}
+                                                className={'rounded-full bg-yellow-400'}>yellow</div>
+                                            <div
+                                                onClick={()=>changeColor('red')}
+                                                className={'rounded-full bg-red-700'}>red</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="-mt-2 p-2 text-center ">
+                                        <button
+                                            type="button"
+                                            className="inline-flex justify-center rounded-md border border-transparent bg-bluee-500 px-4 py-2 text-sm font-medium bg-opacity-95 text-white hover:shadow-md hover:bg-opacity-100 focus:outline-none "
+                                            //onClick={closeModal}
+                                            onClick={()=>changeCV(3)}
+                                        >
+                                            Select Sample
+                                        </button>
+                                    </div>
+                                </Dialog.Panel>
+
+                            </Transition.Child>
+                        </div>
+
+                    </div>
+                </Dialog>
+            </Transition>
+            <Transition appear show={isOpen == 4} as={Fragment}>
+                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black bg-opacity-25"/>
+
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto mt-8">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-125"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel
+                                    className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-2 text-left align-middle shadow-xl transition-all">
+                                    <div className='flex'>
+                                        <div className='w-10/12'>
+                                            <CVpdfErling personal={personal} profileDescription={profileDescription}
+                                                         educationList={educationList} experienceList={experienceList}
+                                                         skillsList={skillsList} languagesList={languagesList} type={'modalSample'}/>
+                                        </div>
+                                        <div className='w-7/12 mt-7'>
+                                            <div
+                                                className={'rounded-full bg-gray-800'}
+                                                onClick={()=>changeColor('black')}>{isColor}</div>
+                                            <div
+                                                onClick={()=>changeColor('violet')}
+                                                className={'rounded-full bg-violet-800'}>violet</div>
+                                            <div
+                                                onClick={()=>changeColor('blue')}
+                                                className={'rounded-full bg-blue-500'}>blue</div>
+                                            <div
+                                                onClick={()=>changeColor('green')}
+                                                className={'rounded-full bg-green-500'}>green</div>
+                                            <div
+                                                onClick={()=>changeColor('yellow')}
+                                                className={'rounded-full bg-yellow-400'}>yellow</div>
+                                            <div
+                                                onClick={()=>changeColor('red')}
+                                                className={'rounded-full bg-red-700'}>red</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="-mt-2 p-2 text-center ">
+                                        <button
+                                            type="button"
+                                            className="inline-flex justify-center rounded-md border border-transparent bg-bluee-500 px-4 py-2 text-sm font-medium bg-opacity-95 text-white hover:shadow-md hover:bg-opacity-100 focus:outline-none "
+                                            //onClick={closeModal}
+                                            onClick={()=>changeCV(4)}
+                                        >
+                                            Select Sample
+                                        </button>
+                                    </div>
+                                </Dialog.Panel>
+
+                            </Transition.Child>
+                        </div>
+
+                    </div>
+                </Dialog>
+            </Transition>
+            <Transition appear show={isOpen == 5} as={Fragment}>
+                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black bg-opacity-25"/>
+
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto mt-8">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-125"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel
+                                    className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-2 text-left align-middle shadow-xl transition-all">
+                                    <div className='flex'>
+                                        <div className='w-10/12'>
+                                            <CVpdfTwilight personal={personal} profileDescription={profileDescription}
+                                                         educationList={educationList} experienceList={experienceList}
+                                                         skillsList={skillsList} languagesList={languagesList} type={'modalSample'}/>
+                                        </div>
+                                        <div className='w-7/12 mt-7'>
+                                            <div
+                                                className={'rounded-full bg-gray-800'}
+                                                onClick={()=>changeColor('black')}>{isColor}</div>
+                                            <div
+                                                onClick={()=>changeColor('violet')}
+                                                className={'rounded-full bg-violet-800'}>violet</div>
+                                            <div
+                                                onClick={()=>changeColor('blue')}
+                                                className={'rounded-full bg-blue-500'}>blue</div>
+                                            <div
+                                                onClick={()=>changeColor('green')}
+                                                className={'rounded-full bg-green-500'}>green</div>
+                                            <div
+                                                onClick={()=>changeColor('yellow')}
+                                                className={'rounded-full bg-yellow-400'}>yellow</div>
+                                            <div
+                                                onClick={()=>changeColor('red')}
+                                                className={'rounded-full bg-red-700'}>red</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="-mt-2 p-2 text-center ">
+                                        <button
+                                            type="button"
+                                            className="inline-flex justify-center rounded-md border border-transparent bg-bluee-500 px-4 py-2 text-sm font-medium bg-opacity-95 text-white hover:shadow-md hover:bg-opacity-100 focus:outline-none "
+                                            //onClick={closeModal}
+                                            onClick={()=>changeCV(5)}
+                                        >
+                                            Select Sample
+                                        </button>
+                                    </div>
+                                </Dialog.Panel>
+
+                            </Transition.Child>
+                        </div>
+
+                    </div>
+                </Dialog>
+            </Transition>
+            <Transition appear show={isOpen == 6} as={Fragment}>
+                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black bg-opacity-25"/>
+
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto mt-8">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-125"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel
+                                    className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-2 text-left align-middle shadow-xl transition-all">
+                                    <div className='flex'>
+                                        <div className='w-10/12'>
+                                            <CVpdfSparkle personal={personal} profileDescription={profileDescription}
+                                                           educationList={educationList} experienceList={experienceList}
+                                                           skillsList={skillsList} languagesList={languagesList} type={'modalSample'}/>
+                                        </div>
+                                        <div className='w-7/12 mt-7'>
+                                            <div
+                                                className={'rounded-full bg-gray-800'}
+                                                onClick={()=>changeColor('black')}>{isColor}</div>
+                                            <div
+                                                onClick={()=>changeColor('violet')}
+                                                className={'rounded-full bg-violet-800'}>violet</div>
+                                            <div
+                                                onClick={()=>changeColor('blue')}
+                                                className={'rounded-full bg-blue-500'}>blue</div>
+                                            <div
+                                                onClick={()=>changeColor('green')}
+                                                className={'rounded-full bg-green-500'}>green</div>
+                                            <div
+                                                onClick={()=>changeColor('yellow')}
+                                                className={'rounded-full bg-yellow-400'}>yellow</div>
+                                            <div
+                                                onClick={()=>changeColor('red')}
+                                                className={'rounded-full bg-red-700'}>red</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="-mt-2 p-2 text-center ">
+                                        <button
+                                            type="button"
+                                            className="inline-flex justify-center rounded-md border border-transparent bg-bluee-500 px-4 py-2 text-sm font-medium bg-opacity-95 text-white hover:shadow-md hover:bg-opacity-100 focus:outline-none "
+                                            //onClick={closeModal}
+                                            onClick={()=>changeCV(6)}
+                                        >
+                                            Select Sample
+                                        </button>
+                                    </div>
+                                </Dialog.Panel>
+
+                            </Transition.Child>
+                        </div>
+
+                    </div>
+                </Dialog>
+            </Transition>
+
+
+
+            <div className="items-center text-center ">
+                <button onClick={() => exportPDFWithComponent()}
+                        className=" bg-violet-700 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto"
+                >
+                    <div className="text-white text-lg font-semibold ">
+                        Download PDF
+                    </div>
+                    <img src='/ChevronNext.svg' alt='next' className="h-6 w-6 text-center mt-auto mb-auto"/>
+                </button>
+                <Link href="/box/experience">
+                    <button className="bg-violet-50 px-12 py-3 rounded-md mt-5 flex ml-auto mr-auto">
+                        <img src='/ChevronPrevious.svg' alt='previous' className="h-6 w-6 mt-auto mb-auto"/>
+                        <div className="text-gray-400 text-md hover:text-gray-500">
+                            Previous step
+                        </div>
+                    </button>
+                </Link>
+            </div>
+            <div className='flex justify-center' style={{ position: "absolute", left: "-4000px", top: 0 }}>
+                <PDFExport ref={pdfExportComponent} paperSize="A4">
+                    {isChoose === 1 ?
+                        <div className=''>
+                            <CVpdfStanford personal={personal} profileDescription={profileDescription}
+                                           educationList={educationList} experienceList={experienceList} skillsList={skillsList}
+                                           languagesList={languagesList} type={'downloadSample'}/>
+                        </div>
+                        : isChoose === 2 ?
+                            <div className=''>
+                                <CVpdfOtago personal={personal} profileDescription={profileDescription}
+                                            educationList={educationList} experienceList={experienceList} skillsList={skillsList}
+                                            languagesList={languagesList} type={'downloadSample'}/>
+                            </div>
+                            : isChoose === 3 ?
+                                <div>
+                                    <div className=''>
+                                        <CVpdfBerkeley personal={personal} profileDescription={profileDescription}
+                                                   educationList={educationList} experienceList={experienceList} skillsList={skillsList}
+                                                   languagesList={languagesList} type={'downloadSample'}/>
+                                    </div>
+                                </div>
+                                : isChoose === 4 ?
+                                    <div>
+                                        <div className=''>
+                                            <CVpdfErling personal={personal} profileDescription={profileDescription}
+                                                           educationList={educationList} experienceList={experienceList} skillsList={skillsList}
+                                                           languagesList={languagesList} type={'downloadSample'}/>
+                                        </div>
+                                    </div>
+                                : isChoose === 5 ?
+                                    <div>
+                                        <div className=''>
+                                            <CVpdfTwilight personal={personal} profileDescription={profileDescription}
+                                                               educationList={educationList} experienceList={experienceList} skillsList={skillsList}
+                                                               languagesList={languagesList} type={'downloadSample'}/>
+                                        </div>
+                                    </div>
+                                :
+                                        <div>
+                                            <div className=''>
+                                                <CVpdfSparkle personal={personal} profileDescription={profileDescription}
+                                                               educationList={educationList} experienceList={experienceList} skillsList={skillsList}
+                                                               languagesList={languagesList} type={'downloadSample'}/>
+                                            </div>
+                                        </div>
+                    }
+                </PDFExport>
+            </div>
+
+            {isConfetti &&
+                <Confetti
+                    width={window.innerWidth - 50}
+                    height={window.innerHeight + 50}
+                    numberOfPieces={500}
+                />}
         </>
     )
 }

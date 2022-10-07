@@ -21,7 +21,7 @@ function Header() {
 
 
     const signin = async () => {
-        signIn().then()
+        signIn()
     }
 
 
@@ -62,11 +62,12 @@ function Header() {
                     </div>
                     <div className='flex'>
                         <div className='flex items-center mx-7 xl:min-w-[300px] space-x-5  mr-3 px-3'>
-                            <Link href={`/box/personal`}
-                                  className='flex hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
-                                Create My Resume
+                            <div className=' hover:opacity-110 hover:text-violet-700 '>
+                            <Link href={`/box/personal`} className='flex  hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
+                                Create CV
                             </Link>
-                            <div className='flex items-center hover:text-blue-900'>
+                            </div>
+                            <div className='flex items-center  hover:text-blue-900'>
                                 <Dropdown name='Resume' firstLink='Templates' secondLink='Create Resume'
                                           createLink='/box/personal'/>
                             </div>
@@ -85,7 +86,7 @@ function Header() {
 
                         {session ? (
                             <div className='flex'>
-                                <div className='flex items-center space-x-2 p-2 cursor-pointer border border-gray-100'>
+                                <div className='flex items-center space-x-2 p-2 cursor-pointer '>
                                     <Dropdown name={session?.user?.name} firstLink='Your profile' secondLink='Settings'
                                               typeProfile='profile' imageProfile={`${session?.user?.image}`}/>
                                 </div>
@@ -93,7 +94,7 @@ function Header() {
                         ) : (
                             <div>
                                 <div onClick={() => signin()}
-                                     className='flex items-center space-x-2 p-2 cursor-pointer border  bg-violet-700 font-medium rounded-md py-2 px-4 xl:py-4 xl:px-7 hover:bg-violet-500'>
+                                     className='flex items-center space-x-2  cursor-pointer border  bg-violet-700 font-medium rounded-md py-1 px-3 xl:py-3 xl:px-6 hover:bg-violet-500'>
                                     <div className='relative h-5 w-5 flex-shrink-0 hover:scale-95'>
                                         <Image objectFit='contain' src="/login.svg"
                                                layout="fill" className='' alt=""/>
@@ -117,7 +118,7 @@ function Header() {
                     <div className='flex'>
                         <Link href="/">
                             <button
-                                className="bg-violet-700 text-white text-lg xl:text-xl font-semibold rounded-md py-2 px-4 xl:py-4 xl:px-7 hover:bg-violet-500">
+                                className="bg-violet-700 text-white text-lg xl:text-lg font-medium rounded-md  py-1 px-3 xl:py-3 xl:px-6 hover:bg-violet-500">
                                 Go back home
                             </button>
                         </Link>
