@@ -18,9 +18,14 @@
     .mainbg{
         @apply
     }
+
+    .section-headline {
+        @apply font-bold sm:text-sm uppercase tracking-widest border-green-500 border-l-8 pl-2 text-green-500;
+    }
 }
 /*-mr-72 -mt-48 -mb-52*/
 /*-mt-32 -mb-32*/
+
 
 /*loading style*/
 
@@ -174,3 +179,27 @@ input:invalid[focused="true"] ~ span{
 ::-webkit-scrollbar-thumb:vertical:hover {
     background: linear-gradient(transparent, rgba(135, 3, 239, 0.95));
 }
+
+/*что бы убрать синий цвет в инпутах, когда выбираешь из реком. браузера*/
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+/*для таблицы в резюме sparkle*/
+.wrap ul {
+    list-style-position: inside;
+    -moz-column-count: 2; /* Firefox */
+    -webkit-column-count: 2; /* Safari and Chrome */
+    column-count: 2;
+    height: 60px;
+}
+/*для таблиц в резюме berkeley*/
+.wrap2 ul {
+    list-style-position: inside;
+    -moz-column-count: 3; /* Firefox */
+    -webkit-column-count: 3; /* Safari and Chrome */
+    column-count: 3;
+    height: 70px;
+}
+

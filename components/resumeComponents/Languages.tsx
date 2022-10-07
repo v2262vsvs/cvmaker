@@ -130,7 +130,7 @@ function Languages() {
                                                     } name="level" id="cars"
                                                     className="ring-2 ring-gray-200 my-auto text-lg px-4 py-3 text-neutral-600   rounded-sm w-full outline-none">
                                                 <option value="" disabled selected>Choose a level</option>
-                                                <option className="" value="Native Language">Native Language</option>
+                                                <option className="" value="Fluent">Native Language</option>
                                                 <option value="Hight level">Hight level of spoken and written language</option>
                                                 <option value="Good knowledge">Very good knowledge</option>
                                                 <option value="Sufficient">Knowledge at a good working level</option>

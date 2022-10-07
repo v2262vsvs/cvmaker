@@ -39,7 +39,7 @@ export default function CVpdfStanford({
                                           experienceList,
                                           skillsList,
                                           languagesList,
-    type
+                                          type
                                       }: Props) {
     //const [scale, setScale] = useState(true)
 
@@ -66,9 +66,9 @@ export default function CVpdfStanford({
             // )}
             className={classNames(
                 type === 'downloadSample' ? ''
-                    : type === 'modalSample' ? 'sampleScale50'
-                    :  choose === 1 ? 'ring-2 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50'
-                    : 'sampleScale50'
+                    : type === 'modalSample' ? 'sampleScale50 overflow-hidden'
+                    :  choose === 1 ? 'ring-2 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50 overflow-hidden'
+                    : 'sampleScale50 overflow-hidden'
             )}
         >
             <div>
@@ -144,7 +144,13 @@ export default function CVpdfStanford({
                     </div>
                 </div>
 
-                <div className=" border-t-0.1 max-w-[555px] mt-3 mb-10 ml-auto mr-auto border border-gray-200"></div>
+                <div className=" border-t-0.1 max-w-[555px] mt-3 ml-auto mr-auto border border-gray-200"></div>
+                <div className="px-5 pt-3">
+                    <div className="text-neutral-800 font-light mb-1 ">Profile</div>
+                    <div className="space-y-1  font-extralight text-xs">
+                        {profileDescription}
+                    </div>
+                </div>
                 <div className=" border-t-0.1 max-w-[555px] mt-3  ml-auto mr-auto border border-gray-200"></div>
 
                 <div className="px-5 pt-3">
