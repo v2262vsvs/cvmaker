@@ -62,7 +62,7 @@ function Header() {
                     </div>
                     <div className='flex'>
                         <div className='flex items-center mx-7 xl:min-w-[300px] space-x-5  mr-3 px-3'>
-                            <div className='text-violet-700 hover:opacity-110  '>
+                            <div className=' hover:opacity-110 hover:text-violet-700 '>
                             <Link href={`/box/personal`} className='flex  hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
                                 Create CV
                             </Link>

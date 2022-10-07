@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import CvCard from "../resumeComponents/CvCard";
+import CvCards from "../resumeComponents/CvCards";
 
 const HomeContent = () => {
     return (
@@ -52,20 +52,15 @@ const HomeContent = () => {
                         {/*<h2 style={{border: '1px solid black'}}>TEXT</h2>*/}
                 </div>
                 <Link href={'/box/personal'}>
-                    <div className='mt-28 grid grid-cols-3 mx-auto' style={{width: '70%', height: '1040px'}}>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
+                    <div className='ml-10' >
+                        <CvCards/>
                     </div>
                 </Link>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" width="100%"  className='animation-svg animation'>
                 <defs>
-                    <pattern id="blocks" patternUnits="userSpaceOnUse" width="200" height="200">
+                    <pattern id="blocks" patternUnits="userSpaceOnUse" width="200" height="196">
                         <rect width="100" height="100" className="topleft black"/>
                         <rect width="100" height="100" className="topright white" x="100"/>
                         <rect width="100" height="100" className="bottomleft white" y="100"/>
