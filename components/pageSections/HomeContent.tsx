@@ -1,12 +1,33 @@
 import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import CvCard from "../resumeComponents/CvCard";
+import CvCards from "../resumeComponents/CvCards";
+import { useQuery } from '@apollo/client';
+import { GET_ACCOUNT_BY_EMAIL, GET_CV_BY_ID, GET_FULL_CV_BY_ID } from '../../graphql/queries';
+import { useSession } from 'next-auth/react';
 
 const HomeContent = () => {
+    const {data : session} = useSession()
+    
+    const {data,error} = useQuery(GET_FULL_CV_BY_ID,{
+        variables:{
+          id:35
+        }
+      })
+      if(error){
+        return `Error! ${error}`
+      } 
+    const cv : any  = data
+    console.log('cv ',cv)
+
+    
+    
+
+    
+
     return (
-        <div>
-            <div className="bg-white pb-5 pt-2 max-w-2xl max-h-96 container mx-auto">
+        <div className=''>
+            <div className="bg-white pb-5 pt-2 max-w-2xl max-h-96 container mx-auto rounded-b-xl">
                 <div
                     className="ml-auto mr-auto mt-12 items-center text-center max-w-[500px] lg:max-w-[650px] space-y-3">
                     <p className="text-blue-900 text-sm font-medium text-center">
@@ -52,20 +73,15 @@ const HomeContent = () => {
                         {/*<h2 style={{border: '1px solid black'}}>TEXT</h2>*/}
                 </div>
                 <Link href={'/box/personal'}>
-                    <div className='mt-28 grid grid-cols-3 mx-auto' style={{width: '70%', height: '1040px'}}>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
-                        <CvCard/>
+                    <div className='ml-10' >
+                        <CvCards/>
                     </div>
                 </Link>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" width="100%"  className='animation-svg animation'>
                 <defs>
-                    <pattern id="blocks" patternUnits="userSpaceOnUse" width="200" height="200">
+                    <pattern id="blocks" patternUnits="userSpaceOnUse" width="200" height="196">
                         <rect width="100" height="100" className="topleft black"/>
                         <rect width="100" height="100" className="topright white" x="100"/>
                         <rect width="100" height="100" className="bottomleft white" y="100"/>

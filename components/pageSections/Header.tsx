@@ -62,13 +62,13 @@ function Header() {
                     </div>
                     <div className='flex'>
                         <div className='flex items-center mx-7 xl:min-w-[300px] space-x-5  mr-3 px-3'>
-                            <div className='text-violet-700 hover:opacity-110  '>
-                            <Link href={`/box/personal`} className='flex  hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
+                            <div className=' hover:opacity-110 hover:text-violet-700 '>
+                            <Link href={ `/box/personal`  } className='flex  hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
                                 Create CV
                             </Link>
                             </div>
                             <div className='flex items-center  hover:text-blue-900'>
-                                <Dropdown name='Resume' firstLink='Templates' secondLink='Create Resume'
+                                <Dropdown name='Resume' firstLink='Templates' secondLink='Create Resume' createLink2='/box/tamplate'
                                           createLink='/box/personal'/>
                             </div>
                             <div className='flex items-center hover:text-blue-900'>
@@ -87,7 +87,7 @@ function Header() {
                         {session ? (
                             <div className='flex'>
                                 <div className='flex items-center space-x-2 p-2 cursor-pointer '>
-                                    <Dropdown name={session?.user?.name} firstLink='Your profile' secondLink='Settings'
+                                    <Dropdown name={session?.user?.name} firstLink='Your profile' secondLink='Settings' createLink2='/box/profile'
                                               typeProfile='profile' imageProfile={`${session?.user?.image}`}/>
                                 </div>
                             </div>

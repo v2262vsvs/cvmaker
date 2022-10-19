@@ -13,12 +13,19 @@
         @apply flex items-center space-x-1 text-sm font-semibold opacity-70 hover:opacity-100 cursor-pointer rounded-sm
     }
     .sampleScale50 {
-        @apply bg-white w-[595px] h-[842px] scale-50 shadow-xl rounded-md  -mr-72 -mt-48 -mb-52
+        @apply bg-white w-[595px] h-[842px] scale-65 shadow-xl rounded-2xl -mt-32 -mb-32 -ml-20 -mr-10
     }
     .mainbg{
         @apply
     }
+
+    .section-headline {
+        @apply font-bold sm:text-sm uppercase tracking-widest border-green-500 border-l-8 pl-2 text-green-500;
+    }
 }
+/*-mr-72 -mt-48 -mb-52*/
+/*-mt-32 -mb-32*/
+
 
 /*loading style*/
 
@@ -132,4 +139,67 @@ pattern rect {
     transform-origin: 150px 150px;
 }
 /*end background squares styles*/
+
+
+/*for input validators in personal form*/
+.span-redmark{
+    font-size: 12px;
+    /*padding: 3px;*/
+    color: red;
+    display: none;
+}
+
+input:invalid[focused="true"]{
+    border: 1px solid red;
+}
+
+input:invalid[focused="true"] ~ span{
+    display: block;
+}
+/*!*end*!*/
+
+::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+    background-color: white;
+    border-radius: 6px;
+}
+::-webkit-scrollbar:horizontal {
+    background: linear-gradient(to right, #C4B5FD, #ffffff);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(109,40, 217);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    background: linear-gradient(transparent, rgb(109,40, 217));
+}
+::-webkit-scrollbar-thumb:vertical:hover {
+    background: linear-gradient(transparent, rgba(135, 3, 239, 0.95));
+}
+
+/*что бы убрать синий цвет в инпутах, когда выбираешь из реком. браузера*/
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+/*для таблицы в резюме sparkle*/
+.wrap ul {
+    list-style-position: inside;
+    -moz-column-count: 2; /* Firefox */
+    -webkit-column-count: 2; /* Safari and Chrome */
+    column-count: 2;
+    height: 60px;
+}
+/*для таблиц в резюме berkeley*/
+.wrap2 ul {
+    list-style-position: inside;
+    -moz-column-count: 3; /* Firefox */
+    -webkit-column-count: 3; /* Safari and Chrome */
+    column-count: 3;
+    height: 70px;
+}
 

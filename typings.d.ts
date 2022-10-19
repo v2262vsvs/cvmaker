@@ -1,6 +1,6 @@
 type Personal = {
     name?: string;
-    syrname?: string;
+    surname?: string;
     image?: string | undefined;
     phone?: string;
     postalcode?: string;

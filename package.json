@@ -16,18 +16,21 @@
     "@progress/kendo-licensing": "^1.2.2",
     "@progress/kendo-react-buttons": "^5.7.0",
     "@progress/kendo-react-pdf": "^5.7.0",
+    "@reduxjs/toolkit": "^1.8.5",
     "@supabase/supabase-js": "^2.0.0-rc.8",
     "@types/react": "^18.0.21",
-    "date-fns": "^2.29.2",
+    "date-fns": "^2.29.3",
     "graphql": "^16.6.0",
     "next": "12.2.5",
     "next-auth": "^4.10.3",
     "react": "^18.2.0",
+    "react-confetti": "^6.1.0",
     "react-date-range": "^1.4.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.3.0",
     "react-redux": "^8.0.4",
-    "react-step-progress-bar": "^1.0.3"
+    "react-step-progress-bar": "^1.0.3",
+    "react-toastify": "^9.0.8"
   },
   "devDependencies": {
     "@types/node": "18.7.14",

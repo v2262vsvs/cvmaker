@@ -4,7 +4,10 @@ import HeadMeta from "../components/pageSections/HeadMeta";
 import ToTopButton from "../components/elementsUI/ToTopButton";
 
 
+
 export default function Home() {
+  
+    
     return (
         <>
             <HeadMeta
@@ -17,3 +20,4 @@ export default function Home() {
         </>
   );
 }
+
