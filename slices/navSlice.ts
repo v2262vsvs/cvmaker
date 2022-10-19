@@ -4,7 +4,7 @@ import type { RootState } from '../store'
 interface CounterState {
     choose: number | null,
     scale:number | null,
-    color:string | null,
+    color:number | null,
   }
 
 const initialState : CounterState={
@@ -23,10 +23,10 @@ export const navSlice = createSlice({
         setScale:(state,action : PayloadAction<number>)=>{
             state.scale = action.payload
         },
-        setColor:(state,action :PayloadAction<string>)=>{
+        setColor:(state,action :PayloadAction<number>)=>{
             state.color = action.payload
         },
-
+        
     }
 })
 

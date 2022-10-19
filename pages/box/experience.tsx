@@ -8,7 +8,6 @@ import Languages from "../../components/resumeComponents/Languages";
 import HeadMeta from "../../components/pageSections/HeadMeta";
 import StepProgressBar from "../../components/elementsUI/StepProgressBar";
 import ToTopButton from "../../components/elementsUI/ToTopButton";
-import MyModal from "../../components/resumeComponents/MyModal";
 
 
 function experience() {
@@ -33,7 +32,7 @@ function experience() {
 
                 <StepProgressBar percent={percent}/>
 
-                <div className="bg-violet-50 rounded-t-md h-full shadow-t-xl space-y-10 pt-10 ">
+                <div className="bg-gray-100 rounded-t-md h-full shadow-t-xl space-y-10 pt-10 ">
 
                     <Profile/>
                     <Education/>
@@ -44,7 +43,7 @@ function experience() {
                     <div className="items-center text-center pt-10">
                         <Link href="/box/sample">
                             <button
-                                className="bg-violet-700  px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto">
+                                className="bg-bluee-500  px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto">
                                 <div className="text-white text-lg font-semibold">
                                     The next step
                                 </div>
@@ -52,7 +51,7 @@ function experience() {
                             </button>
                         </Link>
                         <Link href="/box/personal">
-                            <button className="bg-violet-50 px-12 py-3 rounded-md mt-5 flex ml-auto mr-auto  ">
+                            <button className="bg-gray-100 px-12 py-3 rounded-md mt-5 flex ml-auto mr-auto  ">
                                 <img src='/ChevronPrevious.svg' alt='previous' className="h-6 w-6 mt-auto mb-auto"/>
                                 <div className="text-gray-400 text-md hover:text-gray-500">
                                     Previous step
@@ -60,24 +59,6 @@ function experience() {
                             </button>
                         </Link>
                     </div>
-                </div>
-                <div
-                    className='shadow-2xl shadow-violet-500'
-                    style={{
-                        position: 'fixed',
-                        bottom: '80px',
-                        right: '180px',
-                        height: 80,
-                        width: 80,
-                        background: 'white',
-                        display: "flex",
-                        justifyContent: 'center',
-                        borderRadius: 40
-                    }}>
-                    <MyModal
-                        type='hint'
-                        advice={'Что думаешь по поводу тут подсказок общих???'}
-                    />
                 </div>
             </div>
             <ToTopButton/>
