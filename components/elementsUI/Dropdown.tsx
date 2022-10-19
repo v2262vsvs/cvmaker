@@ -21,7 +21,9 @@ export default function Dropdown(props: any) {
             <div>
                 <Menu.Button
                     className={classNames(
-                        typeProfile ? 'inline-flex w-full justify-center rounded-lg border border-gray-300 bg-violet-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:shadow-lg focus:outline-none ' : 'inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100'
+                        typeProfile ? 'inline-flex w-full justify-center rounded-lg border border-gray-300 bg-violet-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:shadow-lg focus:outline-none '
+                            //: 'inline-flex w-full justify-center  px-4 py-2 text-sm font-medium text-gray-700  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100'
+                            : 'inline-flex justify-center hover:text-violet-700'
                     )}
                     >
                     {typeProfile &&
@@ -29,7 +31,7 @@ export default function Dropdown(props: any) {
                             <Image objectFit='contain' src={imageProfile} layout="fill" className='rounded-full' alt='/'/>
                         </div>}
                     {name}
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd"
                               d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                               clipRule="evenodd"/>
@@ -53,7 +55,7 @@ export default function Dropdown(props: any) {
                                 <a
                                     href="#"
                                     className={classNames(
-                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                        active ? 'bg-violet-200 text-gray-900' : 'text-gray-700',
                                         'block px-4 py-2 text-sm'
                                     )}
                                 >
@@ -66,7 +68,7 @@ export default function Dropdown(props: any) {
                                 <a
                                     href={createLink}
                                     className={classNames(
-                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                        active ? 'bg-violet-200 text-gray-900' : 'text-gray-700',
                                         'block px-4 py-2 text-sm'
                                     )}
                                 >
@@ -79,9 +81,9 @@ export default function Dropdown(props: any) {
                                 <Menu.Item>
                                     {({ active }) => (
                                         <button
-                                            
+
                                             className={classNames(
-                                                active ? 'bg-gray-100 text-violet-800' : 'text-violet-700',
+                                                active ? 'bg-violet-200 text-violet-800' : 'text-violet-700',
                                                 'block w-full px-4 py-2 text-left text-sm'
                                             )}
                                         >
