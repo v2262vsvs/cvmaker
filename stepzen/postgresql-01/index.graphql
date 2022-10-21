@@ -1,0 +1,78 @@
+type Userinfo {
+  address: String
+  city: String
+  created_at: DateTime
+  cv: Cv
+    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+  cv_id: ID
+  email: String
+  id: ID!
+  image: String
+  name: String
+  phone: String
+  postalcode: String
+  surname: String
+}
+
+"""
+These are some examples of queries generated from the schema. Feel free to modify them or add your own.
+"""
+type Query {
+  getUserinfoUsingCv_id(id: ID!): [Userinfo]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      SELECT T."address", T."city", T."created_at", T."cv_id", T."email", T."id", T."image", T."name", T."phone", T."postalcode", T."surname"
+        FROM "public"."userinfo" T
+        WHERE T."cv_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  getUserinfoList: [Userinfo]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "userinfo"
+      configuration: "postgresql_config"
+    )
+  getUserinfo(id: ID!): Userinfo
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "userinfo"
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+These are some examples of mutations generated from the schema. Feel free to modify them or add your own.
+"""
+type Mutation {
+  insertUserinfo(
+    image: String!
+    surname: String!
+    city: String!
+    created_at: DateTime!
+    email: String!
+    name: String!
+    postalcode: String!
+    phone: String!
+    address: String!
+    cv_id: ID!
+  ): Userinfo
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "userinfo"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  deleteUserinfo(id: ID!): Userinfo
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "userinfo"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+}

@@ -33,13 +33,10 @@ function profile() {
     const {data : session} = useSession()
     const router = useRouter()
     const dispatch = useDispatch()
-
     const [deleteCv] = useMutation(DELETE_CV_BY_ID)
     const [isChoose, setIsChoose] = useState<number>(1)
-
-
-   
     const pdfExportComponent = React.useRef<PDFExport>(null);
+    const [isOpen, setIsOpen] = useState<number>(0)
 
 
     const {data,error} = useQuery(GET_FULL_CVS_BY_ACCOUNT_BY_EMAIL,{
@@ -49,17 +46,11 @@ function profile() {
       })
       if(error){
         return `Error! ${error}`
-      } 
+      }
+
     console.log('account ',data)
     dispatch(setColor(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.color))
-    const color = useSelector((state: RootState) => state.nav.color);
-    console.log(color)
-
-    //setIsChoose(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.sample)
     dispatch(setChoose(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.sample));
-
-    
-
     let educationArr:Education[] = []
     for(let i=0;i<data?.getEducationByAccountEmail.length;i++){
       if (data?.getEducationByAccountEmail[i].cv_id == data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].id){
@@ -84,7 +75,7 @@ function profile() {
         languagesArr.push(data?.getLanguagesByAccountEmail[i])
       }
     }
-    const [isOpen, setIsOpen] = useState<number>(0)
+  
 
     function openModal(n:number) {
       setIsOpen(n)
@@ -93,11 +84,6 @@ function profile() {
       setIsOpen(0)
     }
     const handleEdit = async () => {
-
-      
-
-      
-      
         window.localStorage.setItem("PERSONAL_STATE", JSON.stringify(data?.getUserInfoByAccountEmail[data?.getCvsByAccountEmail.length-1]));
         console.log("storage", window.localStorage.getItem("PERSONAL_STATE"))
 
@@ -117,11 +103,8 @@ function profile() {
         console.log("storage for profile  ", window.localStorage.getItem("PROFILE_DESCRIPTION_STATE"));
 
         router.push('/box/personal')
-      
-    
     }
     const handleDelete = async () => {
-
       try { 
         const {data:{deleteUserByCvId:deletedCV}} = await deleteCv({
           variables:{
@@ -129,21 +112,16 @@ function profile() {
           },
         })
 
-        toast("Your last CV deleted!")
+        toast.success("Your last CV deleted!")
         location.reload();        
-
     }catch(error){console.log("error",error)}
     }
-
 
     const exportPDFWithComponent = async () => {
       setIsConfetti(true)
       if (pdfExportComponent.current) {
           pdfExportComponent.current.save();
       }
-      
-
-      
       setIsConfetti(false)
   };
 
@@ -153,9 +131,12 @@ function profile() {
     
 
   return (
-    <div className="h-full">
+    <>
+    <div className="bg-violet-50 h-full w-screen">
+    <div className=" h-full w-full bg-violet-50 relative">
       
-      <HeadMeta title={'Your Profile'} content={'add later some text'}/>      <div className="mt-5 mx-20">
+      <HeadMeta title={'Your Profile'} content={'add later some text'}/>      
+      <div className="mt-5 mx-20">
         <div className="flex justify-between">
           <div className="font-extrabold text-violet-700 text-xl xl:text-2xl 2xl:text-4xl">
             Resumes & Cover Letters
@@ -178,10 +159,10 @@ function profile() {
             <div className=" text-gray-500">Cover Letters</div>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex ">
       {data?.getCvsByAccountEmail.length > 0  ?(
-        <div>
-          <div className="mx-14 mt-3">
+        <div className="">
+          <div className="mx-14 mt-3 mb-32">
             {(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].sample == 1) && (
               <div onClick={()=>openModal(2)}>
               <CVpdfStanford
@@ -262,8 +243,7 @@ function profile() {
         </div>
         ) : (
         <div className="mx-14 mt-3">
-            <div
-            className='sampleScale50 overflow-hidden'></div>
+            
             <CVpdfOtago
                 personal={{}}
                 profileDescription={''}
@@ -276,7 +256,7 @@ function profile() {
       )}
       
 
-      <div className="mt-8 space-y-2 -ml-20">
+      <div className="mt-8 space-y-2 -ml-20 ">
         <div className="mb-1 font-medium text-lg">Your last cv</div>
         <div onClick={()=>handleEdit()} className="flex space-x-1 hover:border-b hover:border-violet-700 w-fit cursor-pointer">
           <div className="h-5 w-5 text-violet-600 ">
@@ -284,7 +264,7 @@ function profile() {
           </div>
           <div>Edit</div>
         </div>
-        <div onClick={() => exportPDFWithComponent()} className="flex space-x-1 hover:border-b hover:border-violet-700 w-fit cursor-pointer">
+        <div onClick={() => exportPDFWithComponent()} className="flex space-x-1 hover:border-b  hover:border-violet-700 w-fit cursor-pointer">
           <div className="h-5 w-5 text-violet-600">
               <DownloadIcon/>
           </div>
@@ -298,7 +278,7 @@ function profile() {
         </div>
       </div>
 
-      <div className="mt-3 ml-48 ">
+      <div className="mt-3 ml-10 2xl:ml-28 ">
       <Link href="/box/personal">
       <div  className='bg-white w-[595px] h-[842px] scale-65 shadow-xl hover:shadow-2xl rounded-2xl -mt-32  -mb-32 -ml-20 -mr-10  overflow-hidden'>
         <div className="rounded-full bg-violet-300 hover:-scale-105 bg-opacity-25 w-48 h-48  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -310,7 +290,7 @@ function profile() {
       </Link>
 
       </div>
-      <div className="mt-8 space-y-2 -ml-6">
+      <div className="mt-8 space-y-2 -ml-6 mr-20">
         <div className="mb-1 font-medium text-lg text-gray-500">New Resume</div>
         <div  className="flex text-gray-500 text-sm font-light cursor-pointer">
           <div>Create a tailored resume for each job <div>application. Double your chances of <div>getting hired!</div></div> </div>
@@ -530,10 +510,21 @@ function profile() {
                     numberOfPieces={500}
                 />}
 
-      <div className="absolute inset-x-0 bottom-0">
-        <Footer />
-      </div>
+    <div className="shadow-xl fixed bottom-0  ">
+      <Footer />
+    </div>    
+    
+
+    
     </div>
+    
+
+
+    
+    
+
+    </div>
+    </>
   );
 }
 

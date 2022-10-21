@@ -68,7 +68,7 @@ function Header() {
                             </Link>
                             </div>
                             <div className='flex items-center  hover:text-blue-900'>
-                                <Dropdown name='Resume' firstLink='Templates' secondLink='Create Resume' createLink2='/box/tamplate'
+                                <Dropdown name='Resume' firstLink='Templates' secondLink='Create Resume' 
                                           createLink='/box/personal'/>
                             </div>
                             <div className='flex items-center hover:text-blue-900'>

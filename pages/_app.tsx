@@ -7,29 +7,33 @@ import Loading from '../components/elementsUI/Loading'
 
 import { ApolloProvider } from '@apollo/client'
 import client from "../apolo-client"
-import {Toaster} from "react-hot-toast"
 import { store } from '../store';
 import { Provider } from 'react-redux';
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 //remove overflow-y-scroll || h-screen
 
 function MyApp({ Component, pageProps: { session, ...pageProps }, }: AppProps) {
     return (
-        < div className='bg-violet-50 h-screen'>
+        < div >
         <Provider store={store}>
         <ApolloProvider client={client}>
             <SessionProvider session={session}>
-                <div >
+                <div className='bg-violet-50 h-screen overflow-y-scroll' >
                    
                     <Loading/>
+                    
+                    <ToastContainer />
+                    
                     <Header/>
-                    <Toaster/>
-                    <div >
-                        <Component  {...pageProps} />
-                    </div>
+                    <Component  {...pageProps} />
+                    
                 </div>
             </SessionProvider>              
         </ApolloProvider>

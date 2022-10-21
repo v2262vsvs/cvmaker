@@ -11,7 +11,10 @@ type Cv {
   account: Account
     @materializer(
       query: "getAccount"
-      arguments: [{ name: "id", field: "account_id" }]
+      arguments: [
+        { name: "id", field: "account_id" }
+        { name: "id", field: "account_id" }
+      ]
     )
   account_id: ID
   color: String
@@ -25,13 +28,20 @@ type Cv {
   sample: Int
   skillsList: [Skills] @materializer(query: "getSkillsUsingCv_id")
   userList: [UserInfo] @materializer(query: "getUserUsingCv_id")
+  userinfoList: [Userinfo] @materializer(query: "getUserinfoUsingCv_id")
 }
 
 type Education {
   city: String
   created_at: DateTime
   cv: Cv
-    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+    @materializer(
+      query: "getCv"
+      arguments: [
+        { name: "id", field: "cv_id" }
+        { name: "id", field: "cv_id" }
+      ]
+    )
   cv_id: ID
   degree: String
   description: String
@@ -45,7 +55,13 @@ type Experience {
   city: String
   created_at: DateTime
   cv: Cv
-    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+    @materializer(
+      query: "getCv"
+      arguments: [
+        { name: "id", field: "cv_id" }
+        { name: "id", field: "cv_id" }
+      ]
+    )
   cv_id: ID
   description: String
   employer: String
@@ -58,7 +74,13 @@ type Experience {
 type Interests {
   created_at: DateTime
   cv: Cv
-    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+    @materializer(
+      query: "getCv"
+      arguments: [
+        { name: "id", field: "cv_id" }
+        { name: "id", field: "cv_id" }
+      ]
+    )
   cv_id: ID
   hobby: String
   id: ID!
@@ -67,7 +89,13 @@ type Interests {
 type Languages {
   created_at: DateTime
   cv: Cv
-    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+    @materializer(
+      query: "getCv"
+      arguments: [
+        { name: "id", field: "cv_id" }
+        { name: "id", field: "cv_id" }
+      ]
+    )
   cv_id: ID
   id: ID!
   language: String
@@ -77,7 +105,13 @@ type Languages {
 type Skills {
   created_at: DateTime
   cv: Cv
-    @materializer(query: "getCv", arguments: [{ name: "id", field: "cv_id" }])
+    @materializer(
+      query: "getCv"
+      arguments: [
+        { name: "id", field: "cv_id" }
+        { name: "id", field: "cv_id" }
+      ]
+    )
   cv_id: ID
   habit: String
   id: ID!
@@ -97,7 +131,7 @@ type UserInfo {
   phone: String
   postalcode: String
   surname: String
-  address:String
+  address: String
 }
 
 """
@@ -118,79 +152,74 @@ type Query {
       table: "account"
       configuration: "postgresql_config"
     )
-    getAccountByEmail(email: String!): Account
+  getAccountByEmail(email: String!): Account
     @dbquery(
       type: "postgresql"
-      query: """ 
+      query: """
       select * from "account"  where "email" = $1
       """
       configuration: "postgresql_config"
     )
-
-    getCvsByAccountEmail(email: String!): [Cv]
+  getCvsByAccountEmail(email: String!): [Cv]
     @dbquery(
       type: "postgresql"
-      query: """ 
+      query: """
       SELECT cv.account_id,cv.color,cv.created_at,cv.description,cv.id,cv.sample
       FROM account
       INNER JOIN cv ON cv.account_id=account.id WHERE account.email = $1
       """
       configuration: "postgresql_config"
     )
-    getEducationByAccountEmail(email: String!): [Education]
+  getEducationByAccountEmail(email: String!): [Education]
     @dbquery(
       type: "postgresql"
-      query: """ 
-      SELECT education.city, education.created_at, education.cv_id, education.degree, education.description, education.enddate, education.id, education.school, education.startdate 
+      query: """
+      SELECT education.city, education.created_at, education.cv_id, education.degree, education.description, education.enddate, education.id, education.school, education.startdate
       FROM account
       INNER JOIN cv ON cv.account_id=account.id INNER JOIN education ON education.cv_id=cv.id  WHERE account.email = $1
       """
       configuration: "postgresql_config"
     )
-    getExperienceByAccountEmail(email: String!): [Experience]
+  getExperienceByAccountEmail(email: String!): [Experience]
     @dbquery(
       type: "postgresql"
-      query: """ 
-      SELECT experience.city, experience.created_at, experience.cv_id, experience.employer, experience.description, experience.enddate, experience.id, experience.position, experience.startdate 
+      query: """
+      SELECT experience.city, experience.created_at, experience.cv_id, experience.employer, experience.description, experience.enddate, experience.id, experience.position, experience.startdate
       FROM account
       INNER JOIN cv ON cv.account_id=account.id INNER JOIN experience ON experience.cv_id=cv.id  WHERE account.email = $1
       """
       configuration: "postgresql_config"
     )
-    getLanguagesByAccountEmail(email: String!): [Languages]
+  getLanguagesByAccountEmail(email: String!): [Languages]
     @dbquery(
       type: "postgresql"
-      query: """ 
+      query: """
       SELECT languages.language, languages.level, languages.cv_id
       FROM account
       INNER JOIN cv ON cv.account_id=account.id INNER JOIN languages ON languages.cv_id=cv.id  WHERE account.email = $1
       """
       configuration: "postgresql_config"
     )
-    getSkillsByAccountEmail(email: String!): [Skills]
+  getSkillsByAccountEmail(email: String!): [Skills]
     @dbquery(
       type: "postgresql"
-      query: """ 
-      SELECT skills.level, skills.habit, skills.cv_id 
+      query: """
+      SELECT skills.level, skills.habit, skills.cv_id
       FROM account
       INNER JOIN cv ON cv.account_id=account.id INNER JOIN skills ON skills.cv_id=cv.id  WHERE account.email = $1
       """
       configuration: "postgresql_config"
     )
-    getUserInfoByAccountEmail(email: String!): [UserInfo]
+  getUserInfoByAccountEmail(email: String!): [UserInfo]
     @dbquery(
       type: "postgresql"
-      query: """ 
+      query: """
       SELECT userinfo.name, userinfo.surname, userinfo.image, userinfo.phone, userinfo.city, userinfo.postalcode, userinfo.address, userinfo.email, userinfo.cv_id
       FROM account
       INNER JOIN cv ON cv.account_id=account.id INNER JOIN userinfo ON userinfo.cv_id=cv.id  WHERE account.email = $1
       """
       configuration: "postgresql_config"
     )
-
-
-
-
   getCvUsingAccount_id(id: ID!): [Cv]
     @dbquery(
       type: "postgresql"
@@ -201,8 +230,6 @@ type Query {
       """
       configuration: "postgresql_config"
     )
-
-
   getCvList: [Cv]
     @dbquery(
       type: "postgresql"
@@ -210,7 +237,6 @@ type Query {
       table: "cv"
       configuration: "postgresql_config"
     )
-    
   getCv(id: ID!): Cv
     @dbquery(
       type: "postgresql"
@@ -368,11 +394,7 @@ type Query {
 These are some examples of mutations generated from the schema. Feel free to modify them or add your own.
 """
 type Mutation {
-  insertAccount(
-    image: String!
-    login: String!
-    email: String!
-  ): Account
+  insertAccount(image: String!, login: String!, email: String!): Account
     @dbquery(
       type: "postgresql"
       schema: "public"
@@ -433,7 +455,7 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-    deleteEducationByCvId(cv_id: ID!): Education
+  deleteEducationByCvId(cv_id: ID!): Education
     @dbquery(
       type: "postgresql"
       schema: "public"
@@ -473,7 +495,7 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-  insertInterests( hobby: String!, cv_id: ID!): Interests
+  insertInterests(hobby: String!, cv_id: ID!): Interests
     @dbquery(
       type: "postgresql"
       schema: "public"
@@ -489,11 +511,7 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-  insertLanguages(
-    language: String!
-    level: String!
-    cv_id: ID!
-  ): Languages
+  insertLanguages(language: String!, level: String!, cv_id: ID!): Languages
     @dbquery(
       type: "postgresql"
       schema: "public"
@@ -509,7 +527,7 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-    deleteLanguagesByCvId(cv_id: ID!): Languages
+  deleteLanguagesByCvId(cv_id: ID!): Languages
     @dbquery(
       type: "postgresql"
       schema: "public"
@@ -517,11 +535,7 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-  insertSkills(
-    level: String!
-    habit: String!
-    cv_id: ID!
-  ): Skills
+  insertSkills(level: String!, habit: String!, cv_id: ID!): Skills
     @dbquery(
       type: "postgresql"
       schema: "public"
@@ -554,7 +568,7 @@ type Mutation {
     postalcode: String!
     phone: String!
     cv_id: ID!
-    address:String!
+    address: String!
   ): UserInfo
     @dbquery(
       type: "postgresql"
@@ -571,7 +585,7 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-    deleteUserByCvId(cv_id: ID!): UserInfo
+  deleteUserByCvId(cv_id: ID!): UserInfo
     @dbquery(
       type: "postgresql"
       schema: "public"

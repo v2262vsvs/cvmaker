@@ -6,6 +6,7 @@ import Confetti from 'react-confetti'
 import { useSelector,useDispatch } from 'react-redux';
 import {selectChoose, setChoose, setColor} from '../../slices/navSlice';
 import client from "../../apolo-client"
+import { toast } from 'react-toastify'
 
 import {PDFExport} from "@progress/kendo-react-pdf";
 
@@ -203,6 +204,7 @@ export default function CvSampleCards() {
 
 
     const exportPDFWithComponent = async () => {
+        if (sample){
         setIsConfetti(true)
         if (pdfExportComponent.current) {
             pdfExportComponent.current.save();
@@ -214,12 +216,15 @@ export default function CvSampleCards() {
                     email: session?.user?.email
                 }
             })
-
-            console.log('getAccountByEmail',data?.getAccountByEmail.id)
-            let accountID = data?.getAccountByEmail?.id
-            if (data?.getAccountByEmail?.email == session?.user?.email ){
+            let accountID
+            console.log('getAccountByEmail',data?.getAccountByEmail?.email)
+            console.log('session email',session?.user?.email)
+            //let accountID = data?.getAccountByEmail?.id
+            if (data?.getAccountByEmail?.email === session?.user?.email ){
                 console.log('using existing account',data)
+                accountID = data?.getAccountByEmail?.id
             } else {
+                
                 console.log('creating a new account')
                 const {data} = await addAccount({
                     variables:{
@@ -280,8 +285,8 @@ export default function CvSampleCards() {
                 }
                 for (let i = 0; i<experienceList.length;i++){
 
-                    let startdate = formatDate(experienceList[i].startDate)
-                    let enddate = formatDate(experienceList[i].endDate)
+                    //let startdate = formatDate(experienceList[i].startDate)
+                    //let enddate = formatDate(experienceList[i].endDate)
                     const {data:{insertExperience:newExperience}}=await addExperience({
                         variables:{
                             city:experienceList[i].city,
@@ -319,11 +324,15 @@ export default function CvSampleCards() {
 
         
         setIsConfetti(false)
+    } else {
+        toast.error("Choose your sample!")
+    }
     };
 
 
     return (
         <>
+        
             <div className='flex items-center space-x-3 overflow-x-scroll overflow-y-hidden overflow-clip scrollbar-hide w-[1400px] py-5 px-3 ml-auto mr-auto'>
                 {/*<div onClick={()=>openModal(1)} >*/}
                 {/*    <CVpdfStanford personal={personal} profileDescription={profileDescription}*/}
@@ -858,6 +867,7 @@ export default function CvSampleCards() {
                     height={window.innerHeight + 50}
                     numberOfPieces={500}
                 />}
+        
         </>
     )
 }
