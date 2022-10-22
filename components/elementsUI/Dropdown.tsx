@@ -2,18 +2,27 @@ import React, { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import Image from "next/image";
 import {signOut} from "next-auth/react";
+import { useRouter } from 'next/router';
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
 export default function Dropdown(props: any) {
+    const router = useRouter()
 
     const {firstLink, name, secondLink, typeProfile, imageProfile, createLink, createLink2} = props
 
     const singout = async (e:React.MouseEvent<HTMLFormElement, MouseEvent>)=>{
         e.preventDefault()
         signOut()
+    }
+
+    const handleRoute2 = async () => {
+        router.push(createLink2)
+    }
+    const handleRoute1 = async () => {
+        router.push(createLink)
     }
 //className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
     return (
@@ -50,10 +59,11 @@ export default function Dropdown(props: any) {
             >
                 <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1">
+                        <div onClick={()=>handleRoute2()} className=''>
                         <Menu.Item>
                             {({ active }) => (
                                 <a
-                                    href={createLink2}
+                                    
                                     className={classNames(
                                         active ? 'bg-violet-200 text-gray-900' : 'text-gray-700',
                                         'block px-4 py-2 text-sm'
@@ -63,10 +73,12 @@ export default function Dropdown(props: any) {
                                 </a>
                             )}
                         </Menu.Item>
+                        </div>
+                        <div onClick={()=>handleRoute1()}>
                         <Menu.Item>
                             {({ active }) => (
                                 <a
-                                    href={createLink}
+                                    
                                     className={classNames(
                                         active ? 'bg-violet-200 text-gray-900' : 'text-gray-700',
                                         'block px-4 py-2 text-sm'
@@ -76,6 +88,7 @@ export default function Dropdown(props: any) {
                                 </a>
                             )}
                         </Menu.Item>
+                        </div>
                         {typeProfile &&
                             <form onClick={(e) => singout(e)} method="POST" action="#">
                                 <Menu.Item>

@@ -26,14 +26,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, }: AppProps) {
         <ApolloProvider client={client}>
             <SessionProvider session={session}>
                 <div className='bg-violet-50 h-screen overflow-y-scroll' >
-                   
                     <Loading/>
-                    
                     <ToastContainer />
-                    
                     <Header/>
                     <Component  {...pageProps} />
-                    
                 </div>
             </SessionProvider>              
         </ApolloProvider>

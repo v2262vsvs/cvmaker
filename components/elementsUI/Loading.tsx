@@ -8,8 +8,16 @@ function Loading(): any {
 
     useEffect(() => {
         const handleStart = (url:any) => (url !== router.asPath) && setLoading(true);
-        const handleComplete = (url: any) => (url === router.asPath) && setTimeout(() =>{setLoading(false)},300);
-
+        const handleComplete = (url: any) => {
+            console.log('url',url)
+            console.log('router.asPath',router.asPath)
+            if(url === '/box/profile'){
+                (url === router.asPath)&& setTimeout(() =>{setLoading(false)},700);
+            }else {
+                (url === router.asPath)&& setTimeout(() =>{setLoading(false)},0);
+            }
+        }
+        
         router.events.on('routeChangeStart', handleStart)
         router.events.on('routeChangeComplete', handleComplete)
         router.events.on('routeChangeError',  handleComplete)

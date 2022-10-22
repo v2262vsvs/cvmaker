@@ -76,7 +76,7 @@ function Profile() {
     //console.log(size)
 
 
-
+    
     const {data,error} = useQuery(GET_FULL_CVS_BY_ACCOUNT_BY_EMAIL,{
         variables:{
           email:session?.user?.email
@@ -85,6 +85,7 @@ function Profile() {
       if(error){
         return `Error! ${error}`
       }
+    
 
     console.log('account ',data)
     dispatch(setColor(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.color))
@@ -175,7 +176,6 @@ function Profile() {
     <>
     <div className="bg-violet-50 h-full w-screen">
     <div className=" h-full w-full bg-violet-50 relative">
-      
       <HeadMeta title={'Your Profile'} content={'add later some text'}/>      
       <div className="mt-5 mx-20">
         <div className="flex justify-between">
