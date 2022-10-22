@@ -802,7 +802,7 @@ export default function CvSampleCards() {
                     </div>
                     <img src='/ChevronNext.svg' alt='next' className="h-6 w-6 text-center mt-auto mb-auto"/>
                 </button>
-                <Link href="/box/experience">
+                <Link href="/box/experiencepage">
                     <button className="bg-violet-50 px-12 py-3 rounded-md mt-5 flex ml-auto mr-auto">
                         <img src='/ChevronPrevious.svg' alt='previous' className="h-6 w-6 mt-auto mb-auto"/>
                         <div className="text-gray-400 text-md hover:text-gray-500">

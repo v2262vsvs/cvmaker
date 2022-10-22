@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from 'next/router'
 
 
-function personal() {
+function Personal() {
     // for progress bar
     const [percent, setPercent] = useState<number>(0)
     const {data:session} = useSession()
@@ -70,4 +70,4 @@ function personal() {
     );
 }
 
-export default personal;
+export default Personal;

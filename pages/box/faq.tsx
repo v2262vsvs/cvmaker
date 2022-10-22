@@ -1,7 +1,7 @@
 import React from 'react';
 import HeadMeta from "../../components/pageSections/HeadMeta";
 
-const faq = () => {
+const Faq = () => {
     return (
         <>
             <HeadMeta title={'CV - FAQ'} content={'add later some text'}/>
@@ -12,4 +12,4 @@ const faq = () => {
     );
 };
 
-export default faq;
+export default Faq;

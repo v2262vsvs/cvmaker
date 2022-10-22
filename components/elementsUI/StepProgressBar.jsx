@@ -12,7 +12,7 @@ export default function StepProgressBar(props) {
     const router = useRouter()
     console.log('ROUTER ********',router)
     const step1 = '/box/personal'
-    const step2 = '/box/experience'
+    const step2 = '/box/experiencepage'
     const step3 = '/box/sample'
 
 
@@ -54,7 +54,7 @@ export default function StepProgressBar(props) {
                     {({ accomplished }) => (
                         <Link
                             //href={isActive ? '/box/experience' : ''}
-                            href="/box/experience"
+                            href="/box/experiencepage"
                         >
                             <div style={circleStyle}>
                                 <img

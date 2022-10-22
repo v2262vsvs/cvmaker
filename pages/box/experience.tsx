@@ -11,7 +11,7 @@ import ToTopButton from "../../components/elementsUI/ToTopButton";
 import MyModal from "../../components/resumeComponents/MyModal";
 
 
-function experience() {
+function ExperiencePage() {
 
     //for progress bar animation
     const [percent, setPercent] = useState<number>(25)
@@ -85,4 +85,4 @@ function experience() {
     );
 }
 
-export default experience;
+export default ExperiencePage;

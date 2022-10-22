@@ -28,7 +28,7 @@ import { TrashIcon }  from '@heroicons/react/outline'
 
 
 
-function profile() {
+function Profile() {
     const [isConfetti, setIsConfetti] = useState<boolean>(false)
     const {data : session} = useSession()
     const router = useRouter()
@@ -528,4 +528,4 @@ function profile() {
   );
 }
 
-export default profile;
+export default Profile;

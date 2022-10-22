@@ -5,7 +5,7 @@ import CvSampleCards from "../../components/resumeComponents/CvSampleCards";
 import HeadMeta from "../../components/pageSections/HeadMeta";
 import StepProgressBar from "../../components/elementsUI/StepProgressBar";
 
-function sample() {
+function Sample() {
     // const pdfExportComponent = React.useRef<PDFExport>(null);
     // const exportPDFWithComponent = () => {
     //     if (pdfExportComponent.current) {
@@ -42,4 +42,4 @@ function sample() {
     );
 }
 
-export default sample;
+export default Sample;
