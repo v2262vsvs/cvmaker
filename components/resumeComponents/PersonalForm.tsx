@@ -302,7 +302,7 @@ const PersonalForm = () => {
                 </div>
             </div>
             <div className="items-center text-center pt-10">
-                <Link href={"/ence"}>
+                <Link href={"/box/experiencepage"}>
                     <button
                         disabled={!personal.name || !personal.surname || !personal.email}
                         className="bg-violet-700 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto">
