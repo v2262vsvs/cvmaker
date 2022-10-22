@@ -43,7 +43,7 @@ function Personal() {
                     <PersonalForm/>
 
                     <footer className="ml-auto   mr-auto text-center text-gray-500 text-xs max-w-[500px]">
-                        By clicking "Next", you will start creating your resume and agree to
+                        By clicking Next, you will start creating your resume and agree to
                         our general terms and conditions and privacy policy .
                     </footer>
                     <div

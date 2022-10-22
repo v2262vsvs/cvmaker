@@ -128,6 +128,7 @@ const PersonalForm = () => {
 
     //for validation
     const [focused, setFocused] = useState(false);
+    console.log('focused',focused.toString())
 
     const handleFocus = () => {
         setFocused(true);

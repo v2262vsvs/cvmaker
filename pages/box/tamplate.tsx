@@ -4,7 +4,7 @@ import Footer from '../../components/pageSections/Footer';
 import HeadMeta from "../../components/pageSections/HeadMeta";
 import CvCards from '../../components/resumeComponents/CvCards';
 
-const tamplate = () => {
+const Tamplate = () => {
     return (
         <>
             <HeadMeta title={'CV - FAQ'} content={'add later some text'}/>
@@ -42,4 +42,4 @@ const tamplate = () => {
     );
 };
 
-export default tamplate;
+export default Tamplate;
