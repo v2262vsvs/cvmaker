@@ -7,8 +7,9 @@ import { GET_ACCOUNT_BY_EMAIL, GET_CV_BY_ID, GET_FULL_CV_BY_ID } from '../../gra
 import { useSession } from 'next-auth/react';
 
 const HomeContent = () => {
-    const {data : session} = useSession()
-    
+    {/* 
+
+        const {data : session} = useSession()
     const {data,error} = useQuery(GET_FULL_CV_BY_ID,{
         variables:{
           id:35
@@ -19,6 +20,9 @@ const HomeContent = () => {
       } 
     const cv : any  = data
     console.log('cv ',cv)
+    
+    */}
+    
 
     
     

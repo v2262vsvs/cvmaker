@@ -7,7 +7,7 @@ export default function Custom404() {
         <>
             <HeadMeta title={'404 - CV'} content={'404 oh no wrong page!! :('}/>
             <div className='container mx-auto w-96 flex-row text-center'>
-                <Image src="/404-image.png" width={478} height={478}/>
+                <Image src="/404-image.png" width={478} height={478} alt=""/>
                 <p>404</p>
                 <p>Page not found</p>
                 <p className='m-4'>

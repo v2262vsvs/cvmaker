@@ -209,7 +209,7 @@ const PersonalForm = () => {
                                 pattern='^[A-Za-z0-9]{3,16}$'
                                 required={true}
                                 //@ts-ignore
-                                focused={focused.toString()}
+                                //focused={focused.toString()}
                                 onBlur={handleFocus}
                             />
                             <span className='span-redmark'>{"Firstname should be 3-16 characters and shouldn't include any special character!"}</span>
@@ -226,7 +226,7 @@ const PersonalForm = () => {
                                 pattern='^[A-Za-z0-9]{3,16}$'
                                 required={true}
                                 //@ts-ignore
-                                focused={focused.toString()}
+                                //focused={focused.toString()}
                                 onBlur={handleFocus}
                             />
                             <span className='span-redmark'>{"Lastname should be 3-16 characters and shouldn't include any special character!"}</span>
@@ -246,7 +246,7 @@ const PersonalForm = () => {
                                 name='email'
                                 required={true}
                                 //@ts-ignore
-                                focused={focused.toString()}
+                                //focused={focused.toString()}
                                 onBlur={handleFocus}
                             />
                             <span className='span-redmark'>{"It should be a valid email address!"}</span>
