@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from 'next/router'
 
 
-function personal() {
+function Personal() {
     // for progress bar
     const [percent, setPercent] = useState<number>(0)
     const {data:session} = useSession()
@@ -43,7 +43,7 @@ function personal() {
                     <PersonalForm/>
 
                     <footer className="ml-auto   mr-auto text-center text-gray-500 text-xs max-w-[500px]">
-                        By clicking "Next", you will start creating your resume and agree to
+                        By clicking Next, you will start creating your resume and agree to
                         our general terms and conditions and privacy policy .
                     </footer>
                     <div
@@ -70,4 +70,4 @@ function personal() {
     );
 }
 
-export default personal;
+export default Personal;

@@ -2,7 +2,7 @@ import React from 'react';
 import HeadMeta from "../../components/pageSections/HeadMeta";
 import CVpdfStanford from "../../components/resumeComponents/pdfSamples/CVpdfStanford";
 
-function blog() {
+function Blog() {
     return (
         <>
             <HeadMeta title={'CV - BLOG'} content={'add later some text'}/>
@@ -31,4 +31,4 @@ function blog() {
     );
 }
 
-export default blog;
+export default Blog;

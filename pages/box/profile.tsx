@@ -26,20 +26,71 @@ import { PencilIcon }  from '@heroicons/react/outline'
 import { DownloadIcon }  from '@heroicons/react/outline'
 import { TrashIcon }  from '@heroicons/react/outline'
 
+ function useWindowSize() {
+  // Initialize state with undefined width/height so server and client renders match
+  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+  const [windowSize, setWindowSize] = useState({
+    width: 0,
+    height: 0,
+  });
+
+  useEffect(() => {
+    // only execute all the code below in client side
+    if (typeof window !== 'undefined') {
+      // Handler to call on window resize
+      const  handleResize = () => {
+        // Set window width/height to state
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      }
+
+      // Add event listener
+      window.addEventListener("resize", handleResize);
+
+      // Call handler right away so state gets updated with initial window size
+      handleResize();
+
+      // Remove event listener on cleanup
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []); // Empty array ensures that effect is only run on mount
+  return windowSize;
+}
+
+type Experience = {
+    position: string;
+    city: string;
+    employer: string;
+    description: string;
+    startdate: Date;
+    enddate: Date;
+};
+
+type Education = {
+    degree: string;
+    city: string;
+    school: string;
+    description: string;
+    startdate: Date;
+    enddate: Date;
+};
 
 
-function profile() {
+
+function Profile() {
     const [isConfetti, setIsConfetti] = useState<boolean>(false)
     const {data : session} = useSession()
     const router = useRouter()
     const dispatch = useDispatch()
-
     const [deleteCv] = useMutation(DELETE_CV_BY_ID)
     const [isChoose, setIsChoose] = useState<number>(1)
-
-
-   
     const pdfExportComponent = React.useRef<PDFExport>(null);
+    const [isOpen, setIsOpen] = useState<number>(0)
+    const size = useWindowSize();
+    //console.log(size)
+
 
 
     const {data,error} = useQuery(GET_FULL_CVS_BY_ACCOUNT_BY_EMAIL,{
@@ -49,17 +100,12 @@ function profile() {
       })
       if(error){
         return `Error! ${error}`
-      } 
+      }
+
+
     console.log('account ',data)
     dispatch(setColor(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.color))
-    const color = useSelector((state: RootState) => state.nav.color);
-    console.log(color)
-
-    //setIsChoose(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.sample)
     dispatch(setChoose(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.sample));
-
-    
-
     let educationArr:Education[] = []
     for(let i=0;i<data?.getEducationByAccountEmail.length;i++){
       if (data?.getEducationByAccountEmail[i].cv_id == data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].id){
@@ -84,20 +130,18 @@ function profile() {
         languagesArr.push(data?.getLanguagesByAccountEmail[i])
       }
     }
-    const [isOpen, setIsOpen] = useState<number>(0)
+
 
     function openModal(n:number) {
-      setIsOpen(n)
+      if(size.height>940 && size.width>650){
+        setIsOpen(n)
+      }
+
     }
     function closeModal() {
       setIsOpen(0)
     }
     const handleEdit = async () => {
-
-      
-
-      
-      
         window.localStorage.setItem("PERSONAL_STATE", JSON.stringify(data?.getUserInfoByAccountEmail[data?.getCvsByAccountEmail.length-1]));
         console.log("storage", window.localStorage.getItem("PERSONAL_STATE"))
 
@@ -112,50 +156,44 @@ function profile() {
 
         window.localStorage.setItem("SKILLS_STATE",JSON.stringify(skillsArr));
         console.log("storage", window.localStorage.getItem("SKILLS_STATE"));
-          
+
         window.localStorage.setItem("PROFILE_DESCRIPTION_STATE",JSON.stringify(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.description));
         console.log("storage for profile  ", window.localStorage.getItem("PROFILE_DESCRIPTION_STATE"));
 
         router.push('/box/personal')
-      
-    
     }
     const handleDelete = async () => {
-
-      try { 
+      try {
         const {data:{deleteUserByCvId:deletedCV}} = await deleteCv({
           variables:{
               cv_id: data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].id
           },
         })
 
-        toast("Your last CV deleted!")
-        location.reload();        
-
+        toast.success("Your last CV deleted!")
+        location.reload();
     }catch(error){console.log("error",error)}
     }
-
 
     const exportPDFWithComponent = async () => {
       setIsConfetti(true)
       if (pdfExportComponent.current) {
           pdfExportComponent.current.save();
       }
-      
-
-      
       setIsConfetti(false)
   };
 
 
 
-    
-    
+
+
 
   return (
-    <div className="h-full">
-      
-      <HeadMeta title={'Your Profile'} content={'add later some text'}/>      <div className="mt-5 mx-20">
+    <>
+    <div className="bg-violet-50 h-full w-screen">
+    <div className=" h-full w-full bg-violet-50 relative">
+      <HeadMeta title={'Your Profile'} content={'add later some text'}/>
+      <div className="mt-5 mx-20">
         <div className="flex justify-between">
           <div className="font-extrabold text-violet-700 text-xl xl:text-2xl 2xl:text-4xl">
             Resumes & Cover Letters
@@ -178,24 +216,24 @@ function profile() {
             <div className=" text-gray-500">Cover Letters</div>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex ">
       {data?.getCvsByAccountEmail.length > 0  ?(
-        <div>
-          <div className="mx-14 mt-3">
+        <div className="">
+          <div className="mx-14 mt-3 mb-32">
             {(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].sample == 1) && (
               <div onClick={()=>openModal(2)}>
-              <CVpdfStanford
-              //personal={{name: 'Eugene', surname: 'Karashevich', email: 'wert130202@gmail.com'}}
-              personal={data?.getUserInfoByAccountEmail[data?.getCvsByAccountEmail.length-1]}
-              profileDescription={data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].description}
-              educationList={educationArr}
-              experienceList={experienceArr}
-              skillsList={skillsArr}
-              languagesList={languagesArr}
-              />
+              {/*<CVpdfStanford*/}
+              {/*//personal={{name: 'Eugene', surname: 'Karashevich', email: 'wert130202@gmail.com'}}*/}
+              {/*personal={data?.getUserInfoByAccountEmail[data?.getCvsByAccountEmail.length-1]}*/}
+              {/*profileDescription={data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].description}*/}
+              {/*educationList={educationArr}*/}
+              {/*experienceList={experienceArr}*/}
+              {/*skillsList={skillsArr}*/}
+              {/*languagesList={languagesArr}*/}
+              {/*/>*/}
               </div>
             )}
-            
+
             {(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].sample == 2) && (
               <div onClick={()=>openModal(2)}>
               <CVpdfOtago
@@ -220,7 +258,7 @@ function profile() {
               />
               </div>
             )}
-            
+
             {(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].sample == 4) && (
               <div onClick={()=>openModal(2)}>
                <CVpdfErling
@@ -256,15 +294,14 @@ function profile() {
                languagesList={languagesArr}
               />
               </div>
-            )} 
+            )}
       </div>
 
         </div>
         ) : (
         <div className="mx-14 mt-3">
-            <div
-            className='sampleScale50 overflow-hidden'></div>
-            <CVpdfOtago
+
+            <CVpdfSparkle
                 personal={{}}
                 profileDescription={''}
                 educationList={[]}
@@ -274,9 +311,9 @@ function profile() {
             />
         </div>
       )}
-      
 
-      <div className="mt-8 space-y-2 -ml-20">
+
+      <div className="mt-8 space-y-2 -ml-20 ">
         <div className="mb-1 font-medium text-lg">Your last cv</div>
         <div onClick={()=>handleEdit()} className="flex space-x-1 hover:border-b hover:border-violet-700 w-fit cursor-pointer">
           <div className="h-5 w-5 text-violet-600 ">
@@ -284,7 +321,7 @@ function profile() {
           </div>
           <div>Edit</div>
         </div>
-        <div onClick={() => exportPDFWithComponent()} className="flex space-x-1 hover:border-b hover:border-violet-700 w-fit cursor-pointer">
+        <div onClick={() => exportPDFWithComponent()} className="flex space-x-1 hover:border-b  hover:border-violet-700 w-fit cursor-pointer">
           <div className="h-5 w-5 text-violet-600">
               <DownloadIcon/>
           </div>
@@ -298,7 +335,7 @@ function profile() {
         </div>
       </div>
 
-      <div className="mt-3 ml-48 ">
+      <div className="mt-3 ml-10 2xl:ml-28 ">
       <Link href="/box/personal">
       <div  className='bg-white w-[595px] h-[842px] scale-65 shadow-xl hover:shadow-2xl rounded-2xl -mt-32  -mb-32 -ml-20 -mr-10  overflow-hidden'>
         <div className="rounded-full bg-violet-300 hover:-scale-105 bg-opacity-25 w-48 h-48  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -310,7 +347,7 @@ function profile() {
       </Link>
 
       </div>
-      <div className="mt-8 space-y-2 -ml-6">
+      <div className="mt-8 space-y-2 -ml-6 mr-20">
         <div className="mb-1 font-medium text-lg text-gray-500">New Resume</div>
         <div  className="flex text-gray-500 text-sm font-light cursor-pointer">
           <div>Create a tailored resume for each job <div>application. Double your chances of <div>getting hired!</div></div> </div>
@@ -349,7 +386,7 @@ function profile() {
                                 <Dialog.Panel
                                     className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-2 text-left align-middle shadow-xl transition-all">
 
-                                    
+
                                     {(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.sample == 2) && (
                                       <div>
                                       <CVpdfOtago
@@ -440,15 +477,15 @@ function profile() {
                 <PDFExport ref={pdfExportComponent} paperSize="A4">
                     {data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.sample === 1 ?
                         <div className=''>
-                            <CVpdfStanford
-                                      personal={data?.getUserInfoByAccountEmail[data?.getCvsByAccountEmail.length-1]}
-                                      profileDescription={data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].description}
-                                      educationList={educationArr}
-                                      experienceList={experienceArr}
-                                      skillsList={skillsArr}
-                                      languagesList={languagesArr}
-                                      type={'downloadSample'}
-                                      />
+                            {/*<CVpdfStanford*/}
+                            {/*          personal={data?.getUserInfoByAccountEmail[data?.getCvsByAccountEmail.length-1]}*/}
+                            {/*          profileDescription={data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].description}*/}
+                            {/*          educationList={educationArr}*/}
+                            {/*          experienceList={experienceArr}*/}
+                            {/*          skillsList={skillsArr}*/}
+                            {/*          languagesList={languagesArr}*/}
+                            {/*          type={'downloadSample'}*/}
+                            {/*          />*/}
                         </div>
                         : data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.sample === 2 ?
                             <div className=''>
@@ -530,11 +567,22 @@ function profile() {
                     numberOfPieces={500}
                 />}
 
-      <div className="absolute inset-x-0 bottom-0">
-        <Footer />
-      </div>
+    <div className="shadow-xl fixed bottom-0  ">
+      <Footer />
     </div>
+
+
+
+    </div>
+
+
+
+
+
+
+    </div>
+    </>
   );
 }
 
-export default profile;
+export default Profile;

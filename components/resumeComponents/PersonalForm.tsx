@@ -128,6 +128,7 @@ const PersonalForm = () => {
 
     //for validation
     const [focused, setFocused] = useState(false);
+    console.log('focused',focused.toString())
 
     const handleFocus = () => {
         setFocused(true);
@@ -208,7 +209,7 @@ const PersonalForm = () => {
                                 pattern='^[A-Za-z0-9]{3,16}$'
                                 required={true}
                                 //@ts-ignore
-                                focused={focused.toString()}
+                                //focused={focused.toString()}
                                 onBlur={handleFocus}
                             />
                             <span className='span-redmark'>{"Firstname should be 3-16 characters and shouldn't include any special character!"}</span>
@@ -225,7 +226,7 @@ const PersonalForm = () => {
                                 pattern='^[A-Za-z0-9]{3,16}$'
                                 required={true}
                                 //@ts-ignore
-                                focused={focused.toString()}
+                                //focused={focused.toString()}
                                 onBlur={handleFocus}
                             />
                             <span className='span-redmark'>{"Lastname should be 3-16 characters and shouldn't include any special character!"}</span>
@@ -245,7 +246,7 @@ const PersonalForm = () => {
                                 name='email'
                                 required={true}
                                 //@ts-ignore
-                                focused={focused.toString()}
+                                //focused={focused.toString()}
                                 onBlur={handleFocus}
                             />
                             <span className='span-redmark'>{"It should be a valid email address!"}</span>
@@ -301,7 +302,7 @@ const PersonalForm = () => {
                 </div>
             </div>
             <div className="items-center text-center pt-10">
-                <Link href={"/box/experience"}>
+                <Link href={"/box/experiencepage"}>
                     <button
                         disabled={!personal.name || !personal.surname || !personal.email}
                         className="bg-violet-700 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto">

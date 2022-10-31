@@ -10,7 +10,26 @@ type Props = {
     skillsList: Skills[],
     languagesList: Languages[],
     type?: string
+    colorDB?: string
 }
+
+type Experience = {
+    position: string;
+    city: string;
+    employer: string;
+    description: string;
+    startdate: Date;
+    enddate: Date;
+};
+
+type Education = {
+    degree: string;
+    city: string;
+    school: string;
+    description: string;
+    startdate: Date;
+    enddate: Date;
+};
 const mont = [
     "Jan",
     "Feb",
@@ -37,7 +56,8 @@ export default function CVpdfSparkle({
                                         experienceList,
                                         skillsList,
                                         languagesList,
-                                        type
+                                        type,
+                                        colorDB
                                     }: Props) {
 
 
@@ -45,7 +65,14 @@ export default function CVpdfSparkle({
     const color = useSelector((state: RootState) => state.nav.color);
 
     const colorLogic = classNames(
-        choose === 6 ? (
+        colorDB ? (
+            colorDB === 'violet' ? 'text-violet-700'
+                : colorDB === 'blue' ? 'text-blue-700'
+                    : colorDB === 'yellow' ? 'text-yellow-500'
+                        : colorDB === 'red' ? 'text-red-700'
+                            : colorDB === 'green' ? 'text-green-700'
+                                : ''
+        ) : choose === 6 ? (
         color === 'violet' ? 'text-violet-700'
             : color === 'blue' ? 'text-blue-700'
                 : color === 'yellow' ? 'text-yellow-500'
@@ -56,7 +83,14 @@ export default function CVpdfSparkle({
     )
 
     const backgroundLogic = classNames(
-        choose === 6 ? (
+        colorDB ? (
+            colorDB === 'violet' ? 'bg-violet-700'
+                : colorDB === 'blue' ? 'bg-blue-700'
+                    : colorDB === 'yellow' ? 'bg-yellow-500'
+                        : colorDB === 'red' ? 'bg-red-700'
+                            : colorDB === 'green' ? 'bg-green-700'
+                                : ''
+        ) : choose === 6 ? (
         color === 'violet' ? 'bg-violet-700'
             : color === 'blue' ? 'bg-blue-700'
                 : color === 'yellow' ? 'bg-yellow-500'
@@ -72,8 +106,8 @@ export default function CVpdfSparkle({
             className={classNames(
                 type === 'downloadSample' ? ''
                     : type === 'modalSample' ? 'sampleScale50 overflow-hidden'
-                        : choose === 6 ? 'ring-2 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50 overflow-hidden'
-                            : 'sampleScale50 overflow-hidden'
+                        : choose === 6 ? 'ring-4 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50 overflow-hidden'
+                            : 'sampleScale50 overflow-hidden hover:ring-4 ring-offset-1 ring-violet-300 ring-rounded-lg ring-offset-violet-300'
             )}
         >
             <div className={'p-8'}>
@@ -115,19 +149,19 @@ export default function CVpdfSparkle({
                         </div>
                     </div>
                     {experienceList.map((experience) => (
-                        <div key={experience.degree} className={'mb-3'}>
+                        <div key={experience.position} className={'mb-3'}>
                             <div className="flex">
                                 <div className="flex-auto w-5/12 text-xs mr-auto opacity-60">
-                                    {mont[new Date(experience.startDate).getMonth()]}{" "}
-                                    {new Date(experience.startDate).getFullYear()}{" - "}
-                                    {mont[new Date(experience.endDate).getMonth()]}{" "}
-                                    {new Date(experience.endDate).getFullYear()}
+                                    {mont[new Date(experience.startdate).getMonth()]}{" "}
+                                    {new Date(experience.startdate).getFullYear()}{" - "}
+                                    {mont[new Date(experience.enddate).getMonth()]}{" "}
+                                    {new Date(experience.enddate).getFullYear()}
                                 </div>
                                 <div className="flex-auto font-bold text-sm -mt-0.5">
                                     <div
                                         className={colorLogic}
                                     >
-                                        {experience.degree}{", "}{experience.employer}
+                                        {experience.position}{", "}{experience.employer}
                                     </div>
                                     <div className={'font-normal text-xs'}>
                                         <li className={'w-96 mt-1 opacity-80'}>
@@ -157,10 +191,10 @@ export default function CVpdfSparkle({
                         <div key={education.degree} className={'mb-3'}>
                             <div className="flex">
                                 <div className="flex-auto w-5/12 text-xs mr-auto opacity-60">
-                                    {mont[new Date(education.startDate).getMonth()]}{" "}
-                                    {new Date(education.startDate).getFullYear()}{" - "}
-                                    {mont[new Date(education.endDate).getMonth()]}{" "}
-                                    {new Date(education.endDate).getFullYear()}
+                                    {mont[new Date(education.startdate).getMonth()]}{" "}
+                                    {new Date(education.startdate).getFullYear()}{" - "}
+                                    {mont[new Date(education.enddate).getMonth()]}{" "}
+                                    {new Date(education.enddate).getFullYear()}
                                 </div>
                                 <div className="flex-auto font-bold text-sm -mt-0.5">
                                     <div

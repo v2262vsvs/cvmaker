@@ -287,3 +287,107 @@ getUserUsingCv_id(id: $id) {
 }
 `
 
+
+export const GET_CV = gql`
+    query MyQuery($num: Int!){
+        getCvList (limit: $num){
+            id
+            created_at
+            sample
+            color
+            description
+
+            userinfoList {
+                name
+                surname
+                image
+                phone
+                city
+                email
+                postalcode
+                address
+            }
+
+            experienceList {
+                position
+                city
+                employer
+                startdate
+                enddate
+                description
+            }
+
+            educationList {
+                degree
+                city
+                school
+                startdate
+                enddate
+                description
+            }
+
+            skillsList {
+                habit
+                level
+            }
+
+            languagesList {
+                language
+                level
+            }
+        }
+    }
+`
+
+
+export const GET_FULL_CVS_BY_EMAIL = gql`
+    query MyQuery($email:String!){
+        getCvsByAccountEmail(email:$email) {
+            id
+            created_at
+            sample
+            color
+            description
+            account_id
+
+            userinfoList {
+                name
+                surname
+                image
+                phone
+                city
+                email
+                postalcode
+                address
+            }
+
+            experienceList {
+                position
+                city
+                employer
+                startdate
+                enddate
+                description
+            }
+
+            educationList {
+                degree
+                city
+                school
+                startdate
+                enddate
+                description
+            }
+
+            skillsList {
+                habit
+                level
+            }
+
+            languagesList {
+                language
+                level
+            }
+        }
+    }
+`

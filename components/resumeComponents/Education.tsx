@@ -26,14 +26,14 @@ type Education = {
     city: string;
     school: string;
     description: string;
-    startDate: Date;
-    endDate: Date;
+    startdate: Date;
+    enddate: Date;
 };
 
 function Education() {
     const [openEducation, setOpenEducation] = useState<boolean>(false);
-    // const [startDate, setStartDate] = useState<Date>(new Date());
-    // const [endDate, setEndDate] = useState<Date>(addDays(new Date(), 7));
+    // const [startdate, setStartDate] = useState<Date>(new Date());
+    // const [enddate, setEndDate] = useState<Date>(addDays(new Date(), 7));
     const [togleRange, setTogleRange] = useState<boolean>(false);
     const [togleRange2, setTogleRange2] = useState<boolean>(false);
 
@@ -45,13 +45,13 @@ function Education() {
         city: string,
         school: string,
         description: string,
-        startDate: Date,
-        endDate: Date
+        startdate: Date,
+        enddate: Date
     ) => {
         setVisibleEducation(educationList.length)
         setEducationList([
             ...educationList,
-            {degree, city, school, description, startDate, endDate},
+            {degree, city, school, description, startdate, enddate},
         ]);
     };
 
@@ -107,20 +107,20 @@ function Education() {
         const list = [...educationList]
         switch (name) {
             case 'startdate':
-                list[index].startDate = item
+                list[index].startdate = item
                 setEducationList(list)
                 setTogleRange(!togleRange)
                 break;
             case 'enddate':
-                list[index].endDate = item
+                list[index].enddate = item
                 setEducationList(list)
                 setTogleRange2(!togleRange2)
                 break;
         }
     };
     // const selectionRange = {
-    //     startDate: startDate,
-    //     endDate: endDate,
+    //     startdate: startdate,
+    //     enddate: enddate,
     //     key: "selection",
     // };
 
@@ -247,11 +247,11 @@ function Education() {
                                             >
                                                 {/*
                                                     value={`${
-                                                    months[startDate.getMonth()]
-                                                    }-${startDate.getDate()}  ${startDate.getFullYear()}`}
+                                                    months[startdate.getMonth()]
+                                                    }-${startdate.getDate()}  ${startdate.getFullYear()}`}
                                                  */}
                                                 <input
-                                                    value={`${months[new Date(education.startDate).getMonth()]}–${new Date(education.startDate).getDate()} ${new Date(education.startDate).getFullYear()}`}
+                                                    value={`${months[new Date(education.startdate).getMonth()]}–${new Date(education.startdate).getDate()} ${new Date(education.startdate).getFullYear()}`}
                                                     placeholder="Start Date"
                                                     className="ring-2 ring-gray-200 text-neutral-600 px-4 py-3 rounded-sm w-full outline-none"
                                                 />
@@ -265,7 +265,7 @@ function Education() {
                                             >
                                                 <input
 
-                                                    value={`${months[new Date(education.endDate).getMonth()]}–${new Date(education.endDate).getDate()} ${new Date(education.endDate).getFullYear()}`}
+                                                    value={`${months[new Date(education.enddate).getMonth()]}–${new Date(education.enddate).getDate()} ${new Date(education.enddate).getFullYear()}`}
                                                     placeholder="End Date"
                                                     className="ring-2 ring-gray-200 text-neutral-600 px-4 py-3 rounded-sm w-full outline-none"
                                                 />
@@ -278,14 +278,14 @@ function Education() {
                                             <div className="ml-3 mr-16">
                                                 <Calendar
                                                     onChange={item => handleChangeEducationDate(item, index, 'startdate')}
-                                                    date={new Date(education?.startDate)}/>
+                                                    date={new Date(education?.startdate)}/>
                                             </div>
                                         )}
                                         {togleRange2 && (
                                             <div className="ml-3">
                                                 <Calendar
                                                     onChange={item => handleChangeEducationDate(item, index, 'enddate')}
-                                                    date={new Date(education?.endDate)}/>
+                                                    date={new Date(education?.enddate)}/>
                                             </div>
                                         )}
                                     </div>
@@ -346,7 +346,7 @@ function Education() {
                                                 <div className="mt-auto mb-auto text-neutral-400 text-md">
                                                     <div className="font-medium">{education.degree}</div>
                                                     <div
-                                                        className="text-xs">{months[new Date(education.startDate).getMonth()]} {new Date(education.startDate).getFullYear()}–{months[new Date(education.endDate).getMonth()]} {new Date(education.endDate).getFullYear()}</div>
+                                                        className="text-xs">{months[new Date(education.startdate).getMonth()]} {new Date(education.startdate).getFullYear()}–{months[new Date(education.enddate).getMonth()]} {new Date(education.enddate).getFullYear()}</div>
                                                 </div>
                                                 <div className=" flex space-x-3 mt-auto mb-auto  text-neutral-600">
                                                     <div>

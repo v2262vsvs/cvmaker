@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'violetShadow': '19px 21px 4px rgba(123, 97, 255, 0.31)',
+      },
       colors: {
         brown: {
           50: '#fdf8f6',

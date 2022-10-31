@@ -11,7 +11,8 @@ type Props = {
     experienceList: Experience[],
     skillsList: Skills[],
     languagesList: Languages[],
-    type?: string
+    type?: string,
+    colorDB?: string
 }
 const mont = [
     "Jan",
@@ -39,7 +40,8 @@ export default function CVpdfStanford({
                                           experienceList,
                                           skillsList,
                                           languagesList,
-                                          type
+                                          type,
+                                          colorDB
                                       }: Props) {
     //const [scale, setScale] = useState(true)
 
