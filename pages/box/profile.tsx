@@ -45,13 +45,13 @@ import { TrashIcon }  from '@heroicons/react/outline'
           height: window.innerHeight,
         });
       }
-    
+
       // Add event listener
       window.addEventListener("resize", handleResize);
-     
+
       // Call handler right away so state gets updated with initial window size
       handleResize();
-    
+
       // Remove event listener on cleanup
       return () => window.removeEventListener("resize", handleResize);
     }
@@ -59,7 +59,23 @@ import { TrashIcon }  from '@heroicons/react/outline'
   return windowSize;
 }
 
+type Experience = {
+    position: string;
+    city: string;
+    employer: string;
+    description: string;
+    startdate: Date;
+    enddate: Date;
+};
 
+type Education = {
+    degree: string;
+    city: string;
+    school: string;
+    description: string;
+    startdate: Date;
+    enddate: Date;
+};
 
 
 
@@ -76,7 +92,7 @@ function Profile() {
     //console.log(size)
 
 
-    
+
     const {data,error} = useQuery(GET_FULL_CVS_BY_ACCOUNT_BY_EMAIL,{
         variables:{
           email:session?.user?.email
@@ -85,7 +101,7 @@ function Profile() {
       if(error){
         return `Error! ${error}`
       }
-    
+
 
     console.log('account ',data)
     dispatch(setColor(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.color))
@@ -114,13 +130,13 @@ function Profile() {
         languagesArr.push(data?.getLanguagesByAccountEmail[i])
       }
     }
-  
+
 
     function openModal(n:number) {
       if(size.height>940 && size.width>650){
         setIsOpen(n)
       }
-      
+
     }
     function closeModal() {
       setIsOpen(0)
@@ -140,14 +156,14 @@ function Profile() {
 
         window.localStorage.setItem("SKILLS_STATE",JSON.stringify(skillsArr));
         console.log("storage", window.localStorage.getItem("SKILLS_STATE"));
-          
+
         window.localStorage.setItem("PROFILE_DESCRIPTION_STATE",JSON.stringify(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.description));
         console.log("storage for profile  ", window.localStorage.getItem("PROFILE_DESCRIPTION_STATE"));
 
         router.push('/box/personal')
     }
     const handleDelete = async () => {
-      try { 
+      try {
         const {data:{deleteUserByCvId:deletedCV}} = await deleteCv({
           variables:{
               cv_id: data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].id
@@ -155,7 +171,7 @@ function Profile() {
         })
 
         toast.success("Your last CV deleted!")
-        location.reload();        
+        location.reload();
     }catch(error){console.log("error",error)}
     }
 
@@ -169,14 +185,14 @@ function Profile() {
 
 
 
-    
-    
+
+
 
   return (
     <>
     <div className="bg-violet-50 h-full w-screen">
     <div className=" h-full w-full bg-violet-50 relative">
-      <HeadMeta title={'Your Profile'} content={'add later some text'}/>      
+      <HeadMeta title={'Your Profile'} content={'add later some text'}/>
       <div className="mt-5 mx-20">
         <div className="flex justify-between">
           <div className="font-extrabold text-violet-700 text-xl xl:text-2xl 2xl:text-4xl">
@@ -206,18 +222,18 @@ function Profile() {
           <div className="mx-14 mt-3 mb-32">
             {(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].sample == 1) && (
               <div onClick={()=>openModal(2)}>
-              <CVpdfStanford
-              //personal={{name: 'Eugene', surname: 'Karashevich', email: 'wert130202@gmail.com'}}
-              personal={data?.getUserInfoByAccountEmail[data?.getCvsByAccountEmail.length-1]}
-              profileDescription={data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].description}
-              educationList={educationArr}
-              experienceList={experienceArr}
-              skillsList={skillsArr}
-              languagesList={languagesArr}
-              />
+              {/*<CVpdfStanford*/}
+              {/*//personal={{name: 'Eugene', surname: 'Karashevich', email: 'wert130202@gmail.com'}}*/}
+              {/*personal={data?.getUserInfoByAccountEmail[data?.getCvsByAccountEmail.length-1]}*/}
+              {/*profileDescription={data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].description}*/}
+              {/*educationList={educationArr}*/}
+              {/*experienceList={experienceArr}*/}
+              {/*skillsList={skillsArr}*/}
+              {/*languagesList={languagesArr}*/}
+              {/*/>*/}
               </div>
             )}
-            
+
             {(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].sample == 2) && (
               <div onClick={()=>openModal(2)}>
               <CVpdfOtago
@@ -242,7 +258,7 @@ function Profile() {
               />
               </div>
             )}
-            
+
             {(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].sample == 4) && (
               <div onClick={()=>openModal(2)}>
                <CVpdfErling
@@ -278,14 +294,14 @@ function Profile() {
                languagesList={languagesArr}
               />
               </div>
-            )} 
+            )}
       </div>
 
         </div>
         ) : (
         <div className="mx-14 mt-3">
-            
-            <CVpdfOtago
+
+            <CVpdfSparkle
                 personal={{}}
                 profileDescription={''}
                 educationList={[]}
@@ -295,7 +311,7 @@ function Profile() {
             />
         </div>
       )}
-      
+
 
       <div className="mt-8 space-y-2 -ml-20 ">
         <div className="mb-1 font-medium text-lg">Your last cv</div>
@@ -370,7 +386,7 @@ function Profile() {
                                 <Dialog.Panel
                                     className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-2 text-left align-middle shadow-xl transition-all">
 
-                                    
+
                                     {(data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.sample == 2) && (
                                       <div>
                                       <CVpdfOtago
@@ -461,15 +477,15 @@ function Profile() {
                 <PDFExport ref={pdfExportComponent} paperSize="A4">
                     {data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.sample === 1 ?
                         <div className=''>
-                            <CVpdfStanford
-                                      personal={data?.getUserInfoByAccountEmail[data?.getCvsByAccountEmail.length-1]}
-                                      profileDescription={data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].description}
-                                      educationList={educationArr}
-                                      experienceList={experienceArr}
-                                      skillsList={skillsArr}
-                                      languagesList={languagesArr}
-                                      type={'downloadSample'}
-                                      />
+                            {/*<CVpdfStanford*/}
+                            {/*          personal={data?.getUserInfoByAccountEmail[data?.getCvsByAccountEmail.length-1]}*/}
+                            {/*          profileDescription={data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1].description}*/}
+                            {/*          educationList={educationArr}*/}
+                            {/*          experienceList={experienceArr}*/}
+                            {/*          skillsList={skillsArr}*/}
+                            {/*          languagesList={languagesArr}*/}
+                            {/*          type={'downloadSample'}*/}
+                            {/*          />*/}
                         </div>
                         : data?.getCvsByAccountEmail[data?.getCvsByAccountEmail.length-1]?.sample === 2 ?
                             <div className=''>
@@ -553,16 +569,16 @@ function Profile() {
 
     <div className="shadow-xl fixed bottom-0  ">
       <Footer />
-    </div>    
-    
-
-    
     </div>
-    
 
 
-    
-    
+
+    </div>
+
+
+
+
+
 
     </div>
     </>

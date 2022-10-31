@@ -13,21 +13,22 @@ type Personal = {
     city?: string;
     email?: string;
 };
+type Experience = {
+    position: string;
+    city: string;
+    employer: string;
+    description: string;
+    startdate: Date;
+    enddate: Date;
+};
+
 type Education = {
     degree: string;
     city: string;
     school: string;
     description: string;
-    startDate: Date;
-    endDate: Date;
-};
-type Experience = {
-    degree: string;
-    city: string;
-    employer: string;
-    description: string;
-    startDate: Date;
-    endDate: Date;
+    startdate: Date;
+    enddate: Date;
 };
 type Skills = {
     habit: string;
@@ -60,6 +61,7 @@ type Props = {
     skillsList: Skills[];
     languagesList: Languages[];
     type?: string
+    colorDB?: string
 };
 
 function classNames(...classes: any) {
@@ -73,7 +75,8 @@ function CVpdfBerkeley({
                            experienceList,
                            skillsList,
                            languagesList,
-                           type
+                           type,
+                           colorDB
                        }: Props) {
     //const [scale, setScale] = useState(true);
 
@@ -87,7 +90,14 @@ function CVpdfBerkeley({
     const color = useSelector((state: RootState) => state.nav.color);
 
     const colorLogic = classNames(
-        choose === 3 ? (
+        colorDB ? (
+            (colorDB === 'violet') ? 'text-violet-700'
+                : (colorDB === 'blue') ? 'text-blue-700'
+                    : (colorDB === 'yellow') ? 'text-yellow-600'
+                        : (colorDB === 'red') ? 'text-red-700'
+                            : (colorDB === 'green') ? 'text-green-700'
+                                : ''
+        ) : choose === 3 ? (
         (color === 'violet'&& choose===3) ? 'text-violet-700'
             : (color === 'blue'&& choose===3) ? 'text-blue-700'
                 : (color === 'yellow'&& choose===3) ? 'text-yellow-600'
@@ -97,8 +107,26 @@ function CVpdfBerkeley({
         ) : ''
     )
 
+    // const backgroundLogic = classNames(
+    //     choose === 3 ? (
+    //     color === 'violet' ? 'bg-violet-100 rounded-md'
+    //         : color === 'blue'  ? 'bg-blue-100 rounded-md'
+    //             : color === 'yellow' ? 'bg-yellow-50 rounded-md'
+    //                 : color === 'red' ? 'bg-red-100 rounded-md'
+    //                     : color === 'green' ? 'bg-green-100 rounded-md'
+    //                         : 'bg-neutral-100 rounded-md'
+    //     ) : 'bg-neutral-100 rounded-md'
+    // )
+
     const backgroundLogic = classNames(
-        choose === 3 ? (
+        colorDB ? (
+            colorDB === 'violet' ? 'bg-violet-100 rounded-md'
+                : colorDB === 'blue'  ? 'bg-blue-100 rounded-md'
+                    : colorDB === 'yellow' ? 'bg-yellow-50 rounded-md'
+                        : colorDB === 'red' ? 'bg-red-100 rounded-md'
+                            : colorDB === 'green' ? 'bg-green-100 rounded-md'
+                                : 'bg-neutral-100 rounded-md'
+        ) : choose === 3 ? (
         color === 'violet' ? 'bg-violet-100 rounded-md'
             : color === 'blue'  ? 'bg-blue-100 rounded-md'
                 : color === 'yellow' ? 'bg-yellow-50 rounded-md'
@@ -106,8 +134,8 @@ function CVpdfBerkeley({
                         : color === 'green' ? 'bg-green-100 rounded-md'
                             : 'bg-neutral-100 rounded-md'
         ) : 'bg-neutral-100 rounded-md'
-    )
 
+)
 
     return (
         <div>
@@ -115,8 +143,8 @@ function CVpdfBerkeley({
                 className={classNames(
                     type === 'downloadSample' ? ''
                         : type === 'modalSample' ? 'sampleScale50 overflow-hidden'
-                            :  choose === 3 ? 'ring-2 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50 overflow-hidden'
-                                : 'sampleScale50 overflow-hidden'
+                            :  choose === 3 ? 'ring-4 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50 overflow-hidden'
+                                : 'sampleScale50 overflow-hidden hover:ring-4 ring-offset-1 ring-violet-300 ring-rounded-lg ring-offset-violet-300'
                 )}
             >
                 <div className="mx-7 mb-2 space-y-2 mt-2">
@@ -224,10 +252,10 @@ function CVpdfBerkeley({
                                         {education.degree}
                                     </div>
                                     <div className="text-xs text-neutral-500">
-                                        {mont[new Date(education.startDate).getMonth()]}{" "}
-                                        {new Date(education.startDate).getFullYear()}–
-                                        {mont[new Date(education.endDate).getMonth()]}{" "}
-                                        {new Date(education.endDate).getFullYear()}
+                                        {mont[new Date(education.startdate).getMonth()]}{" "}
+                                        {new Date(education.startdate).getFullYear()}–
+                                        {mont[new Date(education.enddate).getMonth()]}{" "}
+                                        {new Date(education.enddate).getFullYear()}
                                     </div>
                                 </div>
                                 <div className="text-xs text-neutral-600 font-serif">
@@ -266,16 +294,16 @@ function CVpdfBerkeley({
                     </div>
                     <div className="space-y-1">
                         {experienceList.map((experience) => (
-                            <div key={experience.degree} className="">
+                            <div key={experience.position} className="">
                                 <div className="flex justify-between">
                                     <div className="text-sm font-semibold text-neutral-800">
-                                        {experience.degree}
+                                        {experience.position}
                                     </div>
                                     <div className="text-xs text-neutral-500">
-                                        {mont[new Date(experience.startDate).getMonth()]}{" "}
-                                        {new Date(experience.startDate).getFullYear()}–
-                                        {mont[new Date(experience.endDate).getMonth()]}{" "}
-                                        {new Date(experience.endDate).getFullYear()}
+                                        {mont[new Date(experience.startdate).getMonth()]}{" "}
+                                        {new Date(experience.startdate).getFullYear()}–
+                                        {mont[new Date(experience.enddate).getMonth()]}{" "}
+                                        {new Date(experience.enddate).getFullYear()}
                                     </div>
                                 </div>
                                 <div className="text-xs text-neutral-700 opacity-90  font-serif">

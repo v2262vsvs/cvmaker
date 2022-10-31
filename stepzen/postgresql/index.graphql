@@ -230,11 +230,16 @@ type Query {
       """
       configuration: "postgresql_config"
     )
-  getCvList: [Cv]
+  getCvList(limit: Int): [Cv]
     @dbquery(
       type: "postgresql"
-      schema: "public"
-      table: "cv"
+      #schema: "public"
+      #table: "cv"
+      query: """
+      select * from cv
+      order by id desc
+      limit $1
+      """
       configuration: "postgresql_config"
     )
   getCv(id: ID!): Cv
@@ -410,6 +415,14 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
+  deleteAccountByEmail(email: String!): Account
+  @dbquery(
+    type: "postgresql"
+    schema: "public"
+    table: "account"
+    dml: DELETE
+    configuration: "postgresql_config"
+  )
   insertCv(
     description: String!
     account_id: ID!

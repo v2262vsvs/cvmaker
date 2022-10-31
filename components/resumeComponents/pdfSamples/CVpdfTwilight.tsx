@@ -11,7 +11,26 @@ type Props = {
     skillsList: Skills[],
     languagesList: Languages[],
     type?: string
+    colorDB?: string
 }
+
+type Experience = {
+    position: string;
+    city: string;
+    employer: string;
+    description: string;
+    startdate: Date;
+    enddate: Date;
+};
+
+type Education = {
+    degree: string;
+    city: string;
+    school: string;
+    description: string;
+    startdate: Date;
+    enddate: Date;
+};
 const mont = [
     "Jan",
     "Feb",
@@ -38,7 +57,8 @@ export default function CVpdfTwilight({
                                         experienceList,
                                         skillsList,
                                         languagesList,
-                                        type
+                                        type,
+                                        colorDB
                                     }: Props) {
 
     let img = personal.image
@@ -49,7 +69,12 @@ export default function CVpdfTwilight({
     const choose = useSelector((state: RootState) => state.nav.choose);
     const color = useSelector((state: RootState) => state.nav.color);
     const colorText = classNames(
-        choose === 5 ? (
+        colorDB ? (
+            colorDB === 'violet' ? 'section-headline text-violet-500 border-violet-500'
+                : colorDB === 'yellow' ? 'section-headline text-yellow-500 border-yellow-500'
+                    : colorDB === 'red' ? 'section-headline text-red-500 border-red-500'
+                        : 'section-headline'
+        ) : choose === 5 ? (
         color === 'violet' ? 'section-headline text-violet-500 border-violet-500'
             : color === 'yellow' ? 'section-headline text-yellow-500 border-yellow-500'
                 : color === 'red' ? 'section-headline text-red-500 border-red-500'
@@ -58,7 +83,12 @@ export default function CVpdfTwilight({
     )
 
     const colorTextName = classNames(
-        choose === 5 ? (
+        colorDB ? (
+            colorDB === 'violet' ? 'border-violet-500 border-l-8 pl-2 text-white'
+                : colorDB === 'yellow' ? 'border-orange-500 border-l-8 pl-2 text-white'
+                    : colorDB === 'red' ? 'border-orange-400 border-l-8 pl-2 text-white'
+                        : 'border-green-500 border-l-8 pl-2 text-white'
+        ) : choose === 5 ? (
         color === 'violet' ? 'border-violet-500 border-l-8 pl-2 text-white'
             : color === 'yellow' ? 'border-orange-500 border-l-8 pl-2 text-white'
                 : color === 'red' ? 'border-orange-400 border-l-8 pl-2 text-white'
@@ -73,22 +103,29 @@ export default function CVpdfTwilight({
             className={classNames(
                 type === 'downloadSample' ? ''
                     : type === 'modalSample' ? 'sampleScale50 overflow-hidden'
-                        : choose === 5 ? 'ring-2 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50 overflow-hidden'
-                            : 'sampleScale50 overflow-hidden'
+                        : choose === 5 ? 'ring-4 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50 overflow-hidden'
+                            : 'sampleScale50 overflow-hidden hover:ring-4 ring-offset-1 ring-violet-300 ring-rounded-lg ring-offset-violet-300'
             )}
         >
             <div className="">
                 <main
-                    className="flex flex-col sm:flex-row-reverse shadow-2xl h-screen "
+                    className="flex flex-col sm:flex-row-reverse shadow-2xl h-[842px]"
                 >
                     <div
                         className={classNames(
-                            color === 'violet' ? 'w-1/3 bg-gradient-to-b from-violet-300 to-indigo-500'
-                                : color === 'blue' ? 'w-1/3 bg-gradient-to-b from-indigo-300 to-green-300'
-                                    : color === 'yellow' ? 'w-1/3 bg-gradient-to-b from-yellow-300 to-orange-500'
-                                        : color === 'red' ? 'w-1/3 bg-gradient-to-b from-red-600 to-orange-400'
-                                            : color === 'green' ? 'w-1/3 bg-gradient-to-b from-green-300 to-indigo-300 '
-                                                : 'w-1/3 bg-gradient-to-b from-gray-800 to-gray-400'
+                            colorDB ? (colorDB === 'violet' ? 'w-1/3 bg-gradient-to-b from-violet-300 to-indigo-500'
+                                    : colorDB === 'blue' ? 'w-1/3 bg-gradient-to-b from-indigo-300 to-green-300'
+                                        : colorDB === 'yellow' ? 'w-1/3 bg-gradient-to-b from-yellow-300 to-orange-500'
+                                            : colorDB === 'red' ? 'w-1/3 bg-gradient-to-b from-red-600 to-orange-400'
+                                                : colorDB === 'green' ? 'w-1/3 bg-gradient-to-b from-green-300 to-indigo-300 '
+                                                    : 'w-1/3 bg-gradient-to-b from-gray-800 to-gray-400'
+                            ) : choose === 5 ? (color === 'violet' ? 'w-1/3 bg-gradient-to-b from-violet-300 to-indigo-500'
+                                    : color === 'blue' ? 'w-1/3 bg-gradient-to-b from-indigo-300 to-green-300'
+                                        : color === 'yellow' ? 'w-1/3 bg-gradient-to-b from-yellow-300 to-orange-500'
+                                            : color === 'red' ? 'w-1/3 bg-gradient-to-b from-red-600 to-orange-400'
+                                                : color === 'green' ? 'w-1/3 bg-gradient-to-b from-green-300 to-indigo-300 '
+                                                    : 'w-1/3 bg-gradient-to-b from-gray-800 to-gray-400'
+                            ) : 'w-1/3 bg-gradient-to-b from-gray-800 to-gray-400'
                         )}
                     >
                         <div className="flex items-center justify-center mb-5 mt-10">
@@ -125,10 +162,15 @@ export default function CVpdfTwilight({
                                         {skill.habit}
                                         <div
                                             className={classNames(
-                                                color === 'violet' ? 'w-32 bg-violet-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
-                                                    : color === 'yellow' ? 'w-32 bg-yellow-600 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
-                                                        : color === 'red' ? 'w-32 bg-red-600 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
-                                                            : 'w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
+                                                colorDB ? (colorDB === 'violet' ? 'w-32 bg-violet-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
+                                                        : colorDB === 'yellow' ? 'w-32 bg-yellow-600 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
+                                                            : colorDB === 'red' ? 'w-32 bg-red-600 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
+                                                                : 'w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2')
+                                                : choose === 5 ? (color === 'violet' ? 'w-32 bg-violet-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
+                                                        : color === 'yellow' ? 'w-32 bg-yellow-600 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
+                                                            : color === 'red' ? 'w-32 bg-red-600 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
+                                                                : 'w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2')
+                                                    : 'w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
                                             )}
                                         >
                                             <div
@@ -184,15 +226,15 @@ export default function CVpdfTwilight({
                                 >Experience</div>
                             </div>
                             {experienceList.map((experience)=> (
-                                <div key={experience.degree} className={'mt-1'}>
+                                <div key={experience.position} className={'mt-1'}>
                                         <div className="lg:inline-block lg:w-3/12 text-gray-500 text-xs font-mono">
-                                            {mont[new Date(experience.startDate).getMonth()]}{" "}
-                                            {new Date(experience.startDate).getFullYear()}{" "}
-                                            {mont[new Date(experience.endDate).getMonth()]}{" "}
-                                            {new Date(experience.endDate).getFullYear()}
+                                            {mont[new Date(experience.startdate).getMonth()]}{" "}
+                                            {new Date(experience.startdate).getFullYear()}{" "}
+                                            {mont[new Date(experience.enddate).getMonth()]}{" "}
+                                            {new Date(experience.enddate).getFullYear()}
                                         </div>
                                         <div className="lg:inline-block lg:w-9/12 align-top w-full text-gray-800 text-sm font-mono font-bold">
-                                            <div className={'uppercase -m-0.5'}>{experience.degree}</div>
+                                            <div className={'uppercase -m-0.5'}>{experience.position}</div>
                                             <h3 className={'text-gray-600 text-xs font-mono font-bold -ml-0.5'}>{experience.employer}</h3>
                                         </div>
                                         <p className='mt-2  text-gray-700 text-xs font-mono tracking-tighter'>
@@ -211,10 +253,10 @@ export default function CVpdfTwilight({
                             {educationList.map((education)=> (
                                 <div key={education.degree} className={'mt-1'}>
                                     <div className="lg:inline-block lg:w-3/12 text-gray-500 text-xs font-mono">
-                                        {mont[new Date(education.startDate).getMonth()]}{" "}
-                                        {new Date(education.startDate).getFullYear()}{" "}
-                                        {mont[new Date(education.endDate).getMonth()]}{" "}
-                                        {new Date(education.endDate).getFullYear()}
+                                        {mont[new Date(education.startdate).getMonth()]}{" "}
+                                        {new Date(education.startdate).getFullYear()}{" "}
+                                        {mont[new Date(education.enddate).getMonth()]}{" "}
+                                        {new Date(education.enddate).getFullYear()}
                                     </div>
                                     <div className="lg:inline-block lg:w-9/12 align-top w-full text-gray-800 text-sm font-mono font-bold">
                                         <div className={'uppercase -m-0.5'}>{education.degree}</div>

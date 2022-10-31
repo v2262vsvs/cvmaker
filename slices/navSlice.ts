@@ -10,7 +10,7 @@ interface CounterState {
 const initialState : CounterState={
     choose:null,
     scale:null,
-    color:null,
+    color:'black',
 }
 
 export const navSlice = createSlice({

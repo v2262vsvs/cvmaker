@@ -68,8 +68,8 @@ function Header() {
                             </Link>
                             </div>
                             <div className='flex items-center  hover:text-blue-900'>
-                                <Dropdown name='Resume' firstLink='Templates' secondLink='Create Resume' 
-                                          createLink='/box/personal'/>
+                                <Dropdown name='Resume' firstLink='Templates' secondLink='Create Resume'
+                                          createLink='/box/personal' createLink2='/box/templates'/>
                             </div>
                             <div className='flex items-center hover:text-blue-900'>
                                 <Dropdown name='Cover Letter' firstLink='Templates' secondLink='Create Cover Letter'/>
@@ -87,7 +87,7 @@ function Header() {
                         {session ? (
                             <div className='flex'>
                                 <div className='flex items-center space-x-2 p-2 cursor-pointer '>
-                                    <Dropdown name={session?.user?.name} firstLink='Your profile' secondLink='Settings' createLink2='/box/profile'
+                                    <Dropdown name={session?.user?.name} firstLink='Your profile' secondLink='Settings' createLink2='/box/profile' createLink='/box/settings'
                                               typeProfile='profile' imageProfile={`${session?.user?.image}`}/>
                                 </div>
                             </div>

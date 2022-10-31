@@ -28,9 +28,9 @@ function formatDate(date : Date) {
         day = '' + d.getDate(),
         year = d.getFullYear();
 
-    if (month.length < 2) 
+    if (month.length < 2)
         month = '0' + month;
-    if (day.length < 2) 
+    if (day.length < 2)
         day = '0' + day;
 
     return [year, month, day].join('-');
@@ -51,16 +51,16 @@ type Education = {
     city: string;
     school: string;
     description: string;
-    startDate: Date;
-    endDate: Date;
+    startdate: Date;
+    enddate: Date;
 };
 type Experience = {
-    degree: string;
+    position: string;
     city: string;
     employer: string;
     description: string;
-    startDate: Date;
-    endDate: Date;
+    startdate: Date;
+    enddate: Date;
 };
 type Skills = {
     habit: string;
@@ -78,7 +78,7 @@ function useWindowSize() {
       width: 0,
       height: 0,
     });
-  
+
     useEffect(() => {
       // only execute all the code below in client side
       if (typeof window !== 'undefined') {
@@ -90,21 +90,21 @@ function useWindowSize() {
             height: window.innerHeight,
           });
         }
-      
+
         // Add event listener
         window.addEventListener("resize", handleResize);
-       
+
         // Call handler right away so state gets updated with initial window size
         handleResize();
-      
+
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
       }
     }, []); // Empty array ensures that effect is only run on mount
     return windowSize;
   }
-  
-  
+
+
 
 export default function CvSampleCards() {
     const sample = useSelector((state: RootState) => state.nav.choose);
@@ -138,6 +138,17 @@ export default function CvSampleCards() {
         dispatch(setColor(color))
     }
 
+    const [isCongratulation, setIsCongratulation] = useState(false)
+
+    function openCongratulation () {
+        setIsCongratulation(true)
+        exportPDFWithComponent()
+    }
+    function closeCongratulation () {
+        setIsCongratulation(false)
+    }
+
+
     const pdfExportComponent = React.useRef<PDFExport>(null);
 
 
@@ -154,9 +165,9 @@ export default function CvSampleCards() {
 
 
 
-   
 
-    
+
+
 
     const [personal, setPersonal] = useState<Personal>({});
     const [profileDescription, setProfileDescription] = useState<string>("");
@@ -240,14 +251,17 @@ export default function CvSampleCards() {
     }, []);
 
 
-
     const exportPDFWithComponent = async () => {
+
+
         if (sample){
         setIsConfetti(true)
         if (pdfExportComponent.current) {
             pdfExportComponent.current.save();
         }
-        try { 
+        try {
+            const id = toast.loading("Saving your CV :3")
+
             const {data} = await client.query({
                 query: GET_ACCOUNT_BY_EMAIL,
                 variables:{
@@ -262,7 +276,7 @@ export default function CvSampleCards() {
                 console.log('using existing account',data)
                 accountID = data?.getAccountByEmail?.id
             } else {
-                
+
                 console.log('creating a new account')
                 const {data} = await addAccount({
                     variables:{
@@ -274,7 +288,7 @@ export default function CvSampleCards() {
                 console.log(data, 'new Account created')
                 accountID = data?.insertAccount?.id
             }
-                 
+
                 console.log('creating a new cv')
                 const {data:{insertCv:newCv}}=await addCv({
                     variables:{
@@ -301,18 +315,18 @@ export default function CvSampleCards() {
                     },
                 })
                 console.log(newUser, 'user(personal data page) added')
-                
-                
+
+
 
                 for (let i = 0; i<educationList.length;i++){
 
-                    let startdate = formatDate(educationList[i].startDate)
-                    let enddate = formatDate(educationList[i].endDate)
+                    let startdate = formatDate(educationList[i].startdate)
+                    let enddate = formatDate(educationList[i].enddate)
                     const {data:{insertEducation:newEducation}}=await addEducation({
                         variables:{
                             city:educationList[i].city,
-                            enddate:educationList[i].endDate,
-                            startdate: educationList[i].startDate,
+                            enddate:educationList[i].enddate,
+                            startdate: educationList[i].startdate,
                             description:educationList[i].description,
                             school:educationList[i].school,
                             cv_id:newCv.id,
@@ -323,17 +337,17 @@ export default function CvSampleCards() {
                 }
                 for (let i = 0; i<experienceList.length;i++){
 
-                    //let startdate = formatDate(experienceList[i].startDate)
-                    //let enddate = formatDate(experienceList[i].endDate)
+                    //let startdate = formatDate(experienceList[i].startdate)
+                    //let enddate = formatDate(experienceList[i].enddate)
                     const {data:{insertExperience:newExperience}}=await addExperience({
                         variables:{
                             city:experienceList[i].city,
-                            enddate:educationList[i].endDate,
-                            startdate: educationList[i].startDate,
+                            enddate:experienceList[i].enddate,
+                            startdate: experienceList[i].startdate,
                             description:experienceList[i].description,
                             employer:experienceList[i].employer,
                             cv_id:newCv.id,
-                            position:experienceList[i].degree,
+                            position:experienceList[i].position,
                         },
                     })
                     console.log(newExperience,'experience #',i,' added')
@@ -358,10 +372,11 @@ export default function CvSampleCards() {
                     })
                     console.log(newLanguage,'language #',i,' added')
                 }
+            toast.update(id, { render: "You CV was saved ^_^", type: "success", isLoading: false, autoClose: 2000 });
         }catch(error){console.log("error",error)}
 
-        
-        setIsConfetti(false)
+
+            setIsConfetti(false)
     } else {
         toast.error("Choose your sample!")
     }
@@ -370,7 +385,7 @@ export default function CvSampleCards() {
 
     return (
         <>
-        
+
             <div className='flex items-center space-x-3 overflow-x-scroll overflow-y-hidden overflow-clip scrollbar-hide w-[1400px] py-5 px-3 ml-auto mr-auto'>
                 {/*<div onClick={()=>openModal(1)} >*/}
                 {/*    <CVpdfStanford personal={personal} profileDescription={profileDescription}*/}
@@ -434,9 +449,9 @@ export default function CvSampleCards() {
                                 <Dialog.Panel
                                     className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-2 text-left align-middle shadow-xl transition-all">
                                     <div className=''>
-                                        <CVpdfStanford personal={personal} profileDescription={profileDescription}
-                                                       educationList={educationList} experienceList={experienceList}
-                                                       skillsList={skillsList} languagesList={languagesList} type={'modalSample'}/>
+                                        {/*<CVpdfStanford personal={personal} profileDescription={profileDescription}*/}
+                                        {/*               educationList={educationList} experienceList={experienceList}*/}
+                                        {/*               skillsList={skillsList} languagesList={languagesList} type={'modalSample'}/>*/}
                                     </div>
 
                                     <div className="-mt-2 text-center p-2 ">
@@ -832,7 +847,9 @@ export default function CvSampleCards() {
 
 
             <div className="items-center text-center ">
-                <button onClick={() => exportPDFWithComponent()}
+                <button
+                    onClick={openCongratulation}
+                    //onClick={() => exportPDFWithComponent()}
                         className=" bg-violet-700 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto"
                 >
                     <div className="text-white text-lg font-semibold ">
@@ -853,9 +870,9 @@ export default function CvSampleCards() {
                 <PDFExport ref={pdfExportComponent} paperSize="A4">
                     {isChoose === 1 ?
                         <div className=''>
-                            <CVpdfStanford personal={personal} profileDescription={profileDescription}
-                                           educationList={educationList} experienceList={experienceList} skillsList={skillsList}
-                                           languagesList={languagesList} type={'downloadSample'}/>
+                            {/*<CVpdfStanford personal={personal} profileDescription={profileDescription}*/}
+                            {/*               educationList={educationList} experienceList={experienceList} skillsList={skillsList}*/}
+                            {/*               languagesList={languagesList} type={'downloadSample'}/>*/}
                         </div>
                         : isChoose === 2 ?
                             <div className=''>
@@ -905,7 +922,84 @@ export default function CvSampleCards() {
                     height={window.innerHeight + 50}
                     numberOfPieces={500}
                 />}
-        
+
+            <Transition appear show={isCongratulation} as={Fragment}>
+                <Dialog as="div" className="relative z-30" onClose={closeCongratulation}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-violet-300 bg-opacity-25" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-violetShadow transition-all">
+                                    <Dialog.Title
+                                        as="h3"
+                                        className="text-lg font-medium leading-6 text-gray-900"
+                                    >
+                                        {sample ? 'Congratulations!!!' : 'Please choose a resume :3'}
+                                    </Dialog.Title>
+                                    <div>
+                                        <div className="mt-2">
+                                            <p className="text-sm text-gray-500">
+                                                {sample ? 'Good job, you are taking confident steps towards your goal. Then you can go to the profile where you can see and change or delete your resume. Or go to the main page.' : '-_-'}
+                                            </p>
+                                        </div>
+
+                                        {sample &&
+                                            <div className="mt-4 flex justify-between">
+                                                <button
+                                                    type="button"
+                                                    className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2"
+                                                    //onClick={''}
+                                                >
+                                                    <Link href={'/'}>
+                                                        Home
+                                                    </Link>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2"
+                                                    //onClick={''}
+                                                >
+                                                    <Link href={'/box/profile'}>
+                                                        Profile
+                                                    </Link>
+                                                </button>
+                                            </div>}
+                                        {!sample &&
+                                            <div className="mt-4 flex justify-between">
+                                                <button
+                                                    type="button"
+                                                    className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2"
+                                                    onClick={closeCongratulation}
+                                                >
+                                                    Close
+                                                </button>
+                                            </div>}
+                                    </div>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div>
+                </Dialog>
+            </Transition>
         </>
     )
 }

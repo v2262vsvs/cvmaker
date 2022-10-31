@@ -3,31 +3,26 @@ import Image from "next/image";
 import Link from "next/link";
 import CvCards from "../resumeComponents/CvCards";
 import { useQuery } from '@apollo/client';
-import { GET_ACCOUNT_BY_EMAIL, GET_CV_BY_ID, GET_FULL_CV_BY_ID } from '../../graphql/queries';
+import {
+    GET_ACCOUNT_BY_EMAIL,
+    GET_CV,
+    GET_CV_BY_ID,
+    GET_FULL_CV_BY_ID,
+} from '../../graphql/queries';
 import { useSession } from 'next-auth/react';
 
 const HomeContent = () => {
-    {/* 
 
-        const {data : session} = useSession()
-    const {data,error} = useQuery(GET_FULL_CV_BY_ID,{
-        variables:{
-          id:35
-        }
-      })
-      if(error){
-        return `Error! ${error}`
-      } 
-    const cv : any  = data
-    console.log('cv ',cv)
-    
-    */}
-    
+    // const {data, error} = useQuery(GET_CV,{
+    //     variables:{
+    //         num: 6
+    //     }
+    // })
+    // if(error){
+    //     return `Error! ${error}`
+    // }
+    // console.log(data)
 
-    
-    
-
-    
 
     return (
         <div className=''>
@@ -59,7 +54,7 @@ const HomeContent = () => {
             <div className='bg-white flex justify-center px-4 py-2'>
                 <Image className='' src='/Chevrondown.svg' width='46' height='46'/>
             </div>
-            
+
             <div className='bg-white container mx-auto mt-28 mb-28 '
                  style={{width: '1528px', height: '528px'}}
             >
@@ -107,9 +102,9 @@ const HomeContent = () => {
                     </div>
                 </div>
             </div>
-            
-            
-            
+
+
+
 
             <div className='bg-violet-700 flex-row'
                  style={{width: '100%', height: '1693px'}}
@@ -124,15 +119,16 @@ const HomeContent = () => {
                         </p>
                         </div>
                 </div>
-                
+
                 <Link href={'/box/personal'}>
-                    <div className='ml-10 mr-10' >
+                    <div className='ml-32 mr-10' >
+                        {/*@ts-ignore*/}
                         <CvCards/>
                     </div>
                 </Link>
             </div>
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%"  className='animation-svg animation -mt-80'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%"  className='animation-svg animation -mt-0'>
                 <defs>
                     <pattern id="blocks" patternUnits="userSpaceOnUse" width="200" height="196">
                         <rect width="100" height="100" className="topleft black"/>
