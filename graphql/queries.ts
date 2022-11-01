@@ -391,3 +391,12 @@ export const GET_FULL_CVS_BY_EMAIL = gql`
         }
     }
 `
+
+
+export const GET_COUNT_OF_ACCOUNTS = gql`
+    query {
+        getCountOfAccounts {
+            id
+        }
+    }
+`

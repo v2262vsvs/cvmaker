@@ -138,6 +138,16 @@ type UserInfo {
 These are some examples of queries generated from the schema. Feel free to modify them or add your own.
 """
 type Query {
+  getCountOfAccounts: [Account]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select id from "account"
+      order by id desc
+      limit 1
+      """
+      configuration: "postgresql_config"
+    )
   getAccountList: [Account]
     @dbquery(
       type: "postgresql"

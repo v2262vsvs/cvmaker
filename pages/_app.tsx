@@ -14,6 +14,8 @@ import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+// import './i18n';
+import '/utils/i18n'
 
 
 
@@ -31,7 +33,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, }: AppProps) {
                     <Header/>
                     <Component  {...pageProps} />
                 </div>
-            </SessionProvider>              
+            </SessionProvider>
         </ApolloProvider>
         </Provider>
         </div>
