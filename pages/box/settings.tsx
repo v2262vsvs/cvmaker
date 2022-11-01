@@ -7,8 +7,11 @@ import {useMutation, useQuery} from "@apollo/client";
 import { GET_FULL_CVS_BY_EMAIL} from "../../graphql/queries";
 import {DELETE_ACCOUNT_BY_EMAIL, DELETE_CV_BY_ID} from "../../graphql/mutations";
 import { Dialog, Transition } from '@headlessui/react';
+import {useTranslation} from "react-i18next";
 
 const Settings = () => {
+    const { t, i18n } = useTranslation();
+
     const [isOpen, setIsOpen] = useState(false)
     const [delLoading, setDelLoading] = useState(false)
 
@@ -55,12 +58,12 @@ const Settings = () => {
     const handleSave = async (e: any ) => {
         e.preventDefault()
         try {
-            toast.success("Changes saved");
+            toast.success(t("Changes saved"));
         }catch(error){console.log("error",error)}
     }
 
     const handleDelete = async () => {
-        const id = toast.loading("Deleting your account and resumes, please wait")
+        const id = toast.loading(t("Deleting your account and resumes, please wait"))
 
         try {
             for (let i = 0; i < DATA.length; i ++) {
@@ -80,7 +83,7 @@ const Settings = () => {
                 },
             })
 
-            toast.update(id, { render: "Account was deleted", type: "success", isLoading: false, autoClose: 2000 });
+            toast.update(id, { render: t("Account was deleted"), type: "success", isLoading: false, autoClose: 2000 });
         } catch(error){
             console.log("error",error)
             toast.error('error')
@@ -98,16 +101,16 @@ const Settings = () => {
 
             <div className='flex flex-col container mx-auto mt-16 absolute left-28 z-20'>
                 <div className="font-extrabold text-violet-700 text-4xl">
-                    Profile Settings
+                    {t('Profile Settings')}
                 </div>
                 <div>
-                    <div className={'my-7 text-gray-500 '}>PERSONAL DATA IN CV</div>
+                    <div className={'my-7 text-gray-500 '}>{t('PERSONAL DATA IN CV')}</div>
                     <form className="bg-white w-[835px] p-8 rounded-xl shadow-violetShadow">
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                        htmlFor="grid-first-name">
-                                    First Name
+                                    {t('First Name')}
                                 </label>
                                 <input
                                     className="appearance-none block w-full bg-violet-50 text-gray-700 border border-violet-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-violet-500"
@@ -116,7 +119,7 @@ const Settings = () => {
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                        htmlFor="grid-last-name">
-                                    Last Name
+                                    {t('Last Name')}
                                 </label>
                                 <input
                                     className="appearance-none block w-full bg-violet-50 text-gray-700 border border-violet-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-violet-500"
@@ -127,29 +130,29 @@ const Settings = () => {
                             <div className="w-1/2 px-3">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                        htmlFor="grid-password">
-                                    Email address
+                                    {t('Email address')}
                                 </label>
                                 <input
                                     className="appearance-none block w-full bg-violet-50 text-gray-700 border border-violet-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-violet-500"
                                     name={'email'}/>
                             </div>
-                            <div className="w-1/2 mt-12 px-6 ">
+                            <div className="w-1/2 mt-12 px-3 ">
                                 <button
                                     onClick={handleSave}
-                                    className={'text-violet-700 font-bold ml-80'}>SAVE</button>
+                                    className={'text-violet-700 font-bold'}>{t('SAVE')}</button>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div>
-                    <div className={'my-7 text-gray-500 '}>DANGER ZONE</div>
+                    <div className={'my-7 text-gray-500 '}>{t('DANGER ZONE')}</div>
                     <div className={'flex bg-white w-[835px] p-8 rounded-xl justify-between shadow-violetShadow'}>
-                        <div>IF YOU DELETE YOUR ACCOUNT, IT CANNOT BE RESTORED</div>
+                        <div>{t("IF YOU DELETE YOUR ACCOUNT, IT CANNOT BE RESTORED")}</div>
                         <button
                             className={'text-red-700 font-bold'}
                             // onClick={()=>handleDelete()}
                             onClick={openModal}
-                        >DELETE</button>
+                        >{t('DELETE')}</button>
                     </div>
                 </div>
 
@@ -195,13 +198,13 @@ const Settings = () => {
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        {!delLoading ? 'Deleting Account' : 'Please wait...'}
+                                        {!delLoading ? t('Deleting Account') : t('Please wait...')}
                                     </Dialog.Title>
                                     {!delLoading ? (
                                         <div>
                                             <div className="mt-2">
                                                 <p className="text-sm text-gray-500">
-                                                    Are you sure you want to delete your account? If you delete your account, it cannot be restored.
+                                                    {t('Are you sure you want to delete your account? If you delete your account, it cannot be restored.')}
                                                 </p>
                                             </div>
 
@@ -211,19 +214,19 @@ const Settings = () => {
                                                     className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2"
                                                     onClick={openLoading}
                                                 >
-                                                    Delete
+                                                    {t('Delete')}
                                                 </button>
                                                 <button
                                                     type="button"
                                                     className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2"
                                                     onClick={closeModal}
                                                 >
-                                                    Cancel
+                                                    {t('Cancel')}
                                                 </button>
                                             </div>
                                         </div>
                                     ) : (
-                                        <div>Deleting your account</div>
+                                        <div>{t('Deleting your account')}</div>
                                     )}
                                 </Dialog.Panel>
                             </Transition.Child>
