@@ -11,7 +11,29 @@ type Props = {
     skillsList: Skills[],
     languagesList: Languages[],
     type?: string
+    colorDB?: string
 }
+
+type Experience = {
+    position: string;
+    city: string;
+    employer: string;
+    description: string;
+    startdate: Date;
+    enddate: Date;
+};
+
+type Education = {
+    degree: string;
+    city: string;
+    school: string;
+    description: string;
+    startdate: Date;
+    enddate: Date;
+};
+
+
+
 const mont = [
     "Jan",
     "Feb",
@@ -38,7 +60,8 @@ export default function CVpdfErling({
                                         experienceList,
                                         skillsList,
                                         languagesList,
-                                        type
+                                        type,
+                                        colorDB
                                     }: Props) {
 
     let img = personal.image
@@ -51,18 +74,32 @@ export default function CVpdfErling({
     console.log('colorrrr',color)
 
     const backgroundPanel = classNames(
-        choose === 4 ? (
-        color === 'violet' ? 'bg-violet-800 w-2/6 h-screen'
-            : color === 'blue' ? 'bg-blue-800 w-2/6 h-screen'
-                : color === 'yellow' ? 'bg-yellow-500 w-2/6 h-screen'
-                    : color === 'red' ? 'bg-red-700 w-2/6 h-screen'
-                        : color === 'green' ? 'bg-green-800 w-2/6 h-screen'
-                            : 'bg-gray-800 w-2/6 h-screen'
-        ) : 'bg-gray-800 w-2/6 h-screen'
+        colorDB ? (
+            colorDB === 'violet' ? 'bg-violet-800 w-2/6'
+                : colorDB === 'blue' ? 'bg-blue-800 w-2/6 '
+                    : colorDB === 'yellow' ? 'bg-yellow-500 w-2/6 '
+                        : colorDB === 'red' ? 'bg-red-700 w-2/6 '
+                            : colorDB === 'green' ? 'bg-green-800 w-2/6'
+                                : 'bg-gray-800 w-2/6'
+        ) : choose === 4 ? (
+        color === 'violet' ? 'bg-violet-800 w-2/6'
+            : color === 'blue' ? 'bg-blue-800 w-2/6 '
+                : color === 'yellow' ? 'bg-yellow-500 w-2/6 '
+                    : color === 'red' ? 'bg-red-700 w-2/6 '
+                        : color === 'green' ? 'bg-green-800 w-2/6'
+                            : 'bg-gray-800 w-2/6'
+        ) : 'bg-gray-800 w-2/6'
     )
 
     const colorText = classNames(
-        choose === 4 ? (
+        colorDB ? (
+            colorDB === 'violet' ? 'text-violet-800'
+                : colorDB === 'blue' ? 'text-blue-800'
+                    : colorDB === 'yellow' ? 'text-yellow-500'
+                        : colorDB === 'red' ? 'text-red-700'
+                            : colorDB === 'green' ? 'text-green-800'
+                                : 'text-gray-800'
+        ) : choose === 4 ? (
         color === 'violet' ? 'text-violet-800'
             : color === 'blue' ? 'text-blue-800'
                 : color === 'yellow' ? 'text-yellow-500'
@@ -78,11 +115,11 @@ export default function CVpdfErling({
             className={classNames(
                 type === 'downloadSample' ? ''
                     : type === 'modalSample' ? 'sampleScale50 overflow-hidden'
-                        : choose === 4 ? 'ring-2 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50 overflow-hidden'
-                            : 'sampleScale50 overflow-hidden'
+                        : choose === 4 ? 'ring-4 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50 overflow-hidden'
+                            : 'sampleScale50 overflow-hidden hover:ring-4 ring-offset-1 ring-violet-300 ring-rounded-lg ring-offset-violet-300'
             )}
         >
-            <div className="flex items-center justify-center">
+            <div className="flex flex-col sm:flex-row h-[842px]">
                 <div
                     className={backgroundPanel}
                 >
@@ -174,16 +211,16 @@ export default function CVpdfErling({
                         <hr className="w-1/6 mb-3"/>
                         <div>
                             {experienceList.map((experience) => (
-                                <div  key={experience.degree} className='my-3'>
+                                <div  key={experience.position} className='my-3'>
                                     <div className={'flex justify-between mr-5'}>
                                         <div className="text-gray-700 text-sm uppercase font-semibold tracking-wider">
-                                            {experience.degree}
+                                            {experience.position}
                                         </div>
                                         <div className="text-gray-500 text-xs mt-0.5">
-                                            {mont[new Date(experience.startDate).getMonth()]}{" "}
-                                            {new Date(experience.startDate).getFullYear()}{" - "}
-                                            {mont[new Date(experience.endDate).getMonth()]}{" "}
-                                            {new Date(experience.endDate).getFullYear()}
+                                            {mont[new Date(experience.startdate).getMonth()]}{" "}
+                                            {new Date(experience.startdate).getFullYear()}{" - "}
+                                            {mont[new Date(experience.enddate).getMonth()]}{" "}
+                                            {new Date(experience.enddate).getFullYear()}
                                         </div>
                                     </div>
                                     <div className="text-xs text-neutral-900 font-light italic mr-5">
@@ -215,10 +252,10 @@ export default function CVpdfErling({
                                             {education.degree}
                                         </div>
                                         <div className="text-gray-500 text-xs mt-0.5">
-                                            {mont[new Date(education.startDate).getMonth()]}{" "}
-                                            {new Date(education.startDate).getFullYear()}{" - "}
-                                            {mont[new Date(education.endDate).getMonth()]}{" "}
-                                            {new Date(education.endDate).getFullYear()}
+                                            {mont[new Date(education.startdate).getMonth()]}{" "}
+                                            {new Date(education.startdate).getFullYear()}{" - "}
+                                            {mont[new Date(education.enddate).getMonth()]}{" "}
+                                            {new Date(education.enddate).getFullYear()}
                                         </div>
                                     </div>
                                     <div className="text-xs text-neutral-900 font-light italic mr-5">

@@ -257,14 +257,15 @@ mutation MyMutation($cv_id:ID!){
 }
 `
 
-export const DELETE_SKILLS_BY_ID = gql`
-mutation MyMutation($cv_id:ID!){ 
-  deleteSkillsByCvId(cv_id:$cv_id){
-    created_at
-    cv_id
-    habit
-    level
-   }
+export const DELETE_ACCOUNT_BY_EMAIL = gql`
+mutation MyMutation($email: String!){
+    deleteAccountByEmail (email: $email) {
+        id
+        created_at
+        login
+        image
+        email
+    }
 }
 `
 

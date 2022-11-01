@@ -138,6 +138,16 @@ type UserInfo {
 These are some examples of queries generated from the schema. Feel free to modify them or add your own.
 """
 type Query {
+  getCountOfAccounts: [Account]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select id from "account"
+      order by id desc
+      limit 1
+      """
+      configuration: "postgresql_config"
+    )
   getAccountList: [Account]
     @dbquery(
       type: "postgresql"
@@ -230,11 +240,16 @@ type Query {
       """
       configuration: "postgresql_config"
     )
-  getCvList: [Cv]
+  getCvList(limit: Int): [Cv]
     @dbquery(
       type: "postgresql"
-      schema: "public"
-      table: "cv"
+      #schema: "public"
+      #table: "cv"
+      query: """
+      select * from cv
+      order by id desc
+      limit $1
+      """
       configuration: "postgresql_config"
     )
   getCv(id: ID!): Cv
@@ -410,6 +425,14 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
+  deleteAccountByEmail(email: String!): Account
+  @dbquery(
+    type: "postgresql"
+    schema: "public"
+    table: "account"
+    dml: DELETE
+    configuration: "postgresql_config"
+  )
   insertCv(
     description: String!
     account_id: ID!

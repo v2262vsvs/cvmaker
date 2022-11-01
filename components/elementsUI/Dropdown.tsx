@@ -3,12 +3,15 @@ import { Menu, Transition } from '@headlessui/react'
 import Image from "next/image";
 import {signOut} from "next-auth/react";
 import { useRouter } from 'next/router';
+import {useTranslation} from "react-i18next";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
 export default function Dropdown(props: any) {
+    const { t, i18n } = useTranslation();
+
     const router = useRouter()
 
     const {firstLink, name, secondLink, typeProfile, imageProfile, createLink, createLink2} = props
@@ -63,7 +66,7 @@ export default function Dropdown(props: any) {
                         <Menu.Item>
                             {({ active }) => (
                                 <a
-                                    
+
                                     className={classNames(
                                         active ? 'bg-violet-200 text-gray-900' : 'text-gray-700',
                                         'block px-4 py-2 text-sm'
@@ -78,7 +81,7 @@ export default function Dropdown(props: any) {
                         <Menu.Item>
                             {({ active }) => (
                                 <a
-                                    
+
                                     className={classNames(
                                         active ? 'bg-violet-200 text-gray-900' : 'text-gray-700',
                                         'block px-4 py-2 text-sm'
@@ -100,7 +103,7 @@ export default function Dropdown(props: any) {
                                                 'block w-full px-4 py-2 text-left text-sm'
                                             )}
                                         >
-                                            Sign out
+                                            {t('Sign out')}
                                         </button>
                                     )}
                                 </Menu.Item>
