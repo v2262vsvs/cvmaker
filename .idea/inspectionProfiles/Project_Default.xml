@@ -14,9 +14,10 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="2">
+          <list size="3">
             <item index="0" class="java.lang.String" itemvalue="src" />
             <item index="1" class="java.lang.String" itemvalue="stroke-width" />
+            <item index="2" class="java.lang.String" itemvalue="focused" />
           </list>
         </value>
       </option>

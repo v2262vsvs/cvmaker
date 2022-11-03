@@ -7,14 +7,12 @@ import Loading from '../components/elementsUI/Loading'
 
 import { ApolloProvider } from '@apollo/client'
 import client from "../apolo-client"
+
 import { store } from '../store';
 import { Provider } from 'react-redux';
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { ToastContainer, toast } from 'react-toastify';
 
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import './i18n';
 import '/utils/i18n'
 
 

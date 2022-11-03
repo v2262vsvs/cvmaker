@@ -86,8 +86,6 @@ function Skills() {
                     onClick={() => setOpenSkills(!openSkills)}
                 >
                     <div className="flex py-8 px-10 space-x-2">
-
-
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 font-medium text-neutral-700"
                              viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd"
@@ -222,9 +220,7 @@ function Skills() {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>)}
-
                             </div>
                         ))}
                         <div>

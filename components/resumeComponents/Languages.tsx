@@ -48,7 +48,6 @@ function Languages() {
         }
     }
 
-
     useEffect(() => {
         const data = window.localStorage.getItem("LANGUAGES_STATE");
         console.log("from storage", data);
@@ -145,7 +144,6 @@ function Languages() {
                                         </div>
                                     </div>
 
-
                                     <div className="flex justify-between">
                                         <div className="">
                                             <MyModal advice={"1 .Always indicate your native language. \n2 .Specify as many languages as possible, but only those that you speak, read and really understand. "}/>
@@ -170,10 +168,7 @@ function Languages() {
                                                             clipRule="evenodd"
                                                         />
                                                     </svg>
-                                                    <div
-
-                                                        className="mt-auto mb-auto"
-                                                    >
+                                                    <div className="mt-auto mb-auto">
                                                         Remove
                                                     </div>
                                                 </div>
@@ -224,14 +219,10 @@ function Languages() {
                                                                   clipRule="evenodd"/>
                                                         </svg>
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>)}
-
                             </div>
                         ))}
                         <div>

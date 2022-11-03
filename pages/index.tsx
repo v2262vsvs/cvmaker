@@ -7,7 +7,6 @@ import ToTopButton from "../components/elementsUI/ToTopButton";
 
 export default function Home() {
 
-
     return (
         <>
         <div className=" overflow-x-hidden ">
@@ -16,12 +15,8 @@ export default function Home() {
                 content={'Use professional field-tested resume templates that follow the exact ‘resume rules’ employers look for. Easy to use and done within minutes - try now for free!'}
             />
             <ToTopButton/>
-            {/*@ts-ignore*/}
             <HomeContent/>
-            <div className="">
             <Footer/>
-            </div>
-
         </div>
         </>
   );
