@@ -10,23 +10,13 @@ import { Dialog, Transition } from '@headlessui/react';
 import {useTranslation} from "react-i18next";
 
 const Settings = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const [isOpen, setIsOpen] = useState(false)
     const [delLoading, setDelLoading] = useState(false)
 
     function openLoading() {
         setDelLoading(true)
-        // toast('Deleting your account, please wait' ,{
-        //     position: "top-right",
-        //     autoClose: 10000,
-        //         // hideProgressBar: false,
-        //     closeOnClick: false,
-        //     pauseOnHover: false,
-        //         // draggable: true,
-        //         // progress: undefined,
-        //         // theme: "light",
-        // })
         handleDelete()
     }
 
@@ -42,7 +32,6 @@ const Settings = () => {
     const [deleteAccount] = useMutation(DELETE_ACCOUNT_BY_EMAIL)
     const [deleteCv] = useMutation(DELETE_CV_BY_ID)
 
-    // console.log(session?.user?.email)
     const {data, error} = useQuery(GET_FULL_CVS_BY_EMAIL, {
         variables: {
             email: session?.user?.email
@@ -51,9 +40,7 @@ const Settings = () => {
     if(error){
         return `Error! ${error}`
     }
-    // console.log(data)
     const DATA = data?.getCvsByAccountEmail
-    // console.log(DATA)
 
     const handleSave = async (e: any ) => {
         e.preventDefault()
@@ -150,7 +137,6 @@ const Settings = () => {
                         <div>{t("IF YOU DELETE YOUR ACCOUNT, IT CANNOT BE RESTORED")}</div>
                         <button
                             className={'text-red-700 font-bold'}
-                            // onClick={()=>handleDelete()}
                             onClick={openModal}
                         >{t('DELETE')}</button>
                     </div>
@@ -166,7 +152,6 @@ const Settings = () => {
             <div className="shadow-xl fixed bottom-0 ">
                 <Footer />
             </div>
-            {/*<div className="fixed inset-0 bg-violet-300 bg-opacity-25"/>*/}
 
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-30" onClose={closeModal}>

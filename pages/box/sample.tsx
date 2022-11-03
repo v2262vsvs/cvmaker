@@ -1,17 +1,9 @@
-//import Link from "next/link";
 import React, {useEffect, useState} from "react";
-//import {PDFExport} from "@progress/kendo-react-pdf";
 import CvSampleCards from "../../components/resumeComponents/CvSampleCards";
 import HeadMeta from "../../components/pageSections/HeadMeta";
 import StepProgressBar from "../../components/elementsUI/StepProgressBar";
 
 function Sample() {
-    // const pdfExportComponent = React.useRef<PDFExport>(null);
-    // const exportPDFWithComponent = () => {
-    //     if (pdfExportComponent.current) {
-    //         pdfExportComponent.current.save();
-    //     }
-    // };
 
     //for progress bar animation
     const [percent, setPercent] = useState<number>(50)

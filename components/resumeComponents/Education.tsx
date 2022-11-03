@@ -1,8 +1,5 @@
 import React, {useEffect, useState} from 'react'
-
 import {Calendar} from 'react-date-range';
-// import {DateRange , DateRangePicker} from "react-date-range";
-//import {addDays} from 'date-fns';
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import MyModal from './MyModal';
@@ -32,8 +29,7 @@ type Education = {
 
 function Education() {
     const [openEducation, setOpenEducation] = useState<boolean>(false);
-    // const [startdate, setStartDate] = useState<Date>(new Date());
-    // const [enddate, setEndDate] = useState<Date>(addDays(new Date(), 7));
+
     const [togleRange, setTogleRange] = useState<boolean>(false);
     const [togleRange2, setTogleRange2] = useState<boolean>(false);
 
@@ -79,22 +75,6 @@ function Education() {
     }
 
     const handleRemoveEducation = async (index: number) => {
-        // if(educationList.length === 1) {
-        //     const list = [...educationList];
-        //     list.splice(index, 1);
-        //     setEducationList(list);
-        //     console.log(educationList)
-        //     window.localStorage.removeItem("EDUCATION_STATE")
-        // } else {
-        //     const list = [...educationList];
-        //     list.splice(index, 1);
-        //     setEducationList(list);
-        //     console.log(educationList)
-        // }
-        // const list = [...educationList];
-        // list.splice(index, 1);
-        // setEducationList(list);
-        // console.log(educationList)
         if (educationList.length === 1) {
             window.localStorage.removeItem("EDUCATION_STATE")
         }
@@ -118,11 +98,6 @@ function Education() {
                 break;
         }
     };
-    // const selectionRange = {
-    //     startdate: startdate,
-    //     enddate: enddate,
-    //     key: "selection",
-    // };
 
     useEffect(() => {
         const data = window.localStorage.getItem("EDUCATION_STATE");
@@ -146,12 +121,10 @@ function Education() {
             console.log("storage", window.localStorage.getItem("EDUCATION_STATE"));
         }
     }, [educationList]);
-    //const [date, setDate] = useState<Date | undefined>();
+
 
     return (
         <div>
-
-
             <div className="bg-white max-w-[850px] shadow-xl rounded-md  mr-auto ml-auto ">
                 <div
                     className="cursor-pointer"
@@ -176,7 +149,6 @@ function Education() {
                 {openEducation && (
                     <div className="mr-10 ml-10 pb-10 -mt-2 space-y-4">
                         {educationList.map((education, index) => (
-
                             <div key={index} className="  -mt-2 space-y-4">
                                 {(visibleEducation == index) ? (<div className="  -mt-2 space-y-4">
                                     <div
@@ -245,11 +217,6 @@ function Education() {
                                                 onClick={() => setTogleRange(!togleRange)}
                                                 className="space-y-2 grow"
                                             >
-                                                {/*
-                                                    value={`${
-                                                    months[startdate.getMonth()]
-                                                    }-${startdate.getDate()}  ${startdate.getFullYear()}`}
-                                                 */}
                                                 <input
                                                     value={`${months[new Date(education.startdate).getMonth()]}–${new Date(education.startdate).getDate()} ${new Date(education.startdate).getFullYear()}`}
                                                     placeholder="Start Date"

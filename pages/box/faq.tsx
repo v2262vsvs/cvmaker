@@ -6,7 +6,7 @@ const Faq = () => {
         <>
             <HeadMeta title={'CV - FAQ'} content={'add later some text'}/>
             <div>
-                <h1>Its faq you page</h1>
+                FAQ PAGE
             </div>
         </>
     );

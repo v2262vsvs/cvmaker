@@ -91,8 +91,6 @@ export default function MyModal({advice, type}: Props) {
                                         <p className="text-sm text-gray-500 whitespace-pre-wrap">
                                             {advice}
                                         </p>
-
-
                                     </div>
 
                                     <div className="mt-4">

@@ -1,6 +1,5 @@
 import React from 'react'
 import {useSelector} from 'react-redux';
-//import {selectChoose, setChoose} from '../../../slices/navSlice';
 import {RootState} from '../../../store';
 
 type Props = {
@@ -71,43 +70,39 @@ export default function CVpdfErling({
 
     const choose = useSelector((state: RootState) => state.nav.choose);
     const color = useSelector((state: RootState) => state.nav.color);
-    console.log('colorrrr',color)
 
     const backgroundPanel = classNames(
         colorDB ? (
-            colorDB === 'violet' ? 'bg-violet-800 w-2/6'
-                : colorDB === 'blue' ? 'bg-blue-800 w-2/6 '
-                    : colorDB === 'yellow' ? 'bg-yellow-500 w-2/6 '
-                        : colorDB === 'red' ? 'bg-red-700 w-2/6 '
-                            : colorDB === 'green' ? 'bg-green-800 w-2/6'
-                                : 'bg-gray-800 w-2/6'
+            colorDB === 'yellow' ? 'bg-yellow-500 w-2/6'
+                : colorDB === 'black' ? 'bg-gray-800 w-2/6'
+                    : `bg-${colorDB}-700 w-2/6`
         ) : choose === 4 ? (
-        color === 'violet' ? 'bg-violet-800 w-2/6'
-            : color === 'blue' ? 'bg-blue-800 w-2/6 '
-                : color === 'yellow' ? 'bg-yellow-500 w-2/6 '
-                    : color === 'red' ? 'bg-red-700 w-2/6 '
-                        : color === 'green' ? 'bg-green-800 w-2/6'
-                            : 'bg-gray-800 w-2/6'
+            color === 'yellow' ? 'bg-yellow-500 w-2/6'
+                : color === 'black' ? 'bg-gray-800 w-2/6'
+                    : `bg-${color}-700 w-2/6`
         ) : 'bg-gray-800 w-2/6'
     )
 
     const colorText = classNames(
         colorDB ? (
-            colorDB === 'violet' ? 'text-violet-800'
-                : colorDB === 'blue' ? 'text-blue-800'
-                    : colorDB === 'yellow' ? 'text-yellow-500'
-                        : colorDB === 'red' ? 'text-red-700'
-                            : colorDB === 'green' ? 'text-green-800'
-                                : 'text-gray-800'
+            colorDB === 'yellow' ? 'text-yellow-500'
+                : colorDB === 'black' ? 'text-gray-800'
+                    : `text-${colorDB}-700`
         ) : choose === 4 ? (
-        color === 'violet' ? 'text-violet-800'
-            : color === 'blue' ? 'text-blue-800'
-                : color === 'yellow' ? 'text-yellow-500'
-                    : color === 'red' ? 'text-red-700'
-                        : color === 'green' ? 'text-green-800'
-                            : 'text-gray-800'
+            color === 'yellow' ? 'text-yellow-500'
+                : color === 'black' ? 'text-gray-800'
+                    : `text-${color}-700`
         ) : 'text-gray-800'
     )
+
+    let skillStyle = "bg-gray-400 h-1 rounded-full"
+    if (colorDB) {
+        skillStyle = `bg-${colorDB === 'black' ? 'gray' : colorDB}-400 h-1 rounded-full`
+    }
+    if (choose === 4) {
+        skillStyle = `bg-${color === 'black' ? 'gray' : color}-400 h-1 rounded-full`
+    }
+
 
 
     return (
@@ -140,8 +135,6 @@ export default function CVpdfErling({
                         <hr className="my-5"/>
 
                         <div>
-
-                        </div>
                             <div className="text-white mt-2 uppercase tracking-widest text-lg font-bold">SKILLS</div>
                             <hr className="w-1/6 mb-5"/>
                             <ul className={'text-gray-200'}>
@@ -151,18 +144,19 @@ export default function CVpdfErling({
                                         <div className="w-32 bg-gray-200 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2">
                                             <div
                                                 className={classNames(
-                                                    skill.level === 'Newcomer' ? 'bg-gray-400 h-1 rounded-full w-1/5'
-                                                        : skill.level === 'Beginner' ? 'bg-gray-400 h-1 rounded-full w-2/5'
-                                                        : skill.level === 'Skillful' ? 'bg-gray-400 h-1 rounded-full w-3/5'
-                                                        : skill.level === 'Experienced' ? 'bg-gray-400 h-1 rounded-full w-4/5'
-                                                        : skill.level === 'Expert' ? 'bg-gray-400 h-1 rounded-full w-5/5'
-                                                        : 'bg-gray-500 h-1 rounded-full w-5/5'
+                                                    skill.level === 'Newcomer' ? skillStyle + ' w-1/5'
+                                                        : skill.level === 'Beginner' ? skillStyle + ' w-2/5'
+                                                            : skill.level === 'Skillful' ? skillStyle + ' w-3/5'
+                                                                : skill.level === 'Experienced' ? skillStyle + ' w-4/5'
+                                                                    : skill.level === 'Expert' ? skillStyle + ' w-5/5'
+                                                                        : ''
                                                 )}
                                             ></div>
                                         </div>
                                     </li>
                                 ))}
                             </ul>
+                        </div>
 
                         <hr className="my-5"/>
 
@@ -186,7 +180,6 @@ export default function CVpdfErling({
                 <div className={' w-8/12 h-screen ml-5'}>
                     <div
                         className="font-extrabold uppercase tracking-wider my-6 text-gray-800 text-2xl"
-                        //style={{fontWeight: "bolder" ,fontSize: 40}}
                     >
                         <div
                             className={colorText}
@@ -271,7 +264,6 @@ export default function CVpdfErling({
                 </div>
             </div>
         </div>
-
-)
+    )
 }
 

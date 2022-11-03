@@ -93,8 +93,15 @@ export default {
             "getting hired!": "getting hired!",
             "YOU HAVEN`T FILLED CV FORMS YET.": "YOU HAVEN`T FILLED CV FORMS YET.",
             "Close": "Close",
+            'You download your CV': "You download your CV",
+            "Your last CV deleted!": "Your last CV deleted!",
 
             //profile page
+
+            //templates page
+            "Resume Templates": "Resume Templates",
+            "You can start by filling your resume with data and choose a template at the end": "You can start by filling your resume with data and choose a template at the end",
+            //templates page
 
         }
     },
@@ -190,8 +197,15 @@ export default {
             "getting hired!": "влаштовуватися на роботу!",
             "YOU HAVEN`T FILLED CV FORMS YET.": "ВИ ЩЕ НЕ ЗАПОВНИЛИ ФОРМУ CV.",
             "Close": "Закрити",
+            'You download your CV': "Ви завантажили CV",
+            "Your last CV deleted!": "Ваш останній CV видалено",
 
             //profile page
+
+            //templates page
+            "Resume Templates": "Шаблони резюме",
+            "You can start by filling your resume with data and choose a template at the end": "Ви можете почати із заповнення свого резюме даними та вибрати шаблон у кінці.",
+            //templates page
 
         }
     }

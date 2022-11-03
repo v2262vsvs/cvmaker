@@ -2,28 +2,21 @@ import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import CvCards from "../resumeComponents/CvCards";
-// import { useQuery } from '@apollo/client';
-// import {
-//     GET_ACCOUNT_BY_EMAIL,
-//     GET_CV,
-//     GET_CV_BY_ID,
-//     GET_FULL_CV_BY_ID,
-// } from '../../graphql/queries';
-// import { useSession } from 'next-auth/react';
+
 import {useTranslation} from "react-i18next";
 import {useQuery} from "@apollo/client";
 import {GET_COUNT_OF_ACCOUNTS} from "../../graphql/queries";
 
-const HomeContent = () => {
+const HomeContent: any = () => {
 
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const {data, error} = useQuery(GET_COUNT_OF_ACCOUNTS)
     if(error){
         return `Error! ${error}`
     }
+
     const CountAccounts = data?.getCountOfAccounts
-    // console.log(CountAccounts[0].id)
 
     return (
         <div className=''>
@@ -104,9 +97,6 @@ const HomeContent = () => {
                 </div>
             </div>
 
-
-
-
             <div className='bg-violet-700 flex-row'
                  style={{width: '100%', height: '1693px'}}
             >
@@ -123,7 +113,6 @@ const HomeContent = () => {
 
                 <Link href={'/box/personal'}>
                     <div className='ml-32 mr-10' >
-                        {/*@ts-ignore*/}
                         <CvCards/>
                     </div>
                 </Link>
