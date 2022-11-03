@@ -2,7 +2,7 @@ import React from 'react';
 import {useTranslation} from "react-i18next";
 
 const Footer = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <footer className="p-4 bg-white w-screen sm:p-6 dark:bg-gray-800">

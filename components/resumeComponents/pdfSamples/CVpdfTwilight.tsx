@@ -1,6 +1,5 @@
 import React from 'react'
 import {useSelector} from 'react-redux';
-//import {selectChoose, setChoose} from '../../../slices/navSlice';
 import {RootState} from '../../../store';
 
 type Props = {
@@ -68,31 +67,22 @@ export default function CVpdfTwilight({
 
     const choose = useSelector((state: RootState) => state.nav.choose);
     const color = useSelector((state: RootState) => state.nav.color);
+
     const colorText = classNames(
         colorDB ? (
-            colorDB === 'violet' ? 'section-headline text-violet-500 border-violet-500'
-                : colorDB === 'yellow' ? 'section-headline text-yellow-500 border-yellow-500'
-                    : colorDB === 'red' ? 'section-headline text-red-500 border-red-500'
-                        : 'section-headline'
+            `section-headline text-${colorDB}-500 border-${colorDB}-500`
         ) : choose === 5 ? (
-        color === 'violet' ? 'section-headline text-violet-500 border-violet-500'
-            : color === 'yellow' ? 'section-headline text-yellow-500 border-yellow-500'
-                : color === 'red' ? 'section-headline text-red-500 border-red-500'
-                    : 'section-headline'
+            `section-headline text-${color}-500 border-${color}-500`
         ) : 'section-headline'
     )
 
     const colorTextName = classNames(
         colorDB ? (
-            colorDB === 'violet' ? 'border-violet-500 border-l-8 pl-2 text-white'
-                : colorDB === 'yellow' ? 'border-orange-500 border-l-8 pl-2 text-white'
-                    : colorDB === 'red' ? 'border-orange-400 border-l-8 pl-2 text-white'
-                        : 'border-green-500 border-l-8 pl-2 text-white'
+            colorDB !== 'black' ? `border-${colorDB}-500 border-l-8 pl-2 text-white`
+                : `border-green-500 border-l-8 pl-2 text-white`
         ) : choose === 5 ? (
-        color === 'violet' ? 'border-violet-500 border-l-8 pl-2 text-white'
-            : color === 'yellow' ? 'border-orange-500 border-l-8 pl-2 text-white'
-                : color === 'red' ? 'border-orange-400 border-l-8 pl-2 text-white'
-                    : 'border-green-500 border-l-8 pl-2 text-white'
+            color !== 'black' ? `border-${color}-500 border-l-8 pl-2 text-white`
+                : `border-green-500 border-l-8 pl-2 text-white`
         ) : 'border-green-500 border-l-8 pl-2 text-white'
 
     )
@@ -113,18 +103,12 @@ export default function CVpdfTwilight({
                 >
                     <div
                         className={classNames(
-                            colorDB ? (colorDB === 'violet' ? 'w-1/3 bg-gradient-to-b from-violet-300 to-indigo-500'
-                                    : colorDB === 'blue' ? 'w-1/3 bg-gradient-to-b from-indigo-300 to-green-300'
-                                        : colorDB === 'yellow' ? 'w-1/3 bg-gradient-to-b from-yellow-300 to-orange-500'
-                                            : colorDB === 'red' ? 'w-1/3 bg-gradient-to-b from-red-600 to-orange-400'
-                                                : colorDB === 'green' ? 'w-1/3 bg-gradient-to-b from-green-300 to-indigo-300 '
-                                                    : 'w-1/3 bg-gradient-to-b from-gray-800 to-gray-400'
-                            ) : choose === 5 ? (color === 'violet' ? 'w-1/3 bg-gradient-to-b from-violet-300 to-indigo-500'
-                                    : color === 'blue' ? 'w-1/3 bg-gradient-to-b from-indigo-300 to-green-300'
-                                        : color === 'yellow' ? 'w-1/3 bg-gradient-to-b from-yellow-300 to-orange-500'
-                                            : color === 'red' ? 'w-1/3 bg-gradient-to-b from-red-600 to-orange-400'
-                                                : color === 'green' ? 'w-1/3 bg-gradient-to-b from-green-300 to-indigo-300 '
-                                                    : 'w-1/3 bg-gradient-to-b from-gray-800 to-gray-400'
+                            colorDB ? (
+                                colorDB !== 'black' ? `w-1/3 bg-gradient-to-b from-${colorDB}-300 to-${colorDB}-500`
+                                    : `w-1/3 bg-gradient-to-b from-gray-800 to-gray-400`
+                            ) : choose === 5 ? (
+                                color !== 'black' ? `w-1/3 bg-gradient-to-b from-${color}-300 to-${color}-500`
+                                    : `w-1/3 bg-gradient-to-b from-gray-800 to-gray-400`
                             ) : 'w-1/3 bg-gradient-to-b from-gray-800 to-gray-400'
                         )}
                     >
@@ -162,14 +146,12 @@ export default function CVpdfTwilight({
                                         {skill.habit}
                                         <div
                                             className={classNames(
-                                                colorDB ? (colorDB === 'violet' ? 'w-32 bg-violet-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
-                                                        : colorDB === 'yellow' ? 'w-32 bg-yellow-600 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
-                                                            : colorDB === 'red' ? 'w-32 bg-red-600 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
-                                                                : 'w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2')
-                                                : choose === 5 ? (color === 'violet' ? 'w-32 bg-violet-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
-                                                        : color === 'yellow' ? 'w-32 bg-yellow-600 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
-                                                            : color === 'red' ? 'w-32 bg-red-600 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
-                                                                : 'w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2')
+                                                colorDB ? (
+                                                    colorDB !== 'black' && colorDB !== 'green' ? `w-32 bg-${colorDB}-300 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2`
+                                                        : `w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2`)
+                                                : choose === 5 ? (
+                                                    color !== 'black' && color !== 'green' ? `w-32 bg-${color}-300 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2`
+                                                        : `w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2`)
                                                     : 'w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
                                             )}
                                         >

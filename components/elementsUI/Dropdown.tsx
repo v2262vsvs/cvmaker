@@ -10,7 +10,7 @@ function classNames(...classes: any) {
 }
 
 export default function Dropdown(props: any) {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const router = useRouter()
 
@@ -27,14 +27,13 @@ export default function Dropdown(props: any) {
     const handleRoute1 = async () => {
         router.push(createLink)
     }
-//className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
                 <Menu.Button
                     className={classNames(
                         typeProfile ? 'inline-flex w-full justify-center rounded-lg border border-gray-300 bg-violet-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:shadow-lg focus:outline-none '
-                            //: 'inline-flex w-full justify-center  px-4 py-2 text-sm font-medium text-gray-700  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100'
                             : 'inline-flex justify-center hover:text-violet-700'
                     )}
                     >

@@ -66,37 +66,17 @@ export default function CVpdfSparkle({
 
     const colorLogic = classNames(
         colorDB ? (
-            colorDB === 'violet' ? 'text-violet-700'
-                : colorDB === 'blue' ? 'text-blue-700'
-                    : colorDB === 'yellow' ? 'text-yellow-500'
-                        : colorDB === 'red' ? 'text-red-700'
-                            : colorDB === 'green' ? 'text-green-700'
-                                : ''
+            `text-${colorDB}-700`
         ) : choose === 6 ? (
-        color === 'violet' ? 'text-violet-700'
-            : color === 'blue' ? 'text-blue-700'
-                : color === 'yellow' ? 'text-yellow-500'
-                    : color === 'red' ? 'text-red-700'
-                        : color === 'green' ? 'text-green-700'
-                            : ''
+            `text-${color}-700`
         ) : ''
     )
 
     const backgroundLogic = classNames(
         colorDB ? (
-            colorDB === 'violet' ? 'bg-violet-700'
-                : colorDB === 'blue' ? 'bg-blue-700'
-                    : colorDB === 'yellow' ? 'bg-yellow-500'
-                        : colorDB === 'red' ? 'bg-red-700'
-                            : colorDB === 'green' ? 'bg-green-700'
-                                : ''
+            `bg-${colorDB}-700`
         ) : choose === 6 ? (
-        color === 'violet' ? 'bg-violet-700'
-            : color === 'blue' ? 'bg-blue-700'
-                : color === 'yellow' ? 'bg-yellow-500'
-                    : color === 'red' ? 'bg-red-700'
-                        : color === 'green' ? 'bg-green-700'
-                            : ''
+            `bg-${color}-700`
         ) : ''
     )
 

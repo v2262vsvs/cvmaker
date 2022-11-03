@@ -12,17 +12,10 @@ import {useTranslation} from "react-i18next";
 
 
 function Header() {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const {data: session} = useSession()
     console.log(session)
-    const [open, setOpen] = useState(false)
-    const onMenu = async (state: boolean) => {
-        setOpen(state)
-        console.log(open)
-    }
-    // проблема с логином , вылизазит 404
-
 
     const signin = async () => {
         signIn()
@@ -30,7 +23,6 @@ function Header() {
 
 
     //add hidden bar
-
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
 
@@ -75,9 +67,6 @@ function Header() {
                                 <Dropdown name={t('Resume')} firstLink={t('Templates')} secondLink={t('Create Resume')}
                                           createLink='/box/personal' createLink2='/box/templates'/>
                             </div>
-                            {/*<div className='flex items-center hover:text-blue-900'>*/}
-                            {/*    <Dropdown name='Cover Letter' firstLink='Templates' secondLink='Create Cover Letter'/>*/}
-                            {/*</div>*/}
                             <Link href={`/box/blog`}
                                   className='flex hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
                                 {t('Blog')}

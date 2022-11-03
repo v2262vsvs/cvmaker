@@ -78,7 +78,6 @@ function CVpdfBerkeley({
                            type,
                            colorDB
                        }: Props) {
-    //const [scale, setScale] = useState(true);
 
     let img = personal.image;
     if (img === undefined) {
@@ -91,51 +90,21 @@ function CVpdfBerkeley({
 
     const colorLogic = classNames(
         colorDB ? (
-            (colorDB === 'violet') ? 'text-violet-700'
-                : (colorDB === 'blue') ? 'text-blue-700'
-                    : (colorDB === 'yellow') ? 'text-yellow-600'
-                        : (colorDB === 'red') ? 'text-red-700'
-                            : (colorDB === 'green') ? 'text-green-700'
-                                : ''
+            `text-${colorDB}-700`
         ) : choose === 3 ? (
-        (color === 'violet'&& choose===3) ? 'text-violet-700'
-            : (color === 'blue'&& choose===3) ? 'text-blue-700'
-                : (color === 'yellow'&& choose===3) ? 'text-yellow-600'
-                    : (color === 'red'&& choose===3) ? 'text-red-700'
-                        : (color === 'green'&& choose===3) ? 'text-green-700'
-                            : ''
+            `text-${color}-700`
         ) : ''
     )
 
-    // const backgroundLogic = classNames(
-    //     choose === 3 ? (
-    //     color === 'violet' ? 'bg-violet-100 rounded-md'
-    //         : color === 'blue'  ? 'bg-blue-100 rounded-md'
-    //             : color === 'yellow' ? 'bg-yellow-50 rounded-md'
-    //                 : color === 'red' ? 'bg-red-100 rounded-md'
-    //                     : color === 'green' ? 'bg-green-100 rounded-md'
-    //                         : 'bg-neutral-100 rounded-md'
-    //     ) : 'bg-neutral-100 rounded-md'
-    // )
-
     const backgroundLogic = classNames(
         colorDB ? (
-            colorDB === 'violet' ? 'bg-violet-100 rounded-md'
-                : colorDB === 'blue'  ? 'bg-blue-100 rounded-md'
-                    : colorDB === 'yellow' ? 'bg-yellow-50 rounded-md'
-                        : colorDB === 'red' ? 'bg-red-100 rounded-md'
-                            : colorDB === 'green' ? 'bg-green-100 rounded-md'
-                                : 'bg-neutral-100 rounded-md'
+            colorDB === 'black' ? 'bg-neutral-100 rounded-md'
+                    : `bg-${colorDB}-100 rounded-md`
         ) : choose === 3 ? (
-        color === 'violet' ? 'bg-violet-100 rounded-md'
-            : color === 'blue'  ? 'bg-blue-100 rounded-md'
-                : color === 'yellow' ? 'bg-yellow-50 rounded-md'
-                    : color === 'red' ? 'bg-red-100 rounded-md'
-                        : color === 'green' ? 'bg-green-100 rounded-md'
-                            : 'bg-neutral-100 rounded-md'
+            color === 'black' ? 'bg-neutral-100 rounded-md'
+                : `bg-${color}-100 rounded-md`
         ) : 'bg-neutral-100 rounded-md'
-
-)
+    )
 
     return (
         <div>
@@ -177,26 +146,26 @@ function CVpdfBerkeley({
                                     alt=""
                                 />
                             </div>
-                            <div className="flex text-neutral-800 space-x-2  text-xl font-semibold">
+                            <div className={`${colorLogic} flex space-x-2  text-xl font-semibold`}>
                                 <div>{personal.name}</div>
                                 <div>{personal.surname}</div>
                             </div>
                         </div>
                         <div className="flex  space-x-10 ">
                             <div className="text-neutral-600 text-xs w-10">Address</div>
-                            <div className="text-neutral-800 text-xs font-bold">
+                            <div className={`${colorLogic} text-xs font-bold`}>
                                 {personal.address}{", "}{personal.city}{", "}{personal.postalcode}
                             </div>
                         </div>
                         <div className="flex  space-x-10">
                             <div className="text-neutral-600 text-xs w-10">Phone</div>
-                            <div className="text-neutral-800 text-xs font-semibold">
+                            <div className={`${colorLogic} text-xs font-bold`}>
                                 {personal.phone}
                             </div>
                         </div>
                         <div className="flex  space-x-10">
                             <div className="text-neutral-600 text-xs w-10">Email</div>
-                            <div className="text-neutral-800 text-xs font-semibold">
+                            <div className={`${colorLogic} text-xs font-bold`}>
                                 {personal.email}
                             </div>
                         </div>

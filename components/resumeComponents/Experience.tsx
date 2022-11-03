@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import {Calendar} from 'react-date-range';
-//import {DateRange, DateRangePicker} from "react-date-range";
-//import {addDays} from 'date-fns';
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import MyModal from './MyModal';
@@ -30,8 +28,7 @@ const months = [
 ];
 
 function Experience() {
-    // const [startdate, setStartDate] = useState<Date>(new Date());
-    // const [enddate, setEndDate] = useState<Date>(addDays(new Date(), 7));
+
     const [visibleExperience, setVisibleExperience] = useState<number>(0);
     const [openExperience, setOpenExperience] = useState<boolean>(false);
     const [experienceList, setExperienceList] = useState<Experience[]>([]);
@@ -217,11 +214,6 @@ function Experience() {
                                                 onClick={() => setTogleRange(!togleRange)}
                                                 className="space-y-2 grow"
                                             >
-                                                {/*
-                          value={`${
-                            months[startdate.getMonth()]
-                          }-${startdate.getDate()}  ${startdate.getFullYear()}`}
-                           */}
                                                 <input
                                                     value={`${months[new Date(experience.startdate).getMonth()]}–${new Date(experience.startdate).getDate()} ${new Date(experience.startdate).getFullYear()}`}
                                                     placeholder="Start Date"
@@ -345,9 +337,7 @@ function Experience() {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>)}
-
                             </div>
                         ))}
                         <div>
