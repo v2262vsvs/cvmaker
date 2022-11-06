@@ -141,7 +141,7 @@ export default function CvSampleCards() {
     const [isCongratulation, setIsCongratulation] = useState(false)
 
     function openCongratulation () {
-        setIsCongratulation(true)
+        //setIsCongratulation(true)
         exportPDFWithComponent()
     }
     function closeCongratulation () {
@@ -208,6 +208,17 @@ export default function CvSampleCards() {
             formated3 = JSON.parse(data3);
             setEducationList(formated3);
             console.log("education ", educationList);
+        }else {
+            setEducationList([
+                {
+                    startdate: new Date(),
+                    enddate: new Date(),
+                    city: "",
+                    description: "",
+                    school: "",
+                    degree: "",
+                },
+            ]);
         }
 
         const data4 = window.localStorage.getItem("EXPERIENCE_STATE");
@@ -217,6 +228,17 @@ export default function CvSampleCards() {
             formated4 = JSON.parse(data4);
             setExperienceList(formated4);
             console.log("experience ", experienceList);
+        } else {
+            setExperienceList([
+                {
+                    position: "",
+                    city: "",
+                    employer: "",
+                    description: "",
+                    startdate: new Date(),
+                    enddate: new Date(),
+                },
+            ]);
         }
         const data5 = window.localStorage.getItem("SKILLS_STATE");
         console.log("from storage", data5);
@@ -320,8 +342,8 @@ export default function CvSampleCards() {
 
                 for (let i = 0; i<educationList.length;i++){
 
-                    let startdate = formatDate(educationList[i].startdate)
-                    let enddate = formatDate(educationList[i].enddate)
+                    //let startdate = formatDate(educationList[i].startdate)
+                    //let enddate = formatDate(educationList[i].enddate)
                     const {data:{insertEducation:newEducation}}=await addEducation({
                         variables:{
                             city:educationList[i].city,
@@ -375,7 +397,7 @@ export default function CvSampleCards() {
             toast.update(id, { render: "You CV was saved ^_^", type: "success", isLoading: false, autoClose: 2000 });
         }catch(error){console.log("error",error)}
 
-
+            setIsCongratulation(true)
             setIsConfetti(false)
     } else {
         toast.error("Choose your sample!")

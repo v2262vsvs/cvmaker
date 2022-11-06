@@ -2,10 +2,27 @@ import HomeContent from "../components/pageSections/HomeContent";
 import Footer from "../components/pageSections/Footer";
 import HeadMeta from "../components/pageSections/HeadMeta";
 import ToTopButton from "../components/elementsUI/ToTopButton";
+import { useSession } from "next-auth/react";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../slices/auth-slice";
+import { RootState } from "../store";
 
 
 
 export default function Home() {
+    const {data:session} = useSession()
+    const dispatch = useDispatch()
+    if ( session ){
+        dispatch(authActions.setSession({
+            name:session?.user?.name!,
+            email:session?.user?.email!,
+            image:session?.user?.image!,
+        }))
+    }
+
+    
+    
+
 
     return (
         <>
