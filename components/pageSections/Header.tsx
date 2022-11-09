@@ -2,9 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {useRouter} from "next/router";
 import {signIn, useSession} from 'next-auth/react'
-
 import React, {useEffect, useState} from 'react'
-
 import {debounce} from '../../utils/debounce';
 import Dropdown from "../elementsUI/Dropdown";
 import LanguageSwitcher from "../elementsUI/LanguageSwitcher";
@@ -18,7 +16,7 @@ function Header() {
     console.log(session)
 
     const signin = async () => {
-        signIn()
+        await signIn()
     }
 
 

@@ -2,7 +2,6 @@ import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import CvCards from "../resumeComponents/CvCards";
-
 import {useTranslation} from "react-i18next";
 import {useQuery} from "@apollo/client";
 import {GET_COUNT_OF_ACCOUNTS} from "../../graphql/queries";

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Calendar} from 'react-date-range';
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import MyModal from './MyModal';
+import MyModal from '../elementsUI/MyModal';
 
 const months = [
     "January",
@@ -18,14 +18,6 @@ const months = [
     "November",
     "December",
 ];
-type Education = {
-    degree: string;
-    city: string;
-    school: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
 
 function Education() {
     const [openEducation, setOpenEducation] = useState<boolean>(false);

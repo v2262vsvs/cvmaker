@@ -1,10 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import MyModal from './MyModal';
+import MyModal from '../elementsUI/MyModal';
 
-type Skills = {
-    habit: string;
-    level: string;
-};
 
 function Skills() {
     const [openSkills, setOpenSkills] = useState<boolean>(false);

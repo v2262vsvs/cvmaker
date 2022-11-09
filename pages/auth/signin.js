@@ -90,6 +90,8 @@ export async function getServerSideProps(context) {
     const session = await getSession({ req })
     if (session) {
         //signed in
+        
+        
 
         return {
             redirect: {destination: '/'}

@@ -1,6 +1,6 @@
-import {Fragment, useState} from 'react'
+import React, {Fragment, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
-import {CheckIcon, ChevronDownIcon} from '@heroicons/react/solid'
+import {CheckIcon} from '@heroicons/react/solid'
 import i18next from "i18next";
 
 const languages = [
@@ -8,13 +8,13 @@ const languages = [
     {name: 'ua'},
 ]
 
-function chooseLanguage (lang:string) {
+async function chooseLanguage (lang:string) {
     if (lang == 'en') {
-        i18next.changeLanguage(lang)
+        await i18next.changeLanguage(lang)
         console.log('en')
     } else {
         console.log('ua')
-        i18next.changeLanguage(lang)
+        await i18next.changeLanguage(lang)
     }
 }
 
@@ -22,19 +22,18 @@ export default function LanguageSwitcher() {
     const [selected, setSelected] = useState(languages[0])
 
     return (
-        <div className="fixed w-20 relative inline-block text-left">
+        <div className=" inline-block text-left">
             <Listbox value={selected} onChange={setSelected}>
-                <div className="relative mt-1">
+                <div className="relative inline-block text-left w-20">
                     <Listbox.Button
-                        className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+                        className={'hover:text-violet-700 inline-flex justify-center'}
                     >
-                        <span className="block truncate uppercase">{selected.name}</span>
-                        <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                            <ChevronDownIcon
-                                className="h-5 w-5 text-black -ml-1"
-                                aria-hidden="true"
-                            />
-                        </span>
+                        <div className=" truncate uppercase">{selected.name}</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd"
+                                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                  clipRule="evenodd"/>
+                        </svg>
                     </Listbox.Button>
 
                     <Transition

@@ -20,6 +20,8 @@ import {PlusIcon} from '@heroicons/react/solid'
 import {PencilIcon, DownloadIcon, TrashIcon} from '@heroicons/react/outline'
 import {useTranslation} from "react-i18next";
 
+
+
 function useWindowSize() {
     // Initialize state with undefined width/height so server and client renders match
     // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
@@ -53,6 +55,9 @@ function useWindowSize() {
     return windowSize;
 }
 
+
+
+
 function Profile() {
 
     const {t} = useTranslation();
@@ -64,16 +69,23 @@ function Profile() {
     const [isOpen, setIsOpen] = useState<number>(0)
     const size = useWindowSize();
 
-    const {data, error} = useQuery(GET_FULL_CVS_BY_ACCOUNT_EMAIL, {
+
+
+    const {data,refetch} = useQuery(GET_FULL_CVS_BY_ACCOUNT_EMAIL, {
         variables: {
             email: session?.user?.email
         }
     })
-    if (error) {
-        return `Error! ${error}`
-    }
     const DATA = data?.getCvsByAccountEmail[0]
     const CV = {...DATA}
+
+    const dynamicRoute = useRouter().asPath;
+    useEffect(() => {
+
+        refetch({ email: session?.user?.email })
+    }, [dynamicRoute])
+
+
 
     function openModal(n: number) {
         if (size.height > 940 && size.width > 650) {
@@ -195,9 +207,9 @@ function Profile() {
 
                     <div className="flex ">
                         {data?.getCvsByAccountEmail.length > 0 ? (
-                            <div className="flex">
+                            <div className="flex ">
                                 <div className="mx-14 mt-3 mb-32" onClick={()=> openModal(2)}>
-                                    <div className={'sampleScale50 overflow-hidden'}>
+                                    <div className={'sampleScale50 overflow-hidden  rounded-xl shadow-violetShadow'}>
                                         <CVS/>
                                     </div>
                                 </div>
@@ -228,13 +240,13 @@ function Profile() {
 
                             </div>
                         ) : (
-                            <div></div>
+                            <div className="ml-16 2xl:-ml-2 mt-3 mb-32"></div>
                         )}
 
                         <div className="mt-3 ml-10 2xl:ml-28 ">
                             <Link href="/box/personal">
                                 <div
-                                    className='bg-white w-[595px] h-[842px] scale-65 shadow-xl hover:shadow-2xl rounded-2xl -mt-32  -mb-32 -ml-32 -mr-10  overflow-hidden'>
+                                    className='bg-white w-[595px] h-[842px] scale-65 shadow-xl hover:opacity-80 rounded-2xl -mt-32  -mb-32 -ml-32 -mr-10  overflow-hidden  rounded-xl shadow-violetShadow'>
                                     <div
                                         className="rounded-full bg-violet-300 hover:-scale-105 bg-opacity-25 w-48 h-48  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                         <div
@@ -327,4 +339,8 @@ function Profile() {
     );
 }
 
+
+
 export default Profile;
+
+

@@ -13,23 +13,6 @@ type Props = {
     colorDB?: string
 }
 
-type Experience = {
-    position: string;
-    city: string;
-    employer: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
-
-type Education = {
-    degree: string;
-    city: string;
-    school: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
 const mont = [
     "Jan",
     "Feb",
@@ -70,18 +53,18 @@ export default function CVpdfTwilight({
 
     const colorText = classNames(
         colorDB ? (
-            `section-headline text-${colorDB}-500 border-${colorDB}-500`
+            `section-headline text-${colorDB}`
         ) : choose === 5 ? (
-            `section-headline text-${color}-500 border-${color}-500`
+            `section-headline text-${color}`
         ) : 'section-headline'
     )
 
     const colorTextName = classNames(
         colorDB ? (
-            colorDB !== 'black' ? `border-${colorDB}-500 border-l-8 pl-2 text-white`
+            colorDB !== 'black' ? `text-${colorDB} border-l-8 pl-2 text-white`
                 : `border-green-500 border-l-8 pl-2 text-white`
         ) : choose === 5 ? (
-            color !== 'black' ? `border-${color}-500 border-l-8 pl-2 text-white`
+            color !== 'black' ? `text-${color} border-l-8 pl-2 text-white`
                 : `border-green-500 border-l-8 pl-2 text-white`
         ) : 'border-green-500 border-l-8 pl-2 text-white'
 
@@ -104,10 +87,10 @@ export default function CVpdfTwilight({
                     <div
                         className={classNames(
                             colorDB ? (
-                                colorDB !== 'black' ? `w-1/3 bg-gradient-to-b from-${colorDB}-300 to-${colorDB}-500`
+                                colorDB !== 'black' ? `w-1/3 gradientBg-${colorDB}`
                                     : `w-1/3 bg-gradient-to-b from-gray-800 to-gray-400`
                             ) : choose === 5 ? (
-                                color !== 'black' ? `w-1/3 bg-gradient-to-b from-${color}-300 to-${color}-500`
+                                color !== 'black' ? `w-1/3 gradientBg-${color}`
                                     : `w-1/3 bg-gradient-to-b from-gray-800 to-gray-400`
                             ) : 'w-1/3 bg-gradient-to-b from-gray-800 to-gray-400'
                         )}
@@ -147,10 +130,10 @@ export default function CVpdfTwilight({
                                         <div
                                             className={classNames(
                                                 colorDB ? (
-                                                    colorDB !== 'black' && colorDB !== 'green' ? `w-32 bg-${colorDB}-300 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2`
+                                                    colorDB !== 'black' && colorDB !== 'green' ? `w-32 skill-${colorDB} rounded-full h-1 dark:bg-gray-700 mt-2 mb-2`
                                                         : `w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2`)
                                                 : choose === 5 ? (
-                                                    color !== 'black' && color !== 'green' ? `w-32 bg-${color}-300 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2`
+                                                    color !== 'black' && color !== 'green' ? `w-32 skill-${color} rounded-full h-1 dark:bg-gray-700 mt-2 mb-2`
                                                         : `w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2`)
                                                     : 'w-32 bg-green-500 rounded-full h-1 dark:bg-gray-700 mt-2 mb-2'
                                             )}
