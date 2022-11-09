@@ -1,10 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import MyModal from './MyModal';
+import MyModal from '../elementsUI/MyModal';
 
-type Languages = {
-    language: string;
-    level: string;
-};
 
 function Languages() {
     const [openLanguages, setOpenLanguages] = useState<boolean>(false);

@@ -3,41 +3,7 @@ import Image from "next/image";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store";
 
-type Personal = {
-    name?: string;
-    surname?: string;
-    image?: string | undefined;
-    phone?: string;
-    postalcode?: string;
-    address?: string;
-    city?: string;
-    email?: string;
-};
-type Experience = {
-    position: string;
-    city: string;
-    employer: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
 
-type Education = {
-    degree: string;
-    city: string;
-    school: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
-type Skills = {
-    habit: string;
-    level: string;
-};
-type Languages = {
-    language: string;
-    level: string;
-};
 
 const mont = [
     "Jan",
@@ -90,19 +56,19 @@ function CVpdfBerkeley({
 
     const colorLogic = classNames(
         colorDB ? (
-            `text-${colorDB}-700`
+            `text-${colorDB}`
         ) : choose === 3 ? (
-            `text-${color}-700`
+            `text-${color}`
         ) : ''
     )
 
     const backgroundLogic = classNames(
         colorDB ? (
             colorDB === 'black' ? 'bg-neutral-100 rounded-md'
-                    : `bg-${colorDB}-100 rounded-md`
+                    : `background100-${colorDB} rounded-md`
         ) : choose === 3 ? (
             color === 'black' ? 'bg-neutral-100 rounded-md'
-                : `bg-${color}-100 rounded-md`
+                : `background100-${color} rounded-md`
         ) : 'bg-neutral-100 rounded-md'
     )
 

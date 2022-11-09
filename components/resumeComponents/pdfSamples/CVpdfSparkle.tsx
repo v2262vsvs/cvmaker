@@ -13,23 +13,6 @@ type Props = {
     colorDB?: string
 }
 
-type Experience = {
-    position: string;
-    city: string;
-    employer: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
-
-type Education = {
-    degree: string;
-    city: string;
-    school: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
 const mont = [
     "Jan",
     "Feb",
@@ -66,17 +49,17 @@ export default function CVpdfSparkle({
 
     const colorLogic = classNames(
         colorDB ? (
-            `text-${colorDB}-700`
+            `text-${colorDB}`
         ) : choose === 6 ? (
-            `text-${color}-700`
+            `text-${color}`
         ) : ''
     )
 
     const backgroundLogic = classNames(
         colorDB ? (
-            `bg-${colorDB}-700`
+            `background-${colorDB}`
         ) : choose === 6 ? (
-            `bg-${color}-700`
+            `background-${color}`
         ) : ''
     )
 

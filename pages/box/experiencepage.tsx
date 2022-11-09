@@ -8,7 +8,7 @@ import Languages from "../../components/resumeComponents/Languages";
 import HeadMeta from "../../components/pageSections/HeadMeta";
 import StepProgressBar from "../../components/elementsUI/StepProgressBar";
 import ToTopButton from "../../components/elementsUI/ToTopButton";
-import MyModal from "../../components/resumeComponents/MyModal";
+import MyModal from "../../components/elementsUI/MyModal";
 
 
 function ExperiencePage() {

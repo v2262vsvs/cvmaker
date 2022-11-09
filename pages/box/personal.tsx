@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import HeadMeta from "../../components/pageSections/HeadMeta";
 import StepProgressBar from "../../components/elementsUI/StepProgressBar";
 import PersonalForm from "../../components/resumeComponents/PersonalForm";
-import MyModal from "../../components/resumeComponents/MyModal";
+import MyModal from "../../components/elementsUI/MyModal";
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/router'
 
@@ -12,7 +12,7 @@ function Personal() {
     const [percent, setPercent] = useState<number>(0)
     const {data:session} = useSession()
     const router = useRouter()
-    
+
 
     // for progress bar animation
     useEffect(() => {
@@ -24,7 +24,7 @@ function Personal() {
             router.push('/auth/signin')
             console.log('router',router)
         }
-        
+
     }, [])
 
 

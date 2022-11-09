@@ -2,16 +2,9 @@ import React, {useEffect, useState} from 'react'
 import {Calendar} from 'react-date-range';
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import MyModal from './MyModal';
+import MyModal from '../elementsUI/MyModal';
 
-type Experience = {
-    position: string;
-    city: string;
-    employer: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
+
 const months = [
     "January",
     "February",

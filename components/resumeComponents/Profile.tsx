@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import React, {useEffect, useRef, useState} from 'react'
-import MyModal from './MyModal';
+import MyModal from '../elementsUI/MyModal';
 
 function Profile() {
     const dataFetchedRef = useRef(false);

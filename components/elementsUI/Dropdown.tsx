@@ -18,14 +18,14 @@ export default function Dropdown(props: any) {
 
     const singout = async (e:React.MouseEvent<HTMLFormElement, MouseEvent>)=>{
         e.preventDefault()
-        signOut()
+        await signOut()
     }
 
     const handleRoute2 = async () => {
-        router.push(createLink2)
+        await router.push(createLink2)
     }
     const handleRoute1 = async () => {
-        router.push(createLink)
+        await router.push(createLink)
     }
 
     return (
