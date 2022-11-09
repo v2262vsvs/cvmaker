@@ -3,42 +3,6 @@ import Image from "next/image";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store";
 
-type Personal = {
-    name?: string;
-    surname?: string;
-    image?: string | undefined;
-    phone?: string;
-    postalcode?: string;
-    address?: string;
-    city?: string;
-    email?: string;
-};
-type Experience = {
-    position: string;
-    city: string;
-    employer: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
-
-type Education = {
-    degree: string;
-    city: string;
-    school: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
-type Skills = {
-    habit: string;
-    level: string;
-};
-type Languages = {
-    language: string;
-    level: string;
-};
-
 const mont = [
     "Jan",
     "Feb",
@@ -85,20 +49,20 @@ function CVpdfOtago({personal, profileDescription, educationList, experienceList
     const colorLogic = classNames(
         colorDB ? (
             colorDB === 'black' ? 'text-neutral-800'
-                    : `text-${colorDB}-700`
+                    : `text-${colorDB}`
         ) : choose === 2 ? (
             color === 'black' ? 'text-neutral-800'
-                    : `text-${color}-700`
+                    : `text-${color}`
         ) : 'text-neutral-800'
     )
 
     const backgroundLogic = classNames(
         colorDB ? (
              colorDB === 'black' ? 'bg-gray-500'
-                    : `bg-${colorDB}-700`
+                    : `background-${colorDB}`
         ) : choose === 2 ? (
             color === 'black' ? 'bg-gray-500'
-                : `bg-${color}-700`
+                : `background-${color}`
         ) :  'bg-gray-500'
     )
 

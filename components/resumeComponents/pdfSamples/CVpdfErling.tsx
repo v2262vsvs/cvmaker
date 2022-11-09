@@ -13,26 +13,6 @@ type Props = {
     colorDB?: string
 }
 
-type Experience = {
-    position: string;
-    city: string;
-    employer: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
-
-type Education = {
-    degree: string;
-    city: string;
-    school: string;
-    description: string;
-    startdate: Date;
-    enddate: Date;
-};
-
-
-
 const mont = [
     "Jan",
     "Feb",
@@ -75,32 +55,30 @@ export default function CVpdfErling({
         colorDB ? (
             colorDB === 'yellow' ? 'bg-yellow-500 w-2/6'
                 : colorDB === 'black' ? 'bg-gray-800 w-2/6'
-                    : `bg-${colorDB}-700 w-2/6`
+                    : `background-${colorDB}  w-2/6`
         ) : choose === 4 ? (
             color === 'yellow' ? 'bg-yellow-500 w-2/6'
                 : color === 'black' ? 'bg-gray-800 w-2/6'
-                    : `bg-${color}-700 w-2/6`
+                    : `background-${color} w-2/6`
         ) : 'bg-gray-800 w-2/6'
     )
 
     const colorText = classNames(
         colorDB ? (
-            colorDB === 'yellow' ? 'text-yellow-500'
-                : colorDB === 'black' ? 'text-gray-800'
-                    : `text-${colorDB}-700`
+            colorDB === 'black' ? 'text-gray-800'
+                    : `text-${colorDB}`
         ) : choose === 4 ? (
-            color === 'yellow' ? 'text-yellow-500'
-                : color === 'black' ? 'text-gray-800'
-                    : `text-${color}-700`
+            color === 'black' ? 'text-gray-800'
+                    : `text-${color}`
         ) : 'text-gray-800'
     )
 
     let skillStyle = "bg-gray-400 h-1 rounded-full"
     if (colorDB) {
-        skillStyle = `bg-${colorDB === 'black' ? 'gray' : colorDB}-400 h-1 rounded-full`
+        skillStyle = `skill-${colorDB} h-1 rounded-full`
     }
     if (choose === 4) {
-        skillStyle = `bg-${color === 'black' ? 'gray' : color}-400 h-1 rounded-full`
+        skillStyle = `skill-${color} h-1 rounded-full`
     }
 
 

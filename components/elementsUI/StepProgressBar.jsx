@@ -2,13 +2,13 @@ import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import Link from "next/link";
 import { useRouter } from 'next/router'
-import React, {Fragment, useEffect, useState} from 'react'
+import React from 'react'
 
 
 export default function StepProgressBar(props) {
     const router = useRouter()
     console.log('ROUTER ********',router)
-    const step1 = '/box/personal'
+    // const step1 = '/box/personal'
     const step2 = '/box/experiencepage'
     const step3 = '/box/sample'
 
@@ -24,7 +24,7 @@ export default function StepProgressBar(props) {
         justifyContent: 'center'
     }
 
-    
+
 
 
     return (
@@ -51,7 +51,7 @@ export default function StepProgressBar(props) {
                 <Step transition="scale">
                     {({ accomplished }) => (
                         <Link
-                            
+
                             href={step2}
                         >
                             <div style={circleStyle}>

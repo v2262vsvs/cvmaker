@@ -19,8 +19,7 @@ import {toast} from 'react-toastify'
 import {PlusIcon} from '@heroicons/react/solid'
 import {PencilIcon, DownloadIcon, TrashIcon} from '@heroicons/react/outline'
 import {useTranslation} from "react-i18next";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+
 
 
 function useWindowSize() {
@@ -59,16 +58,6 @@ function useWindowSize() {
 
 
 
-
-
-
-
-
-
-
-
-
-
 function Profile() {
 
     const {t} = useTranslation();
@@ -80,8 +69,8 @@ function Profile() {
     const [isOpen, setIsOpen] = useState<number>(0)
     const size = useWindowSize();
 
-   
-   
+
+
     const {data,refetch} = useQuery(GET_FULL_CVS_BY_ACCOUNT_EMAIL, {
         variables: {
             email: session?.user?.email
@@ -89,14 +78,14 @@ function Profile() {
     })
     const DATA = data?.getCvsByAccountEmail[0]
     const CV = {...DATA}
-    
+
     const dynamicRoute = useRouter().asPath;
     useEffect(() => {
-        
+
         refetch({ email: session?.user?.email })
     }, [dynamicRoute])
-   
-    
+
+
 
     function openModal(n: number) {
         if (size.height > 940 && size.width > 650) {

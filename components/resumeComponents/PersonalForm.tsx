@@ -5,17 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 
-type Personal = {
-    name?: string;
-    surname?: string;
-    image?: string | undefined;
-    phone?: string;
-    postalcode?: string;
-    address?: string;
-    city?: string;
-    email?: string;
-};
-
 
 const PersonalForm = () => {
     //stopped from calling useEffect twice

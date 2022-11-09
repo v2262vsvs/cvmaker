@@ -3,9 +3,8 @@ import Footer from "../components/pageSections/Footer";
 import HeadMeta from "../components/pageSections/HeadMeta";
 import ToTopButton from "../components/elementsUI/ToTopButton";
 import { useSession } from "next-auth/react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authActions } from "../slices/auth-slice";
-import { RootState } from "../store";
 
 
 
@@ -20,8 +19,8 @@ export default function Home() {
         }))
     }
 
-    
-    
+
+
 
 
     return (

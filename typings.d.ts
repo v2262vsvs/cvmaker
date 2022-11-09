@@ -7,28 +7,29 @@ type Personal = {
     address?: string;
     city?: string;
     email?: string;
-  };
-  type Education = {
+};
+
+type Education = {
     degree: string;
     city: string;
     school: string;
     description: string;
-    startDate: Date;
-    endDate: Date;
-  };
-  type Experience = {
-    degree: string;
+    startdate: Date;
+    enddate: Date;
+};
+type Experience = {
+    position: string;
     city: string;
     employer: string;
     description: string;
-    startDate: Date;
-    endDate: Date;
-  };
-  type Skills = {
+    startdate: Date;
+    enddate: Date;
+};
+type Skills = {
     habit: string;
     level: string;
-  };
-  type Languages = {
+};
+type Languages = {
     language: string;
     level: string;
-  };
+};

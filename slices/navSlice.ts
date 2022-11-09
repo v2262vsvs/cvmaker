@@ -5,12 +5,14 @@ interface CounterState {
     choose: number | null,
     scale:number | null,
     color:string | null,
+    congratulation: boolean
   }
 
 const initialState : CounterState={
     choose:null,
     scale:null,
     color:'black',
+    congratulation:false
 }
 
 export const navSlice = createSlice({
@@ -26,14 +28,19 @@ export const navSlice = createSlice({
         setColor:(state,action :PayloadAction<string>)=>{
             state.color = action.payload
         },
+        setCongratulation:(state,action: PayloadAction<boolean>)=> {
+            state.congratulation = action.payload
+        }
 
     }
 })
 
-export const {setChoose,setScale,setColor} = navSlice.actions
+export const {setChoose,setScale,setColor, setCongratulation} = navSlice.actions
 
 export const selectChoose = (state:RootState) => state.nav.choose;
 export const selectScale = (state:RootState) => state.nav.scale;
 export const selectColor = (state:RootState) => state.nav.color;
+export const selectCongratulation = (state:RootState) => state.nav.congratulation;
+
 
 export default navSlice.reducer;
