@@ -41,7 +41,7 @@ function Profile() {
 
     return (
         <div>
-            <div className="bg-white max-w-[850px] shadow-xl rounded-md  mr-auto ml-auto ">
+            <div className="bg-white max-w-[850px] shadow-violetShadow rounded-xl  mr-auto ml-auto max-md:w-11/12 max-md:mx-auto ">
                 <div
                     className="cursor-pointer"
                     onClick={() => setOpenProfile(!openProfile)}
@@ -49,7 +49,7 @@ function Profile() {
                     <div className="flex py-8 px-10 space-x-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-7 w-7 font-medium text-neutral-700"
+                            className="h-7 w-7 font-medium text-violet-700"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                         >
@@ -59,14 +59,14 @@ function Profile() {
                                 clipRule="evenodd"
                             />
                         </svg>
-                        <div className="font-medium text-xl text-neutral-700">
+                        <div className="font-medium text-xl text-violet-700">
                             Profile
                         </div>
                     </div>
                 </div>
 
                 {openProfile && (
-                    <div className="mr-10 ml-10 pb-10 -mt-2 space-y-4">
+                    <div className="mr-10 ml-10 pb-10 -mt-2 space-y-4 max-md:w-11/12 max-md:mx-auto">
                         <div className="border-t-0.1 max-w-[770px] ml-auto mr-auto border border-gray-200"></div>
                         <div className="text-neutral-600 text-sm ">
                             Description

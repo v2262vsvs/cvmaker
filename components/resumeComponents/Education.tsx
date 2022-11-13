@@ -117,7 +117,7 @@ function Education() {
 
     return (
         <div>
-            <div className="bg-white max-w-[850px] shadow-xl rounded-md  mr-auto ml-auto ">
+            <div className="bg-white max-w-[850px] shadow-violetShadow rounded-xl  mr-auto ml-auto max-md:w-11/12 max-md:mx-auto">
                 <div
                     className="cursor-pointer"
                     onClick={() => setOpenEducation(!openEducation)}
@@ -125,21 +125,21 @@ function Education() {
                     <div className="flex py-8 px-10 space-x-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-7 w-7 font-medium text-neutral-700"
+                            className="h-7 w-7 font-medium text-violet-700"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                         >
                             <path
                                 d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
                         </svg>
-                        <div className="font-medium text-xl text-neutral-700">
+                        <div className="font-medium text-xl text-violet-700">
                             Education and qualifications
                         </div>
                     </div>
                 </div>
 
                 {openEducation && (
-                    <div className="mr-10 ml-10 pb-10 -mt-2 space-y-4">
+                    <div className="mr-10 ml-10 pb-10 -mt-2 space-y-4 max-md:w-11/12 max-md:mx-auto">
                         {educationList.map((education, index) => (
                             <div key={index} className="  -mt-2 space-y-4">
                                 {(visibleEducation == index) ? (<div className="  -mt-2 space-y-4">
@@ -149,7 +149,7 @@ function Education() {
                                     <div className="flex space-x-7">
                                         <div className="space-y-2 grow">
                                             <div className="text-neutral-600 text-sm">
-                                                Degree or certificate
+                                                Degree
                                             </div>
                                             <input
                                                 value={education.degree}

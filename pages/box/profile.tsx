@@ -91,6 +91,7 @@ function Profile() {
         if (size.height > 940 && size.width > 650) {
             setIsOpen(n)
         }
+        // setIsOpen(n)
     }
 
     function closeModal() {
@@ -178,23 +179,23 @@ function Profile() {
 
     return (
         <>
-            <div className="bg-violet-50 h-full w-screen">
+            <div className="bg-violet-50 h-full overflow-y-hidden">
                 <div className=" h-full w-full bg-violet-50 relative">
                     <HeadMeta title={'Your Profile'} content={'add later some text'}/>
-                    <div className="mt-5 mx-20">
+                    <div className="mt-5 sm:mx-20 max-sm:mx-5">
                         <div className="flex justify-between">
-                            <div className="font-extrabold text-violet-700 text-xl xl:text-2xl 2xl:text-4xl">
+                            <div className="font-extrabold text-violet-700 text-xl xl:text-2xl 2xl:text-4xl  max-[500px]:w-1/3 max-[500px]:mb-2">
                                 {t('Resumes')}
                             </div>
                             <div
-                                className="flex mt-5 px-8 space-x-2 py-4 bg-violet-700 rounded-lg hover:shadow-lg shadow-md cursor-pointer">
+                                className="flex px-8 space-x-2 py-4 bg-violet-700 rounded-lg hover:shadow-lg shadow-md cursor-pointer max-[418px]:p-3 animation-button">
                                 <Link href="/box/personal">
                                     <button
-                                        className="text-white font-medium text-xl">
+                                        className="text-white font-medium text-xl max-[347px]:text-sm ">
                                         {t('Create New')}
                                     </button>
                                 </Link>
-                                <div className="h-7 w-7 text-white">
+                                <div className="h-7 w-7 text-white ">
                                     <PlusIcon/>
                                 </div>
                             </div>
@@ -207,14 +208,14 @@ function Profile() {
 
                     <div className="flex ">
                         {data?.getCvsByAccountEmail.length > 0 ? (
-                            <div className="flex ">
-                                <div className="mx-14 mt-3 mb-32" onClick={()=> openModal(2)}>
+                            <div className="flex   max-[600px]:flex-col-reverse max-[600px]:mx-auto max-[600px]:-mt-24 max-[460px]:-ml-14 max-[600px]:scale-75">
+                                <div className="md:mx-14 mt-3 mb-32" onClick={()=> openModal(2)}>
                                     <div className={'sampleScale50 overflow-hidden  rounded-xl shadow-violetShadow'}>
                                         <CVS/>
                                     </div>
                                 </div>
-                                <div className="mt-8 space-y-2 -ml-20 ">
-                                    <div className="mb-1 font-medium text-lg">{t('Your last CV')}</div>
+                                <div className="mt-8 space-y-2 lg:-ml-20  max-[767px]:p-2 max-[600px]:flex max-[600px]:space-x-10 max-[460px]:-ml-1">
+                                    <div className="mb-1 font-medium text-lg max-[615px]:hidden">{t('Your last CV')}</div>
                                     <div onClick={() => handleEdit()}
                                          className="flex space-x-1 hover:border-b hover:border-violet-700 w-fit cursor-pointer">
                                         <div className="h-5 w-5 text-violet-600 ">
@@ -240,13 +241,28 @@ function Profile() {
 
                             </div>
                         ) : (
-                            <div className="ml-16 2xl:-ml-2 mt-3 mb-32"></div>
+                            // <div className="ml-16 2xl:-ml-2 mt-3 mb-32"></div>
+                            <div className="mt-3 md:ml-28 min-[1237px]:hidden max-[600px]:mx-auto max-[460px]:-mt-16 max-[600px]:scale-75 mb-4 ">
+                                <Link href="/box/personal">
+                                    <div
+                                        className='bg-white w-[595px] h-[842px] scale-65  hover:opacity-80 rounded-2xl -mt-32  -mb-32 -ml-32 -mr-10  overflow-hidden  rounded-xl shadow-violetShadow'>
+                                        <div
+                                            className="rounded-full bg-violet-300 hover:-scale-105 bg-opacity-25 w-48 h-48  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                            <div
+                                                className="h-24 w-24 text-violet-700  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                                <PlusIcon/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
                         )}
 
-                        <div className="mt-3 ml-10 2xl:ml-28 ">
+
+                        <div className="mt-3 ml-10 2xl:ml-28 max-[1237px]:hidden ">
                             <Link href="/box/personal">
                                 <div
-                                    className='bg-white w-[595px] h-[842px] scale-65 shadow-xl hover:opacity-80 rounded-2xl -mt-32  -mb-32 -ml-32 -mr-10  overflow-hidden  rounded-xl shadow-violetShadow'>
+                                    className='bg-white w-[595px] h-[842px] scale-65  hover:opacity-80 rounded-2xl -mt-32  -mb-32 -ml-32 -mr-10  overflow-hidden  rounded-xl shadow-violetShadow'>
                                     <div
                                         className="rounded-full bg-violet-300 hover:-scale-105 bg-opacity-25 w-48 h-48  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                         <div
@@ -257,7 +273,7 @@ function Profile() {
                                 </div>
                             </Link>
                         </div>
-                        <div className="mt-8 space-y-2 -ml-6 mr-20">
+                        <div className="mt-8 space-y-2 -ml-6 mr-20 max-[1237px]:hidden">
                             <div className="mb-1 font-medium text-lg text-gray-500">{t('New Resume')}</div>
                             <div className="flex text-gray-500 text-sm font-light cursor-pointer">
                                 <div>{t('Create a tailored resume for each job')}

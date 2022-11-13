@@ -112,19 +112,19 @@ const PersonalForm = () => {
     return (
         <>
             <div style={{height: focused ? '685px': '600px'}}
-                 className="bg-white max-w-[850px] shadow-xl rounded-md h-full mr-auto ml-auto "
+                 className="bg-white max-w-[850px] shadow-violetShadow rounded-xl h-full mr-auto ml-auto "
             >
                 <div className=" pt-6 pb-5 font-medium px-10 text-xl text-neutral-700">
                     Personal data
                 </div>
-                <div className="border-t-0.1 max-w-[770px] ml-auto mr-auto border border-gray-200"></div>
-
-                <div className="flex space-x-5 mr-10 ml-10 mt-7">
+                <div className="border-t-0.1 max-w-[770px] ml-auto mr-auto border border-gray-200 "></div>
+                {/*max-[516px]:flex-wrap*/}
+                <div className="flex space-x-7 mt-7 max-md:w-11/12 max-md:mx-auto ml-10 mr-10">
                     <div
-                        className="relative z-0 bg-neutral-100 h-44 w-44 rounded-sm shadow-sm outline-gray-100 hover:outline-neutral-300 outline-dotted hover:outline-2 hover:outline-offset-2 ring-1 ring-neutral-200 ">
+                        className="relative z-0 bg-violet-50 h-44 w-44 max-[473px]:w-2/3 rounded-xl shadow-violetShadowMenu outline-violet-100 hover:outline-violet-300 outline-dotted hover:outline-2 hover:outline-offset-2 ring-1 ring-violet-200 ">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className=" h-16 w-16 text-neutral-500	 text-center ml-auto mr-auto mt-10"
+                            className=" h-16 w-16 text-center ml-auto mr-auto mt-10 text-violet-500"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                         >
@@ -134,7 +134,7 @@ const PersonalForm = () => {
                                 clipRule="evenodd"
                             />
                         </svg>
-                        <div className="text-center text-sm mt-3 text-neutral-500">
+                        <div className="text-center text-sm mt-3 text-violet-500">
                             Upload Photo
                         </div>
                         {personal.image && (
@@ -142,14 +142,14 @@ const PersonalForm = () => {
                                 <Image
                                     layout="fill"
                                     src={`${personal.image}`}
-                                    className="w-44 h-44 "
+                                    className="w-44 h-44 rounded-xl"
                                 />
                                 <div
                                     className="absolute z-20 w-44 h-44 inset-0 opacity-0 hover:opacity-60 text-center items-center">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         onClick={() => handleRemoveImage()}
-                                        className="mt-12 ml-12 h-20 w-20 text-neutral-500   hover:scale-95 cursor-pointer"
+                                        className="mt-12 ml-12 h-20 w-20 hover:scale-95 cursor-pointer text-violet-500"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                     >
@@ -206,7 +206,7 @@ const PersonalForm = () => {
                         </div>
                     </div>
                 </div>
-                <div className="max-w-[770px]  ml-auto mr-auto space-y-5 mt-5">
+                <div className="max-w-[770px]  ml-auto mr-auto space-y-5 mt-5 max-md:w-11/12">
                     <div className="flex space-x-7">
                         <div className="space-y-2 grow">
                             <div className="text-neutral-600 text-sm">Email *</div>
@@ -277,7 +277,7 @@ const PersonalForm = () => {
                 <Link href={"/box/experiencepage"}>
                     <button
                         disabled={!personal.name || !personal.surname || !personal.email}
-                        className="bg-violet-700 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto">
+                        className="bg-violet-700 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto animation-button">
                         <div className="text-white text-lg font-semibold">
                             The next step
                         </div>

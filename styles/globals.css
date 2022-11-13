@@ -32,6 +32,10 @@
 
 
 }
+
+body {
+    background: rgb(245,243,255);
+}
 /*-mr-72 -mt-48 -mb-52*/
 /*-mt-32 -mb-32*/
 
@@ -144,7 +148,7 @@
 }
 .spinner {
     position: absolute;
-    left: 50%;
+    /*left: 50%;*/
     top: 50%;
     height:60px;
     width:60px;
