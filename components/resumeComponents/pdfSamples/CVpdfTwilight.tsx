@@ -82,7 +82,7 @@ export default function CVpdfTwilight({
         >
             <div className="">
                 <main
-                    className="flex flex-col sm:flex-row-reverse shadow-2xl h-[842px]"
+                    className="flex flex-row-reverse shadow-2xl h-[842px]"
                 >
                     <div
                         className={classNames(

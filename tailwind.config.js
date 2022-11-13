@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       boxShadow: {
         'violetShadow': '19px 21px 4px rgba(123, 97, 255, 0.31)',
+        'violetShadowMenu': '7px 8px 4px rgba(123, 97, 255, 0.31)',
       },
       colors: {
         brown: {

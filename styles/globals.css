@@ -13,7 +13,7 @@
         @apply flex items-center space-x-1 text-sm font-semibold opacity-70 hover:opacity-100 cursor-pointer rounded-sm
     }
     .sampleScale50 {
-        @apply bg-white w-[595px] h-[842px] scale-65 shadow-xl rounded-2xl -mt-32 -mb-32 -ml-20 -mr-10
+        @apply bg-white w-[595px] h-[842px] scale-65 shadow-xl rounded-2xl -mt-32 -mb-32 -ml-20 -mr-10 shadow-violetShadow
     }
     .mainbg{
         @apply
@@ -21,6 +21,12 @@
 
     .section-headline {
         @apply font-bold sm:text-sm uppercase tracking-widest border-green-500 border-l-8 pl-2 text-green-500;
+    }
+    .animation-button {
+        @apply transition ease-in-out delay-150  hover:scale-110 hover:bg-violet-500 duration-300
+    }
+    .mobile-view {
+        @apply flex items-center -space-x-14 overflow-x-scroll overflow-clip scale-90
     }
 
 
@@ -205,8 +211,12 @@
 }
 .animation {
     animation: backgroundshift 7s alternate infinite;
+
 }
-.animation-svg { min-height: 50vh; }
+.animation-svg {
+    /*min-height: 28vh;*/
+    height: 200px;
+}
 
 pattern rect {
     animation: scaleshift 7s infinite cubic-bezier(.36,.17,.86,.67);

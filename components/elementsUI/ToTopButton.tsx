@@ -26,17 +26,18 @@ function ToTopButton() {
             {backToTop && (
                 <button
                     onClick={scrollUp}
-                    className='shadow-2xl shadow-violet-500'
+                    className='shadow-2xl shadow-violet-500 '
                     style={{
                         position: 'fixed',
-                        bottom: '80px',
-                        right: '80px',
-                        height: 80,
-                        width: 80,
+                        bottom: '140px',
+                        left: '10px',
+                        height: 70,
+                        width: 70,
                         background: 'white',
                         display: "flex",
                         justifyContent: 'center',
-                        borderRadius: 40
+                        borderRadius: 40,
+                        zIndex: 1
                     }}
                 >
                     <img src='/ChevronUp.svg' alt='up' className='self-center'/>
