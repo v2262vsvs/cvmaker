@@ -18,9 +18,107 @@
     .mainbg{
         @apply
     }
+
+    .section-headline {
+        @apply font-bold sm:text-sm uppercase tracking-widest border-green-500 border-l-8 pl-2 text-green-500;
+    }
+
+
+
 }
 /*-mr-72 -mt-48 -mb-52*/
 /*-mt-32 -mb-32*/
+
+/* styles for resumes */
+.background-red {
+    background: #d32f2f;
+}
+.background-yellow {
+    background: #fdd835;
+}
+.background-green {
+    background: #388e3c;
+}
+.background-blue {
+    background: #1976d2;
+}
+.background-violet {
+    background: rgba(135, 3, 239, 0.95);
+}
+
+.background100-red {
+    background: #FFE4E6;
+}
+.background100-yellow {
+    background: #FEFCE8;
+}
+.background100-green {
+    background: #D1FAE5;
+}
+.background100-blue {
+    background: #DBEAFE;
+}
+.background100-violet {
+    background: #F3E8FF;
+}
+
+.skill-red {
+    background: #F87171;
+}
+.skill-yellow {
+    background: #FACC15;
+}
+.skill-green {
+    background: #34D399;
+}
+.skill-blue {
+    background: #60A5FA;
+}
+.skill-violet {
+    background: #C084FC;
+}
+.skill-black {
+    background: darkgray;
+}
+
+.text-red {
+    color: #d32f2f;
+    border-color: #d32f2f;
+}
+.text-yellow {
+    color: #fdd835;
+    border-color: #fdd835;
+}
+.text-green {
+    color: #388e3c;
+    border-color: #388e3c;
+}
+.text-blue {
+    color: #1976d2;
+    border-color: #1976d2;
+}
+.text-violet {
+    color: rgba(135, 3, 239, 0.95);
+    border-color: rgba(135, 3, 239, 0.95);
+}
+
+.gradientBg-red {
+    background: linear-gradient(to bottom, #FCA5A5, #EF4444);
+}
+.gradientBg-yellow {
+    background: linear-gradient(to bottom, #FDE047, #EAB308);
+}
+.gradientBg-green {
+    background: linear-gradient(to bottom, #86EFAC, #22C55E);
+}
+.gradientBg-blue {
+    background: linear-gradient(to bottom, #93C5FD, #3B82F6);
+}
+.gradientBg-violet {
+    background: linear-gradient(to bottom, #D8B4FE, #9333EA);
+}
+
+
 
 /*loading style*/
 
@@ -174,3 +272,27 @@ input:invalid[focused="true"] ~ span{
 ::-webkit-scrollbar-thumb:vertical:hover {
     background: linear-gradient(transparent, rgba(135, 3, 239, 0.95));
 }
+
+/*что бы убрать синий цвет в инпутах, когда выбираешь из реком. браузера*/
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+/*для таблицы в резюме sparkle*/
+.wrap ul {
+    list-style-position: inside;
+    -moz-column-count: 2; /* Firefox */
+    -webkit-column-count: 2; /* Safari and Chrome */
+    column-count: 2;
+    height: 60px;
+}
+/*для таблиц в резюме berkeley*/
+.wrap2 ul {
+    list-style-position: inside;
+    -moz-column-count: 3; /* Firefox */
+    -webkit-column-count: 3; /* Safari and Chrome */
+    column-count: 3;
+    height: 70px;
+}
+

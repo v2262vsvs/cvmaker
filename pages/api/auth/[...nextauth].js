@@ -23,5 +23,22 @@ export default NextAuth({
   ],
   pages:{
     signIn:'/auth/signin'
-  }
+  },
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      return true
+    },
+    async redirect({ url, baseUrl }) {
+      //console.log('baseurl',baseUrl)
+      //console.log('url',url)
+      return baseUrl
+    },
+    async session({ session, user, token }) {
+      return session
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      return token
+    }
+  },
+  
 })

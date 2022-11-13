@@ -1,146 +1,130 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import CVpdfStanford from "./pdfSamples/CVpdfStanford";
 import CVpdfOtago from "./pdfSamples/CVpdfOtago";
 import CVpdfBerkeley from "./pdfSamples/CVpdfBerkeley";
+import CVpdfSparkle from "./pdfSamples/CVpdfSparkle";
+import CVpdfErling from "./pdfSamples/CVpdfErling";
+import CVpdfTwilight from "./pdfSamples/CVpdfTwilight";
 
-const CvCards = () => {
-    //props: any
-    // const {openModal} = props
-    //
-    // const [personal, setPersonal] = useState<Personal>({});
-    // const [profileDescription, setProfileDescription] = useState<string>("");
-    // const [educationList, setEducationList] = useState<Education[]>([]);
-    // const [experienceList, setExperienceList] = useState<Experience[]>([]);
-    // const [skillsList, setSkillsList] = useState<Skills[]>([]);
-    // const [languagesList, setLanguagesList] = useState<Languages[]>([]);
-    //
-    //
-    // useEffect(() => {
-    //     const data = window.localStorage.getItem("PERSONAL_STATE");
-    //     console.log("from storage", data);
-    //     if (data !== null) {
-    //         const formated: Personal = JSON.parse(data);
-    //         console.log("name", formated.name);
-    //         setPersonal((personal) => ({
-    //             ...personal,
-    //             name: formated.name,
-    //             syrname: formated.syrname,
-    //             image: formated.image,
-    //             phone: formated.phone,
-    //             postalcode: formated.postalcode,
-    //             address: formated.address,
-    //             city: formated.city,
-    //             email: formated.email,
-    //         }));
-    //     }
-    //     const data2 = window.localStorage.getItem("PROFILE_DESCRIPTION_STATE");
-    //     let formated2 = null;
-    //     if (data2 !== null) {
-    //         formated2 = JSON.parse(data2);
-    //         setProfileDescription(formated2);
-    //         console.log("profileDescription ", profileDescription);
-    //     }
-    //     const data3 = window.localStorage.getItem("EDUCATION_STATE");
-    //     console.log("from storage", data3);
-    //     let formated3 = null;
-    //     if (data3 !== null) {
-    //         formated3 = JSON.parse(data3);
-    //         setEducationList(formated3);
-    //         console.log("education ", educationList);
-    //     }
-    //
-    //     const data4 = window.localStorage.getItem("EXPERIENCE_STATE");
-    //     console.log("from storage", data4);
-    //     let formated4 = null;
-    //     if (data4 !== null) {
-    //         formated4 = JSON.parse(data4);
-    //         setExperienceList(formated4);
-    //         console.log("experience ", experienceList);
-    //     }
-    //     const data5 = window.localStorage.getItem("SKILLS_STATE");
-    //     console.log("from storage", data5);
-    //     let formated5 = null;
-    //     if (data5 !== null) {
-    //         formated5 = JSON.parse(data5);
-    //         setSkillsList(formated5);
-    //         console.log("skills ", skillsList);
-    //     } else {
-    //         setSkillsList([
-    //             {
-    //                 habit: "",
-    //                 level: "",
-    //             },
-    //         ]);
-    //     }
-    //     const data6 = window.localStorage.getItem("LANGUAGES_STATE");
-    //     console.log("from storage", data6);
-    //     let formated6 = null;
-    //     if (data6 !== null) {
-    //         formated6 = JSON.parse(data6);
-    //         setLanguagesList(formated6);
-    //         console.log("languages ", languagesList);
-    //     } else {
-    //         setLanguagesList([
-    //             {
-    //                 language: "",
-    //                 level: "",
-    //             },
-    //         ]);
-    //     }
-    // }, []);
+import {PlusIcon} from "@heroicons/react/solid";
+
+import {useQuery} from "@apollo/client";
+import {GET_CV} from "../../graphql/queries";
+import dataCV from "./pdfSamples/dataCV";
+
+import {useRouter} from "next/router";
+import Link from "next/link";
+
+
+const CvCards: any = () => {
+    const router = useRouter()
+
+    const {data, error} = useQuery(GET_CV, {
+        variables: {
+            num: 6
+        }
+    })
+    if (error) {
+        return `Error! ${error}`
+    }
+    console.log('cv', data)
+    const DATA = data?.getCvList
+
+    const step1 = '/'
+    const step2 = '/box/templates'
+
+    const ID = [1]
 
     return (
-        <div className='mt-12 grid grid-cols-3 mx-auto mx-auto container gap-y-8' >
-            <CVpdfStanford
-                //personal={{name: 'Eugene', syrname: 'Karashevich', email: 'wert130202@gmail.com'}}
-                personal={{}}
-                profileDescription={''}
-                educationList={[]}
-                experienceList={[]}
-                skillsList={[]}
-                languagesList={[]}
-            />
-            <CVpdfOtago
-                personal={{}}
-                profileDescription={''}
-                educationList={[]}
-                experienceList={[]}
-                skillsList={[]}
-                languagesList={[]}
-            />
-            <CVpdfBerkeley
-                personal={{}}
-                profileDescription={''}
-                educationList={[]}
-                experienceList={[]}
-                skillsList={[]}
-                languagesList={[]}
-            />
-            <CVpdfStanford
-                personal={{}}
-                profileDescription={''}
-                educationList={[]}
-                experienceList={[]}
-                skillsList={[]}
-                languagesList={[]}
-            />
-            <CVpdfOtago
-                personal={{}}
-                profileDescription={''}
-                educationList={[]}
-                experienceList={[]}
-                skillsList={[]}
-                languagesList={[]}
-            />
-            <CVpdfBerkeley
-                personal={{}}
-                profileDescription={''}
-                educationList={[]}
-                experienceList={[]}
-                skillsList={[]}
-                languagesList={[]}
-            />
-        </div>
+        <>
+            <div className='mt-12 grid grid-cols-3 mx-auto my-auto container gap-y-8'>
+                {router.pathname == step1 &&
+                    DATA?.map((cv: any) => (
+                        <div key={ID[0]++}>
+                            {cv.sample == 1 && (
+                                <CVpdfStanford
+                                    personal={cv.userinfoList[0]}
+                                    profileDescription={cv.description}
+                                    colorDB={cv.color}
+                                    {...cv}
+                                />
+                            )}
+                            {cv.sample == 2 && (
+                                <CVpdfOtago
+                                    personal={cv.userinfoList[0]}
+                                    profileDescription={cv.description}
+                                    colorDB={cv.color}
+                                    {...cv}
+                                />
+                            )}
+                            {cv.sample == 3 && (
+                                <CVpdfBerkeley
+                                    personal={cv.userinfoList[0]}
+                                    profileDescription={cv.description}
+                                    colorDB={cv.color}
+                                    {...cv}
+                                />
+                            )}
+                            {cv.sample == 4 && (
+                                <CVpdfErling
+                                    personal={cv.userinfoList[0]}
+                                    profileDescription={cv.description}
+                                    colorDB={cv.color}
+                                    {...cv}
+                                />
+                            )}
+                            {cv.sample == 5 && (
+                                <CVpdfTwilight
+                                    personal={cv.userinfoList[0]}
+                                    profileDescription={cv.description}
+                                    colorDB={cv.color}
+                                    {...cv}
+                                />
+                            )}
+                            {cv.sample == 6 && (
+                                <CVpdfSparkle
+                                    personal={cv.userinfoList[0]}
+                                    profileDescription={cv.description}
+                                    colorDB={cv.color}
+                                    {...cv}
+                                />
+                            )}
+                        </div>
+                        )
+                    )}
+            </div>
+            {router.pathname == step2 &&
+                <Link href="/box/personal">
+                    <div className='-mt-8 grid grid-cols-3 mx-auto my-auto container gap-y-8'>
+                        <CVpdfOtago
+                            {...dataCV}
+                        />
+                        <CVpdfBerkeley
+                            {...dataCV}
+                        />
+                        <div
+                            className='bg-white w-[595px] h-[842px] scale-65 shadow-xl hover:shadow-2xl rounded-2xl -mt-32  -mb-32 -ml-20 -mr-10  overflow-hidden hover:ring-4 ring-offset-1 ring-violet-300 ring-rounded-lg ring-offset-violet-300'>
+                            <div
+                                className="rounded-full bg-violet-300 hover:-scale-105 bg-opacity-25 w-48 h-48  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                <div
+                                    className="h-24 w-24 text-violet-700  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                    <PlusIcon/>
+                                </div>
+                            </div>
+                        </div>
+                        <CVpdfSparkle
+                            {...dataCV}
+                        />
+                        <CVpdfErling
+                            {...dataCV}
+                        />
+                        <CVpdfTwilight
+                            {...dataCV}
+                        />
+                    </div>
+                </Link>
+            }
+        </>
     );
 };
 

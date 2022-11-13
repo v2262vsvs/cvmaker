@@ -1,19 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {Calendar} from 'react-date-range';
-//import {DateRange, DateRangePicker} from "react-date-range";
-//import {addDays} from 'date-fns';
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import MyModal from './MyModal';
+import MyModal from '../elementsUI/MyModal';
 
-type Experience = {
-    degree: string;
-    city: string;
-    employer: string;
-    description: string;
-    startDate: Date;
-    endDate: Date;
-};
+
 const months = [
     "January",
     "February",
@@ -30,8 +21,7 @@ const months = [
 ];
 
 function Experience() {
-    // const [startDate, setStartDate] = useState<Date>(new Date());
-    // const [endDate, setEndDate] = useState<Date>(addDays(new Date(), 7));
+
     const [visibleExperience, setVisibleExperience] = useState<number>(0);
     const [openExperience, setOpenExperience] = useState<boolean>(false);
     const [experienceList, setExperienceList] = useState<Experience[]>([]);
@@ -40,25 +30,25 @@ function Experience() {
 
 
     const handleAddExperience = async (
-        degree: string,
+        position: string,
         city: string,
         employer: string,
         description: string,
-        startDate: Date,
-        endDate: Date
+        startdate: Date,
+        enddate: Date
     ) => {
         setVisibleExperience(experienceList.length)
         setExperienceList([
             ...experienceList,
-            {degree, city, employer, description, startDate, endDate},
+            {position, city, employer, description, startdate, enddate},
         ]);
     };
     const handleChangeExperience = async (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>, index: number, name: string) => {
         const value = e.target.value
         const list = [...experienceList]
         switch (name) {
-            case 'degree':
-                list[index].degree = value
+            case 'position':
+                list[index].position = value
                 setExperienceList(list)
                 break;
             case 'city':
@@ -91,12 +81,12 @@ function Experience() {
         const list = [...experienceList]
         switch (name) {
             case 'startdate':
-                list[index].startDate = item
+                list[index].startdate = item
                 setExperienceList(list)
                 setTogleRange(!togleRange)
                 break;
             case 'enddate':
-                list[index].endDate = item
+                list[index].enddate = item
                 setExperienceList(list)
                 setTogleRange2(!togleRange2)
                 break;
@@ -162,9 +152,9 @@ function Experience() {
                                         <div className="space-y-2 grow">
                                             <div className="text-neutral-600 text-sm">Position</div>
                                             <input
-                                                value={experience.degree}
+                                                value={experience.position}
                                                 onChange={(e) =>
-                                                    handleChangeExperience(e, index, 'degree')
+                                                    handleChangeExperience(e, index, 'position')
                                                 }
                                                 placeholder="for example, hr-manager"
                                                 name='work'
@@ -217,13 +207,8 @@ function Experience() {
                                                 onClick={() => setTogleRange(!togleRange)}
                                                 className="space-y-2 grow"
                                             >
-                                                {/*
-                          value={`${
-                            months[startDate.getMonth()]
-                          }-${startDate.getDate()}  ${startDate.getFullYear()}`}
-                           */}
                                                 <input
-                                                    value={`${months[new Date(experience.startDate).getMonth()]}–${new Date(experience.startDate).getDate()} ${new Date(experience.startDate).getFullYear()}`}
+                                                    value={`${months[new Date(experience.startdate).getMonth()]}–${new Date(experience.startdate).getDate()} ${new Date(experience.startdate).getFullYear()}`}
                                                     placeholder="Start Date"
                                                     className="ring-2 ring-gray-200 text-neutral-600 px-4 py-3 rounded-sm w-full outline-none"
                                                 />
@@ -237,7 +222,7 @@ function Experience() {
                                             >
                                                 <input
 
-                                                    value={`${months[new Date(experience.endDate).getMonth()]}–${new Date(experience.endDate).getDate()} ${new Date(experience.endDate).getFullYear()}`}
+                                                    value={`${months[new Date(experience.enddate).getMonth()]}–${new Date(experience.enddate).getDate()} ${new Date(experience.enddate).getFullYear()}`}
                                                     placeholder="End Date"
                                                     className="ring-2 ring-gray-200 text-neutral-600 px-4 py-3 rounded-sm w-full outline-none"
                                                 />
@@ -250,14 +235,14 @@ function Experience() {
                                             <div className="ml-3 mr-16">
                                                 <Calendar
                                                     onChange={item => handleChangeExperienceDate(item, index, 'startdate')}
-                                                    date={new Date(experience?.startDate)}/>
+                                                    date={new Date(experience?.startdate)}/>
                                             </div>
                                         )}
                                         {togleRange2 && (
                                             <div className="ml-3">
                                                 <Calendar
                                                     onChange={item => handleChangeExperienceDate(item, index, 'enddate')}
-                                                    date={new Date(experience?.endDate)}/>
+                                                    date={new Date(experience?.enddate)}/>
                                             </div>
                                         )}
                                     </div>
@@ -321,9 +306,9 @@ function Experience() {
                                                 className=" border-t-0.1 max-w-[770px] ml-auto mr-auto border border-gray-200"></div>
                                             <div className="flex justify-between ">
                                                 <div className="mt-auto mb-auto text-neutral-400 text-md">
-                                                    <div className="font-medium">{experience.degree}</div>
+                                                    <div className="font-medium">{experience.position}</div>
                                                     <div
-                                                        className="text-xs">{months[new Date(experience.startDate).getMonth()]} {new Date(experience.startDate).getFullYear()}–{months[new Date(experience.endDate).getMonth()]} {new Date(experience.endDate).getFullYear()}</div>
+                                                        className="text-xs">{months[new Date(experience.startdate).getMonth()]} {new Date(experience.startdate).getFullYear()}–{months[new Date(experience.enddate).getMonth()]} {new Date(experience.enddate).getFullYear()}</div>
                                                 </div>
                                                 <div className=" flex space-x-3 mt-auto mb-auto  text-neutral-600">
                                                     <div>
@@ -345,9 +330,7 @@ function Experience() {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>)}
-
                             </div>
                         ))}
                         <div>

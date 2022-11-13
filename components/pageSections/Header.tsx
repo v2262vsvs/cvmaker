@@ -2,31 +2,25 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {useRouter} from "next/router";
 import {signIn, useSession} from 'next-auth/react'
-
 import React, {useEffect, useState} from 'react'
-
 import {debounce} from '../../utils/debounce';
 import Dropdown from "../elementsUI/Dropdown";
+import LanguageSwitcher from "../elementsUI/LanguageSwitcher";
+import {useTranslation} from "react-i18next";
 
 
 function Header() {
+    const { t } = useTranslation();
+
     const {data: session} = useSession()
     console.log(session)
-    const [open, setOpen] = useState(false)
-    const onMenu = async (state: boolean) => {
-        setOpen(state)
-        console.log(open)
-    }
-    // проблема с логином , вылизазит 404
-
 
     const signin = async () => {
-        signIn()
+        await signIn()
     }
 
 
     //add hidden bar
-
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
 
@@ -62,32 +56,32 @@ function Header() {
                     </div>
                     <div className='flex'>
                         <div className='flex items-center mx-7 xl:min-w-[300px] space-x-5  mr-3 px-3'>
-                            <div className='text-violet-700 hover:opacity-110  '>
-                            <Link href={`/box/personal`} className='flex  hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
-                                Create CV
+                            <div className=' hover:opacity-110 hover:text-violet-700 '>
+                            <Link href={ `/box/personal`  } className='flex  hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
+                                {t('Create CV')}
                             </Link>
                             </div>
                             <div className='flex items-center  hover:text-blue-900'>
-                                <Dropdown name='Resume' firstLink='Templates' secondLink='Create Resume'
-                                          createLink='/box/personal'/>
-                            </div>
-                            <div className='flex items-center hover:text-blue-900'>
-                                <Dropdown name='Cover Letter' firstLink='Templates' secondLink='Create Cover Letter'/>
+                                <Dropdown name={t('Resume')} firstLink={t('Templates')} secondLink={t('Create Resume')}
+                                          createLink='/box/personal' createLink2='/box/templates'/>
                             </div>
                             <Link href={`/box/blog`}
                                   className='flex hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
-                                Blog
+                                {t('Blog')}
                             </Link>
                             <Link href={`/box/faq`}
                                   className='flex hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
-                                FAQ
+                                {t('FAQ')}
                             </Link>
+                            <div>
+                                <LanguageSwitcher/>
+                            </div>
                         </div>
 
                         {session ? (
                             <div className='flex'>
                                 <div className='flex items-center space-x-2 p-2 cursor-pointer '>
-                                    <Dropdown name={session?.user?.name} firstLink='Your profile' secondLink='Settings'
+                                    <Dropdown name={session?.user?.name} firstLink={t('Your profile')} secondLink={t('Settings')} createLink2='/box/profile' createLink='/box/settings'
                                               typeProfile='profile' imageProfile={`${session?.user?.image}`}/>
                                 </div>
                             </div>
@@ -99,7 +93,7 @@ function Header() {
                                         <Image objectFit='contain' src="/login.svg"
                                                layout="fill" className='' alt=""/>
                                     </div>
-                                    <p className='text-white'>Login / Register</p>
+                                    <p className='text-white'>{t("Login/Register")}</p>
                                 </div>
                             </div>
                         )}
@@ -119,7 +113,7 @@ function Header() {
                         <Link href="/">
                             <button
                                 className="bg-violet-700 text-white text-lg xl:text-lg font-medium rounded-md  py-1 px-3 xl:py-3 xl:px-6 hover:bg-violet-500">
-                                Go back home
+                                {t('Go back home')}
                             </button>
                         </Link>
                     </div>

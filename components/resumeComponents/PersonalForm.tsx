@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {useSession} from "next-auth/react";
 import {supabase} from "../../utils/supabaseClient";
 import Image from "next/image";
@@ -6,33 +6,14 @@ import Link from "next/link";
 
 
 
-
-type Personal = {
-    name?: string;
-    syrname?: string;
-    image?: string | undefined;
-    phone?: string;
-    postalcode?: string;
-    address?: string;
-    city?: string;
-    email?: string;
-};
-
-
 const PersonalForm = () => {
+    //stopped from calling useEffect twice
+    const dataFetchedRef = useRef(false);
 
     const [personal, setPersonal] = useState<Personal>({});
     const {data: session} = useSession()
 
 
-    // const [image, setImage] = useState<string | undefined>();
-    // const [name, setName] = useState<string>("");
-    // const [syrname, setSyrname] = useState<string>("");
-    // const [email, setEmail] = useState<string>("");
-    // const [phone, setPhone] = useState<string>("");
-    // const [address, setAddress] = useState<string>("");
-    // const [postalcode, setPostalcode] = useState<string>("");
-    // const [city, setCity] = useState<string>("");
 
     const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
         let file;
@@ -56,19 +37,13 @@ const PersonalForm = () => {
             ...personal,
             ["image"]: value,
         }));
-
-        //setImage("https://opvjnmulzzsldrjmksau.supabase.co/storage/v1/object/public/images/public"+file?.name)
     };
     const handleRemoveImage = async () => {
-        // const list = personal;
-        // list.image = undefined;
-        // setPersonal(list);
         const value = undefined
         setPersonal((personal)=> ({
             ...personal,
             ["image"]: value
         }))
-
     };
     const handleChangePersonal = async (
         e:
@@ -81,17 +56,19 @@ const PersonalForm = () => {
             ...personal,
             [name]: value,
         }));
-
-
     };
 
     useEffect(() => {
+        //stopped from calling useEffect twice
+        if (dataFetchedRef.current) return;
+        dataFetchedRef.current = true;
+
         console.log('useEffect on reload personal page')
         const data = window.localStorage.getItem("PERSONAL_STATE");
         console.log("from storage", data);
         let formated: Personal = {
             name: "",
-            syrname: "",
+            surname: "",
             image: "",
             phone: "",
             postalcode: "",
@@ -101,12 +78,11 @@ const PersonalForm = () => {
         };
         if (data !== null) {
             formated = JSON.parse(data);
-            //const value = formated.name;
             console.log("name", formated.name);
             setPersonal((personal) => ({
                 ...personal,
                 name: formated.name,
-                syrname: formated.syrname,
+                surname: formated.surname,
                 image: formated.image,
                 phone: formated.phone,
                 postalcode: formated.postalcode,
@@ -117,12 +93,7 @@ const PersonalForm = () => {
         }
     }, []);
     useEffect(() => {
-        // if (personal.name != undefined && personal.syrname != undefined && personal.phone != undefined && personal.email != undefined && personal.city != undefined && personal.address != undefined && personal.postalcode != undefined && personal.image != undefined) {
-        //     window.localStorage.setItem("PERSONAL_STATE", JSON.stringify(personal));
-        //     console.log("storage", window.localStorage.getItem("PERSONAL_STATE"));
-        // }
         if (session) {
-            console.log('pass check for setItem')
             window.localStorage.setItem("PERSONAL_STATE", JSON.stringify(personal));
             console.log("storage", window.localStorage.getItem("PERSONAL_STATE"))
         }
@@ -130,10 +101,13 @@ const PersonalForm = () => {
 
     //for validation
     const [focused, setFocused] = useState(false);
+    console.log('focused',focused.toString())
 
     const handleFocus = () => {
         setFocused(true);
     };
+
+    let Focused = {'focused': focused.toString()}
 
     return (
         <>
@@ -209,25 +183,23 @@ const PersonalForm = () => {
                                 name='name'
                                 pattern='^[A-Za-z0-9]{3,16}$'
                                 required={true}
-                                //@ts-ignore
-                                focused={focused.toString()}
+                                {...Focused}
                                 onBlur={handleFocus}
                             />
                             <span className='span-redmark'>{"Firstname should be 3-16 characters and shouldn't include any special character!"}</span>
                         </div>
                         <div className="space-y-2">
-                            <div className="text-neutral-600 text-sm">Syrname *</div>
+                            <div className="text-neutral-600 text-sm">Surname *</div>
                             <input
-                                value={personal.syrname || ''}
-                                onChange={(e) => handleChangePersonal(e, "syrname")}
+                                value={personal.surname || ''}
+                                onChange={(e) => handleChangePersonal(e, "surname")}
                                 className="ring-2 ring-gray-200 px-4 py-3 rounded-sm w-full outline-none"
                                 placeholder=""
                                 type='text'
                                 name='lastname'
                                 pattern='^[A-Za-z0-9]{3,16}$'
                                 required={true}
-                                //@ts-ignore
-                                focused={focused.toString()}
+                                {...Focused}
                                 onBlur={handleFocus}
                             />
                             <span className='span-redmark'>{"Lastname should be 3-16 characters and shouldn't include any special character!"}</span>
@@ -246,8 +218,7 @@ const PersonalForm = () => {
                                 type='email'
                                 name='email'
                                 required={true}
-                                //@ts-ignore
-                                focused={focused.toString()}
+                                {...Focused}
                                 onBlur={handleFocus}
                             />
                             <span className='span-redmark'>{"It should be a valid email address!"}</span>
@@ -303,9 +274,9 @@ const PersonalForm = () => {
                 </div>
             </div>
             <div className="items-center text-center pt-10">
-                <Link href={"/box/experience"}>
+                <Link href={"/box/experiencepage"}>
                     <button
-                        disabled={!personal.name || !personal.syrname || !personal.email}
+                        disabled={!personal.name || !personal.surname || !personal.email}
                         className="bg-violet-700 px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto">
                         <div className="text-white text-lg font-semibold">
                             The next step

@@ -1,13 +1,17 @@
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import Link from "next/link";
-// import {useEffect, useState} from "react";
-// import personal from "../../pages/box/personal";
+import { useRouter } from 'next/router'
+import React from 'react'
 
 
 export default function StepProgressBar(props) {
+    const router = useRouter()
+    console.log('ROUTER ********',router)
+    // const step1 = '/box/personal'
+    const step2 = '/box/experiencepage'
+    const step3 = '/box/sample'
 
-    //const [isActive, setIsActive] = useState(false);
 
     const {percent} = props
 
@@ -20,6 +24,9 @@ export default function StepProgressBar(props) {
         justifyContent: 'center'
     }
 
+
+
+
     return (
         <div className="flex justify-center">
             <ProgressBar
@@ -29,7 +36,7 @@ export default function StepProgressBar(props) {
             >
                 <Step transition="scale">
                     {({ accomplished }) => (
-                        <Link href="/box/personal">
+                        <Link href="/box/personal" >
                             <div style={circleStyle}>
                                 <img
                                     alt="img"
@@ -44,8 +51,8 @@ export default function StepProgressBar(props) {
                 <Step transition="scale">
                     {({ accomplished }) => (
                         <Link
-                            //href={isActive ? '/box/experience' : ''}
-                            href="/box/experience"
+
+                            href={step2}
                         >
                             <div style={circleStyle}>
                                 <img
@@ -60,7 +67,7 @@ export default function StepProgressBar(props) {
                 </Step>
                 <Step transition="scale">
                     {({ accomplished }) => (
-                        <Link href="/box/sample">
+                        <Link href={router.pathname === step2 ? step3 : router.pathname}>
                             <div style={circleStyle}>
                                 <img
                                     alt="img"

@@ -1,11 +1,17 @@
-import React, {useEffect, useState} from 'react'
-import MyModal from './MyModal';
+import { useSession } from 'next-auth/react';
+import React, {useEffect, useRef, useState} from 'react'
+import MyModal from '../elementsUI/MyModal';
 
 function Profile() {
+    const dataFetchedRef = useRef(false);
+
     const [openProfile, setOpenProfile] = useState<boolean>(false);
     const [profileDescription, setProfileDescription] = useState<string>('')
+    const {data: session} = useSession()
 
     useEffect(() => {
+        if (dataFetchedRef.current) return;
+        dataFetchedRef.current = true;
         const data2 = window.localStorage.getItem("PROFILE_DESCRIPTION_STATE");
         console.log("storage for profile  ", data2);
         if (data2 !== null) {
@@ -19,7 +25,7 @@ function Profile() {
 
 
     useEffect(() => {
-        if (profileDescription !== '') {
+        if (session) {
             window.localStorage.setItem(
                 "PROFILE_DESCRIPTION_STATE",
                 JSON.stringify(profileDescription)

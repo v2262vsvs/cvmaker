@@ -2,18 +2,29 @@ import React, {useEffect, useState} from "react";
 import HeadMeta from "../../components/pageSections/HeadMeta";
 import StepProgressBar from "../../components/elementsUI/StepProgressBar";
 import PersonalForm from "../../components/resumeComponents/PersonalForm";
-import MyModal from "../../components/resumeComponents/MyModal";
+import MyModal from "../../components/elementsUI/MyModal";
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/router'
 
 
-function personal() {
+function Personal() {
     // for progress bar
     const [percent, setPercent] = useState<number>(0)
+    const {data:session} = useSession()
+    const router = useRouter()
+
 
     // for progress bar animation
     useEffect(() => {
         setTimeout(() => {
             setPercent(percent + 25)
         }, 800)
+
+        if (!session){
+            router.push('/auth/signin')
+            console.log('router',router)
+        }
+
     }, [])
 
 
@@ -32,7 +43,7 @@ function personal() {
                     <PersonalForm/>
 
                     <footer className="ml-auto   mr-auto text-center text-gray-500 text-xs max-w-[500px]">
-                        By clicking "Next", you will start creating your resume and agree to
+                        By clicking Next, you will start creating your resume and agree to
                         our general terms and conditions and privacy policy .
                     </footer>
                     <div
@@ -59,4 +70,4 @@ function personal() {
     );
 }
 
-export default personal;
+export default Personal;

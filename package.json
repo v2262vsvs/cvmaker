@@ -19,8 +19,9 @@
     "@reduxjs/toolkit": "^1.8.5",
     "@supabase/supabase-js": "^2.0.0-rc.8",
     "@types/react": "^18.0.21",
-    "date-fns": "^2.29.2",
+    "date-fns": "^2.29.3",
     "graphql": "^16.6.0",
+    "i18next": "^22.0.4",
     "next": "12.2.5",
     "next-auth": "^4.10.3",
     "react": "^18.2.0",
@@ -28,8 +29,10 @@
     "react-date-range": "^1.4.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.3.0",
+    "react-i18next": "^12.0.0",
     "react-redux": "^8.0.4",
-    "react-step-progress-bar": "^1.0.3"
+    "react-step-progress-bar": "^1.0.3",
+    "react-toastify": "^9.0.8"
   },
   "devDependencies": {
     "@types/node": "18.7.14",
@@ -39,7 +42,7 @@
     "eslint": "8.23.0",
     "eslint-config-next": "12.2.5",
     "postcss": "^8.4.16",
-    "tailwindcss": "^3.1.8",
+    "tailwindcss": "^3.2.2",
     "typescript": "4.8.2"
   }
 }

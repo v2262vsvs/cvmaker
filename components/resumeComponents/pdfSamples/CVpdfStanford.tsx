@@ -11,7 +11,8 @@ type Props = {
     experienceList: Experience[],
     skillsList: Skills[],
     languagesList: Languages[],
-    type?: string
+    type?: string,
+    colorDB?: string
 }
 const mont = [
     "Jan",
@@ -39,7 +40,8 @@ export default function CVpdfStanford({
                                           experienceList,
                                           skillsList,
                                           languagesList,
-    type
+                                          type,
+                                          colorDB
                                       }: Props) {
     //const [scale, setScale] = useState(true)
 
@@ -66,9 +68,9 @@ export default function CVpdfStanford({
             // )}
             className={classNames(
                 type === 'downloadSample' ? ''
-                    : type === 'modalSample' ? 'sampleScale50'
-                    :  choose === 1 ? 'ring-2 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50'
-                    : 'sampleScale50'
+                    : type === 'modalSample' ? 'sampleScale50 overflow-hidden'
+                    :  choose === 1 ? 'ring-2 ring-offset-1 ring-violet-700 ring-rounded-lg ring-offset-violet-700  sampleScale50 overflow-hidden'
+                    : 'sampleScale50 overflow-hidden'
             )}
         >
             <div>
@@ -85,7 +87,7 @@ export default function CVpdfStanford({
                         </div>
                         <div className="flex text-neutral-800 space-x-2  font-medium text-xl">
                             <div>{personal.name}</div>
-                            <div>{personal.syrname}</div>
+                            <div>{personal.surname}</div>
                         </div>
                     </div>
                     <div className="bg-neutral-400 text-xl text-white font-semibold pt-1 text-center w-10 h-10 mr-5">
@@ -144,7 +146,13 @@ export default function CVpdfStanford({
                     </div>
                 </div>
 
-                <div className=" border-t-0.1 max-w-[555px] mt-3 mb-10 ml-auto mr-auto border border-gray-200"></div>
+                <div className=" border-t-0.1 max-w-[555px] mt-3 ml-auto mr-auto border border-gray-200"></div>
+                <div className="px-5 pt-3">
+                    <div className="text-neutral-800 font-light mb-1 ">Profile</div>
+                    <div className="space-y-1  font-extralight text-xs">
+                        {profileDescription}
+                    </div>
+                </div>
                 <div className=" border-t-0.1 max-w-[555px] mt-3  ml-auto mr-auto border border-gray-200"></div>
 
                 <div className="px-5 pt-3">
@@ -153,16 +161,16 @@ export default function CVpdfStanford({
                     </div>
                     <div className="space-y-2">
                         {educationList.map((education) => (
-                            <div className="space-y-1">
+                            <div key={education.degree} className="space-y-1">
                                 <div className="flex justify-between">
                                     <div className="text-xs font-medium text-neutral-700">
                                         {education.degree}
                                     </div>
                                     <div className="text-xs  font-extralight text-neutral-400">
-                                        {mont[new Date(education.startDate).getMonth()]}{" "}
-                                        {new Date(education.startDate).getFullYear()}–
-                                        {mont[new Date(education.endDate).getMonth()]}{" "}
-                                        {new Date(education.endDate).getFullYear()}
+                                        {mont[new Date(education.startdate).getMonth()]}{" "}
+                                        {new Date(education.startdate).getFullYear()}–
+                                        {mont[new Date(education.enddate).getMonth()]}{" "}
+                                        {new Date(education.enddate).getFullYear()}
                                     </div>
                                 </div>
                                 <div className="text-xs text-neutral-700 font-light opacity-90  font-serif">
@@ -181,16 +189,16 @@ export default function CVpdfStanford({
                     <div className="text-neutral-800 font-light mb-1 ">EXPERIENCE</div>
                     <div className="space-y-2">
                         {experienceList.map((experience) => (
-                            <div className="space-y-1">
+                            <div key={experience.position} className="space-y-1">
                                 <div className="flex justify-between">
                                     <div className="text-xs font-medium text-neutral-700">
-                                        {experience.degree}
+                                        {experience.position}
                                     </div>
                                     <div className="text-xs  font-extralight text-neutral-400">
-                                        {mont[new Date(experience.startDate).getMonth()]}{" "}
-                                        {new Date(experience.startDate).getFullYear()}–
-                                        {mont[new Date(experience.endDate).getMonth()]}{" "}
-                                        {new Date(experience.endDate).getFullYear()}
+                                        {mont[new Date(experience.startdate).getMonth()]}{" "}
+                                        {new Date(experience.startdate).getFullYear()}–
+                                        {mont[new Date(experience.enddate).getMonth()]}{" "}
+                                        {new Date(experience.enddate).getFullYear()}
                                     </div>
                                 </div>
                                 <div className="text-xs text-neutral-700 font-light opacity-90  font-serif">
@@ -208,7 +216,7 @@ export default function CVpdfStanford({
                     <div className="text-neutral-800 font-light mb-1 ">SKILLS</div>
                     <div className="space-y-1">
                         {skillsList.map((skill) => (
-                            <div className="">
+                            <div key={skill.habit} className="">
                                 <div className="text-xs font-medium text-neutral-800">
                                     {skill.habit}
                                 </div>
@@ -224,7 +232,7 @@ export default function CVpdfStanford({
                     <div className="text-neutral-800 font-light mb-1 ">LANGUAGES</div>
                     <div className="space-y-1">
                         {languagesList.map((language) => (
-                            <div className="">
+                            <div key={language.language} className="">
                                 <div className="text-xs font-medium text-neutral-800">
                                     {language.language}
                                 </div>
