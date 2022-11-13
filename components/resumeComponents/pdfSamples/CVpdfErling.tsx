@@ -92,7 +92,7 @@ export default function CVpdfErling({
                             : 'sampleScale50 overflow-hidden hover:ring-4 ring-offset-1 ring-violet-300 ring-rounded-lg ring-offset-violet-300'
             )}
         >
-            <div className="flex flex-col sm:flex-row h-[842px]">
+            <div className="flex  flex-row h-[842px]">
                 <div
                     className={backgroundPanel}
                 >

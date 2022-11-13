@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, }: AppProps) {
         <Provider store={store}>
         <ApolloProvider client={client}>
             <SessionProvider session={session}>
-                <div className='bg-violet-50 h-screen overflow-y-scroll' >
+                <div className='bg-violet-50 ' >
                     <Loading/>
                     <ToastContainer />
                     <Header/>

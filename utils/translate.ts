@@ -108,10 +108,10 @@ export default {
     ua: {
         translation: {
             //header
-            "Create CV": "Створити CV",
+            "Create CV": "Створити",
             "Resume": "Резюме",
             "Blog": "Блог",
-            "FAQ": "Питання та Відповіді",
+            "FAQ": "Запитання",
             "Login/Register": "Увійти/Реєстрація",
             "Templates": "Шаблони",
             "Create Resume": "Стоворити Резюме",
