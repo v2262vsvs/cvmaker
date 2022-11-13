@@ -28,7 +28,7 @@ export default function StepProgressBar(props) {
 
 
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center max-md:w-4/5 max-md:mx-auto">
             <ProgressBar
                 percent={percent}
                 width={600}

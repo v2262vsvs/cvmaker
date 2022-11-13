@@ -76,26 +76,26 @@ function Skills() {
 
     return (
         <div>
-            <div className="bg-white max-w-[850px] shadow-xl rounded-md  mr-auto ml-auto ">
+            <div className="bg-white max-w-[850px] shadow-violetShadow rounded-xl  mr-auto ml-auto max-md:w-11/12 max-md:mx-auto">
                 <div
                     className="cursor-pointer"
                     onClick={() => setOpenSkills(!openSkills)}
                 >
                     <div className="flex py-8 px-10 space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 font-medium text-neutral-700"
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 font-medium text-violet-700"
                              viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd"
                                   d="M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.26-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.26zm8.814-.569a1 1 0 00-1.415-1.414l-.707.707a1 1 0 101.415 1.415l.707-.708zm-7.071 7.072l.707-.707A1 1 0 003.465 9.12l-.708.707a1 1 0 001.415 1.415zm3.2-5.171a1 1 0 00-1.3 1.3l4 10a1 1 0 001.823.075l1.38-2.759 3.018 3.02a1 1 0 001.414-1.415l-3.019-3.02 2.76-1.379a1 1 0 00-.076-1.822l-10-4z"
                                   clipRule="evenodd"/>
                         </svg>
-                        <div className="font-medium text-xl text-neutral-700">
+                        <div className="font-medium text-xl text-violet-700">
                             Skills
                         </div>
                     </div>
                 </div>
 
                 {openSkills && (
-                    <div className="mr-10 ml-10 pb-10 -mt-2 space-y-4">
+                    <div className="mr-10 ml-10 pb-10 -mt-2 space-y-4 max-md:w-11/12 max-md:mx-auto">
                         {skillsList.map((skills, index) => (
 
                             <div key={index} className="  -mt-2 space-y-4">

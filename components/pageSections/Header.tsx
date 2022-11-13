@@ -7,6 +7,7 @@ import {debounce} from '../../utils/debounce';
 import Dropdown from "../elementsUI/Dropdown";
 import LanguageSwitcher from "../elementsUI/LanguageSwitcher";
 import {useTranslation} from "react-i18next";
+import MenuDropdown from "../elementsUI/MenuDropdown";
 
 
 function Header() {
@@ -46,59 +47,77 @@ function Header() {
     return (
         <>
             {router.pathname !== '/auth/signin' ? (
-                <div style={{width: '100%', transition: 'top 0.5s', top: visible ? '0' : '-80px'}}
-                     className={'flex justify-between sticky top-0 z-50 bg-white px-4 py-2 shadow-sm items-center space-x-10'}
-                >
-                    <div className='relative h-10 w-10 flex-shrink-0 cursor-pointer hover:shadow-md '>
-                        <Link href="/">
-                            <img src='/logo.png' alt='logo'/>
-                        </Link>
-                    </div>
-                    <div className='flex'>
-                        <div className='flex items-center mx-7 xl:min-w-[300px] space-x-5  mr-3 px-3'>
-                            <div className=' hover:opacity-110 hover:text-violet-700 '>
-                            <Link href={ `/box/personal`  } className='flex  hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
-                                {t('Create CV')}
-                            </Link>
+                <nav  style={{width: '100%', transition: 'top 0.5s', top: visible ? '0' : '-80px'}}
+                    className="bg-white shadow-violet-200 shadow-sm absolute top-0 right-0 left-0 z-50 sticky">
+                    <div className=" mx-auto px-4">
+                        <div className="flex justify-between">
+                            <div className="flex space-x-7">
+                                <div>
+                                    <Link href="/" className="flex items-center py-2 px-2">
+                                        <div className="flex items-center py-2 px-2 ">
+                                            <img src="/logo.png" alt="Logo" className="h-12 w-12 mr-2 animation-button rounded"/>
+                                        </div>
+                                    </Link>
+                                </div>
                             </div>
-                            <div className='flex items-center  hover:text-blue-900'>
-                                <Dropdown name={t('Resume')} firstLink={t('Templates')} secondLink={t('Create Resume')}
-                                          createLink='/box/personal' createLink2='/box/templates'/>
+                            <div className="hidden md:flex items-center space-x-3 ">
+                                <div className="hidden md:flex items-center space-x-1">
+                                    <div
+                                        className="py-4 px-2 text-gray-600 font-semibold hover:text-violet-700 hover:border-b-4 border-violet-700 ">
+                                        <Link href={ `/box/personal`}>
+                                            {t('Create CV')}
+                                        </Link>
+                                    </div>
+                                    <div
+                                        className="py-4 px-2 text-gray-600 font-semibold hover:text-violet-700 hover:border-b-4 border-violet-700 ">
+                                        <Dropdown name={t('Resume')} firstLink={t('Templates')} secondLink={t('Create Resume')}
+                                                  createLink='/box/personal' createLink2='/box/templates'/>
+                                    </div>
+                                    <div
+                                        className="py-4 px-2 text-gray-600 font-semibold hover:text-violet-700 hover:border-b-4 border-violet-700 ">
+                                        <Link href={`/box/blog`}>
+                                            {t('Blog')}
+                                        </Link>
+                                    </div>
+                                    <div
+                                        className="py-4 px-2 text-gray-600 font-semibold hover:text-violet-700 hover:border-b-4 border-violet-700 ">
+                                        <Link href={`/box/faq`}>
+                                            {t('FAQ')}
+                                        </Link>
+                                    </div>
+                                    <div
+                                        className="py-4 px-2 text-gray-600 font-semibold hover:text-violet-700 hover:border-b-4 border-violet-700 ">
+                                        <LanguageSwitcher/>
+                                    </div>
+                                </div>
+
+                                {session ? (
+                                    <div className='flex'>
+                                        <div className='flex items-center space-x-2 p-2 cursor-pointer  '>
+                                            <Dropdown name={session?.user?.name} firstLink={t('Your profile')} secondLink={t('Settings')} createLink2='/box/profile' createLink='/box/settings'
+                                                      typeProfile='profile' imageProfile={`${session?.user?.image}`}/>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <div onClick={() => signin()}
+                                             className={"flex space-x-2 py-2 px-4 font-semibold text-white bg-violet-700 rounded animation-button"}
+                                        >
+                                            <div className='relative h-5 w-5 flex-shrink-0 hover:scale-95'>
+                                                <Image objectFit='contain' src="/login.svg"
+                                                       layout="fill" className='' alt=""/>
+                                            </div>
+                                            <p className='text-white '>{t("Login/Register")}</p>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
-                            <Link href={`/box/blog`}
-                                  className='flex hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
-                                {t('Blog')}
-                            </Link>
-                            <Link href={`/box/faq`}
-                                  className='flex hover:text-green-900 ring-1 ring-green-900 rounded-md p-1 shadow-sm hover:shadow-md'>
-                                {t('FAQ')}
-                            </Link>
-                            <div>
-                                <LanguageSwitcher/>
+                            <div className="md:hidden flex items-center">
+                                <MenuDropdown/>
                             </div>
                         </div>
-
-                        {session ? (
-                            <div className='flex'>
-                                <div className='flex items-center space-x-2 p-2 cursor-pointer '>
-                                    <Dropdown name={session?.user?.name} firstLink={t('Your profile')} secondLink={t('Settings')} createLink2='/box/profile' createLink='/box/settings'
-                                              typeProfile='profile' imageProfile={`${session?.user?.image}`}/>
-                                </div>
-                            </div>
-                        ) : (
-                            <div>
-                                <div onClick={() => signin()}
-                                     className='flex items-center space-x-2  cursor-pointer border  bg-violet-700 font-medium rounded-md py-1 px-3 xl:py-3 xl:px-6 hover:bg-violet-500'>
-                                    <div className='relative h-5 w-5 flex-shrink-0 hover:scale-95'>
-                                        <Image objectFit='contain' src="/login.svg"
-                                               layout="fill" className='' alt=""/>
-                                    </div>
-                                    <p className='text-white'>{t("Login/Register")}</p>
-                                </div>
-                            </div>
-                        )}
                     </div>
-                </div>
+                </nav>
             ) : (
                 <div
                     className='flex justify-between sticky top-0 z-50 bg-white px-4 py-2 shadow-sm items-center space-x-10'>

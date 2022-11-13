@@ -50,10 +50,10 @@ function Personal() {
                         className='shadow-2xl shadow-violet-500'
                         style={{
                             position: 'fixed',
-                            bottom: '80px',
-                            right: '80px',
-                            height: 80,
-                            width: 80,
+                            bottom: '70px',
+                            right: '10px',
+                            height: 70,
+                            width: 70,
                             background: 'white',
                             display: "flex",
                             justifyContent: 'center',

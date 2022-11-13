@@ -44,7 +44,7 @@ function ExperiencePage() {
                     <div className="items-center text-center pt-10">
                         <Link href="/box/sample">
                             <button
-                                className="bg-violet-700  px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto">
+                                className="bg-violet-700  px-12 py-3 rounded-md hover:shadow-md  shadow-sm flex ml-auto mr-auto animation-button">
                                 <div className="text-white text-lg font-semibold">
                                     The next step
                                 </div>
@@ -65,10 +65,10 @@ function ExperiencePage() {
                     className='shadow-2xl shadow-violet-500'
                     style={{
                         position: 'fixed',
-                        bottom: '80px',
-                        right: '180px',
-                        height: 80,
-                        width: 80,
+                        bottom: '60px',
+                        left: '10px',
+                        height: 70,
+                        width: 70,
                         background: 'white',
                         display: "flex",
                         justifyContent: 'center',

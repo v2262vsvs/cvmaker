@@ -86,13 +86,13 @@ const Settings = () => {
         <>
             <HeadMeta title={'CV - Settings'} content={'Setting your profile'}/>
 
-            <div className='flex flex-col container mx-auto mt-16 absolute left-28 z-20'>
+            <div className='flex flex-col  mx-auto lg:mt-16 absolute lg:left-28 z-20 left-6 mt-6 max-[758px]:h-[1000px]'>
                 <div className="font-extrabold text-violet-700 text-4xl">
                     {t('Profile Settings')}
                 </div>
                 <div>
                     <div className={'my-7 text-gray-500 '}>{t('PERSONAL DATA IN CV')}</div>
-                    <form className="bg-white w-[835px] p-8 rounded-xl shadow-violetShadow">
+                    <form className="bg-white w-[835px] p-8 rounded-xl shadow-violetShadow max-[886px]:w-11/12">
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -114,7 +114,7 @@ const Settings = () => {
                             </div>
                         </div>
                         <div className="flex flex-wrap -mx-3 mb-6">
-                            <div className="w-1/2 px-3">
+                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                        htmlFor="grid-password">
                                     {t('Email address')}
@@ -123,7 +123,7 @@ const Settings = () => {
                                     className="appearance-none block w-full bg-violet-50 text-gray-700 border border-violet-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-violet-500"
                                     name={'email'}/>
                             </div>
-                            <div className="w-1/2 mt-12 px-3 ">
+                            <div className="w-full md:w-1/2 px-3 md:mt-12">
                                 <button
                                     onClick={handleSave}
                                     className={'text-violet-700 font-bold'}>{t('SAVE')}</button>
@@ -133,10 +133,10 @@ const Settings = () => {
                 </div>
                 <div>
                     <div className={'my-7 text-gray-500 '}>{t('DANGER ZONE')}</div>
-                    <div className={'flex bg-white w-[835px] p-8 rounded-xl justify-between shadow-violetShadow'}>
+                    <div className={'flex flex-wrap bg-white w-[835px] p-8 rounded-xl justify-between shadow-violetShadow  max-[886px]:w-11/12'}>
                         <div>{t("IF YOU DELETE YOUR ACCOUNT, IT CANNOT BE RESTORED")}</div>
                         <button
-                            className={'text-red-700 font-bold'}
+                            className={'text-red-700 font-bold max-[710px]:mt-6'}
                             onClick={openModal}
                         >{t('DELETE')}</button>
                     </div>
@@ -144,12 +144,12 @@ const Settings = () => {
 
             </div>
             <svg
-                className={'absolute bottom-0 right-0 z-10 pl-10'}
+                className={'absolute bottom-0 right-0 z-10 pl-10 max-[768px]:hidden'}
                 width="731" height="712" viewBox="0 0 731 712" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M376.058 83.2308C396.786 -1.07696 518.214 -1.07692 538.942 83.2309C552.332 137.693 615.522 163.538 663.991 134.377C739.021 89.2347 824.884 174.018 779.167 248.105C749.635 295.964 775.809 358.36 830.964 371.582C916.345 392.049 916.345 511.951 830.964 532.418C775.809 545.639 749.635 608.036 779.167 655.895C824.884 729.982 739.021 814.765 663.991 769.623C615.522 740.462 552.332 766.307 538.942 820.769C518.214 905.077 396.786 905.077 376.058 820.769C362.668 766.307 299.478 740.462 251.009 769.623C175.979 814.765 90.1162 729.982 135.833 655.895C165.365 608.036 139.191 545.639 84.0359 532.418C-1.34527 511.951 -1.34531 392.049 84.0358 371.582C139.191 358.36 165.365 295.964 135.833 248.105C90.1162 174.018 175.979 89.2347 251.009 134.377C299.478 163.538 362.668 137.693 376.058 83.2308Z" stroke="#8B5CF6" strokeWidth="40" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M603.333 452C603.333 531.529 538.042 596 457.5 596C376.958 596 311.667 531.529 311.667 452C311.667 372.471 376.958 308 457.5 308C538.042 308 603.333 372.471 603.333 452Z" stroke="#8B5CF6" strokeWidth="40" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            <div className="shadow-xl fixed bottom-0 ">
+            <div className="shadow-xl fixed bottom-0 z-30">
                 <Footer />
             </div>
 

@@ -29,20 +29,21 @@ export default function Dropdown(props: any) {
     }
 
     return (
-        <Menu as="div" className="relative inline-block text-left">
+        <Menu as="div" className="relative inline-block text-left ">
             <div>
                 <Menu.Button
                     className={classNames(
-                        typeProfile ? 'inline-flex w-full justify-center rounded-lg border border-gray-300 bg-violet-700 px-4 py-2 text-sm font-medium text-white shadow-sm hover:shadow-lg focus:outline-none '
+                        typeProfile ? 'inline-flex  w-full justify-between rounded-lg border border-gray-300 bg-violet-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:shadow-lg focus:outline-none ' +
+                            'animation-button'
                             : 'inline-flex justify-center hover:text-violet-700'
                     )}
                     >
                     {typeProfile &&
-                        <div className='relative h-6 w-6 mr-3'>
+                        <div className='relative h-6 w-6 mr-2 '>
                             <Image objectFit='contain' src={imageProfile} layout="fill" className='rounded-full' alt='/'/>
                         </div>}
-                    {name}
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                    <div className={`${typeProfile ? 'py-0.5' : ''}`}>{name}</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mt-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd"
                               d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                               clipRule="evenodd"/>
@@ -59,7 +60,7 @@ export default function Dropdown(props: any) {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white  ring-1 ring-violet-500 ring-opacity-5 focus:outline-none font-semibold shadow-violetShadowMenu">
                     <div className="py-1">
                         <div onClick={()=>handleRoute2()} className=''>
                         <Menu.Item>
@@ -67,7 +68,7 @@ export default function Dropdown(props: any) {
                                 <a
 
                                     className={classNames(
-                                        active ? 'bg-violet-200 text-gray-900' : 'text-gray-700',
+                                        active ? 'bg-violet-200 text-violet-700' : 'text-gray-600',
                                         'block px-4 py-2 text-sm'
                                     )}
                                 >
@@ -82,7 +83,7 @@ export default function Dropdown(props: any) {
                                 <a
 
                                     className={classNames(
-                                        active ? 'bg-violet-200 text-gray-900' : 'text-gray-700',
+                                        active ? 'bg-violet-200 text-violet-700' : 'text-gray-600',
                                         'block px-4 py-2 text-sm'
                                     )}
                                 >
@@ -98,7 +99,7 @@ export default function Dropdown(props: any) {
                                         <button
 
                                             className={classNames(
-                                                active ? 'bg-violet-200 text-violet-800' : 'text-violet-700',
+                                                active ? 'bg-violet-200 text-violet-700' : 'text-violet-400',
                                                 'block w-full px-4 py-2 text-left text-sm'
                                             )}
                                         >

@@ -357,7 +357,7 @@ export default function CvSampleCards() {
 
     return (
         <>
-            <div className='flex items-center space-x-3 overflow-x-scroll overflow-y-hidden overflow-clip scrollbar-hide w-[1400px] py-5 px-3 ml-auto mr-auto'>
+            <div className='flex items-center space-x-3 overflow-x-scroll overflow-y-hidden overflow-clip scrollbar-hide lg:w-[1400px]  py-5 px-3 ml-auto mr-auto max-[1403px]:mobile-view'>
                 <div onClick={()=>openModal(2)}>
                     <CVpdfOtago
                         {...SampleData}
