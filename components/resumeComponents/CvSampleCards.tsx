@@ -357,7 +357,29 @@ export default function CvSampleCards() {
 
     return (
         <>
+
+
             <div className='flex items-center space-x-3 overflow-x-scroll overflow-y-hidden overflow-clip scrollbar-hide lg:w-[1400px]  py-5 px-3 ml-auto mr-auto max-[1403px]:mobile-view'>
+                {/*<div className='mr-10 mt-7'>*/}
+                {/*    <div*/}
+                {/*        className={'rounded-full bg-gray-800'}*/}
+                {/*        onClick={()=>changeColor('black')}>{isColor}</div>*/}
+                {/*    <div*/}
+                {/*        onClick={()=>changeColor('violet')}*/}
+                {/*        className={'rounded-full bg-violet-800'}>violet</div>*/}
+                {/*    <div*/}
+                {/*        onClick={()=>changeColor('blue')}*/}
+                {/*        className={'rounded-full bg-blue-500'}>blue</div>*/}
+                {/*    <div*/}
+                {/*        onClick={()=>changeColor('green')}*/}
+                {/*        className={'rounded-full bg-green-500'}>green</div>*/}
+                {/*    <div*/}
+                {/*        onClick={()=>changeColor('yellow')}*/}
+                {/*        className={'rounded-full bg-yellow-400'}>yellow</div>*/}
+                {/*    <div*/}
+                {/*        onClick={()=>changeColor('red')}*/}
+                {/*        className={'rounded-full bg-red-700'}>red</div>*/}
+                {/*</div>*/}
                 <div onClick={()=>openModal(2)}>
                     <CVpdfOtago
                         {...SampleData}
@@ -382,6 +404,30 @@ export default function CvSampleCards() {
                     <CVpdfSparkle
                         {...SampleData}
                     />
+                </div>
+
+            </div>
+
+            <div className={'flex '}>
+                <div className='flex mx-auto max-sm:-mt-14'>
+                    <div
+                        className={'rounded-full bg-gray-800 w-10 h-10'}
+                        onClick={()=>changeColor('black')}></div>
+                    <div
+                        onClick={()=>changeColor('violet')}
+                        className={'rounded-full bg-violet-800 w-10 h-10'}></div>
+                    <div
+                        onClick={()=>changeColor('blue')}
+                        className={'rounded-full bg-blue-500 w-10 h-10'}></div>
+                    <div
+                        onClick={()=>changeColor('green')}
+                        className={'rounded-full bg-green-500 w-10 h-10'}></div>
+                    <div
+                        onClick={()=>changeColor('yellow')}
+                        className={'rounded-full bg-yellow-400 w-10 h-10'}></div>
+                    <div
+                        onClick={()=>changeColor('red')}
+                        className={'rounded-full bg-red-700 w-10 h-10'}></div>
                 </div>
             </div>
 
@@ -419,25 +465,25 @@ export default function CvSampleCards() {
                                                 <Samples/>
                                             </div>
                                         </div>
-                                        <div className='w-7/12 mt-7'>
+                                        <div className='w-7/12 mt-7 z-10 flex-row ml-11'>
                                             <div
-                                                className={'rounded-full bg-gray-800'}
-                                                onClick={()=>changeColor('black')}>{isColor}</div>
+                                                className={'rounded-full bg-gray-800 w-16 h-6'}
+                                                onClick={()=>changeColor('black')}></div>
                                             <div
                                                 onClick={()=>changeColor('violet')}
-                                                className={'rounded-full bg-violet-800'}>violet</div>
+                                                className={'rounded-full bg-violet-800 w-16 h-6'}></div>
                                             <div
                                                 onClick={()=>changeColor('blue')}
-                                                className={'rounded-full bg-blue-500'}>blue</div>
+                                                className={'rounded-full bg-blue-500 w-16 h-6'}></div>
                                             <div
                                                 onClick={()=>changeColor('green')}
-                                                className={'rounded-full bg-green-500'}>green</div>
+                                                className={'rounded-full bg-green-500 w-16 h-6'}></div>
                                             <div
                                                 onClick={()=>changeColor('yellow')}
-                                                className={'rounded-full bg-yellow-400'}>yellow</div>
+                                                className={'rounded-full bg-yellow-400 w-16 h-6'}></div>
                                             <div
                                                 onClick={()=>changeColor('red')}
-                                                className={'rounded-full bg-red-700'}>red</div>
+                                                className={'rounded-full bg-red-700 w-16 h-6'}></div>
                                         </div>
                                     </div>
 
@@ -484,8 +530,8 @@ export default function CvSampleCards() {
 
             {isConfetti &&
                 <Confetti
-                    width={window.innerWidth - 50}
-                    height={window.innerHeight + 50}
+                    width={window.innerWidth -15}
+                    height={window.innerHeight + 330}
                     numberOfPieces={500}
                 />}
 

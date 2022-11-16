@@ -44,7 +44,7 @@ const Templates = () => {
                     </div>
                 </div>
             </div>
-            <div className="shadow-xl fixed bottom-0">
+            <div className="shadow-xl  bg-white">
                 <Footer />
             </div>
         </div>

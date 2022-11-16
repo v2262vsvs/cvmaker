@@ -177,7 +177,7 @@ const PersonalForm = () => {
                             <input
                                 value={personal.name || ''}
                                 onChange={(e) => handleChangePersonal(e, "name")}
-                                className=" ring-2 ring-gray-200 px-4 py-3 rounded-sm w-full outline-none"
+                                className=" px-4 py-3  w-full outline-none appearance-none block w-full bg-violet-50 text-gray-700 border border-violet-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-violet-500"
                                 placeholder=""
                                 type='text'
                                 name='name'
@@ -193,7 +193,7 @@ const PersonalForm = () => {
                             <input
                                 value={personal.surname || ''}
                                 onChange={(e) => handleChangePersonal(e, "surname")}
-                                className="ring-2 ring-gray-200 px-4 py-3 rounded-sm w-full outline-none"
+                                className="appearance-none block w-full bg-violet-50 text-gray-700 border border-violet-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-violet-500"
                                 placeholder=""
                                 type='text'
                                 name='lastname'
@@ -213,7 +213,7 @@ const PersonalForm = () => {
                             <input
                                 value={personal.email || ''}
                                 onChange={(e) => handleChangePersonal(e, "email")}
-                                className="ring-2 ring-gray-200 px-4 py-3 rounded-sm w-full outline-none"
+                                className="appearance-none block w-full bg-violet-50 text-gray-700 border border-violet-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-violet-500"
                                 placeholder=""
                                 type='email'
                                 name='email'
@@ -228,7 +228,7 @@ const PersonalForm = () => {
                             <input
                                 value={personal.phone || ''}
                                 onChange={(e) => handleChangePersonal(e, "phone")}
-                                className="ring-2 ring-gray-200 px-4 py-3 rounded-sm w-full outline-none"
+                                className="appearance-none block w-full bg-violet-50 text-gray-700 border border-violet-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-violet-500"
                                 placeholder=""
                                 type='tel'
                                 name='telephone'
@@ -242,7 +242,7 @@ const PersonalForm = () => {
                             <input
                                 value={personal.address || ''}
                                 onChange={(e) => handleChangePersonal(e, "address")}
-                                className="ring-2 ring-gray-200 px-4 py-3 rounded-sm w-full outline-none"
+                                className="appearance-none block w-full bg-violet-50 text-gray-700 border border-violet-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-violet-500"
                                 placeholder=""
                                 type='text'
                             />
@@ -255,7 +255,7 @@ const PersonalForm = () => {
                             <input
                                 value={personal.postalcode || ''}
                                 onChange={(e) => handleChangePersonal(e, "postalcode")}
-                                className="ring-2 ring-gray-200 px-4 py-3 rounded-sm w-full outline-none"
+                                className="appearance-none block w-full bg-violet-50 text-gray-700 border border-violet-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-violet-500"
                                 placeholder=""
                             />
                         </div>
@@ -264,7 +264,7 @@ const PersonalForm = () => {
                             <input
                                 value={personal.city || ''}
                                 onChange={(e) => handleChangePersonal(e, "city")}
-                                className="ring-2 ring-gray-200 px-4 py-3 rounded-sm w-full outline-none"
+                                className="appearance-none block w-full bg-violet-50 text-gray-700 border border-violet-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-violet-500"
                                 placeholder=""
                                 type='text'
                                 name='city'

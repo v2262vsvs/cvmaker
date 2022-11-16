@@ -179,7 +179,7 @@ function Profile() {
 
     return (
         <>
-            <div className="bg-violet-50 h-full overflow-y-hidden">
+            <div className="bg-violet-50 h-full overflow-y-hidden mb-24 mt-0.5">
                 <div className=" h-full w-full bg-violet-50 relative">
                     <HeadMeta title={'Your Profile'} content={'add later some text'}/>
                     <div className="mt-5 sm:mx-20 max-sm:mx-5">
@@ -338,18 +338,20 @@ function Profile() {
                         </PDFExport>
                     </div>
 
-                    {isConfetti &&
-                        <Confetti
-                            width={window.innerWidth - 50}
-                            height={window.innerHeight + 50}
-                            numberOfPieces={500}
-                            className={'-mt-20'}
-                        />}
 
-                    <div className="shadow-xl fixed bottom-0  ">
-                        <Footer/>
-                    </div>
+
+
                 </div>
+            </div>
+            {isConfetti &&
+                <Confetti
+                    width={window.innerWidth - 15}
+                    height={window.innerHeight + 200}
+                    numberOfPieces={500}
+                    className={'-mt-20'}
+                />}
+            <div className="shadow-xl bg-white overflow-x-hidden">
+                <Footer/>
             </div>
         </>
     );
