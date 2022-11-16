@@ -26,7 +26,7 @@
         @apply transition ease-in-out delay-150  hover:scale-110 hover:bg-violet-500 duration-300
     }
     .mobile-view {
-        @apply flex items-center -space-x-14 overflow-x-scroll overflow-clip scale-90
+        @apply flex items-center -space-x-14 overflow-x-scroll overflow-clip scale-75
     }
 
 

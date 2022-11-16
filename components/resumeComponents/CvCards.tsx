@@ -40,7 +40,7 @@ const CvCards: any = () => {
             <div className='mt-12 lg:grid lg:grid-cols-3 mx-auto my-auto container gap-y-8  max-[1020px]:mobile-view'>
                 {router.pathname == step1 &&
                     DATA?.map((cv: any) => (
-                        <div key={ID[0]++} className={' mb-12'}>
+                        <div key={ID[0]++} className={' '}>
                             {cv.sample == 1 && (
                                 <CVpdfStanford
                                     personal={cv.userinfoList[0]}
