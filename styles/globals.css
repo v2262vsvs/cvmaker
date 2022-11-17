@@ -28,6 +28,9 @@
     .mobile-view {
         @apply flex items-center -space-x-14 overflow-x-scroll overflow-clip scale-75
     }
+    .animation-footer {
+        @apply transition ease-in-out delay-150  hover:scale-125 duration-300
+    }
 
 
 
@@ -302,11 +305,33 @@ input:-webkit-autofill:focus {
     height: 60px;
 }
 /*для таблиц в резюме berkeley*/
-.wrap2 ul {
-    list-style-position: inside;
-    -moz-column-count: 3; /* Firefox */
-    -webkit-column-count: 3; /* Safari and Chrome */
-    column-count: 3;
-    height: 70px;
+
+/*animation in navbar*/
+.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 50px;
 }
 
+.center:before,
+.center:after,
+.center div {
+    background: rgb(109,40, 217);
+    content: "";
+    display: block;
+    height: 6px;
+    border-radius: 3px;
+    margin: 7px 0;
+    transition: 0.5s;
+}
+.center:hover:before {
+    transform: translateY(12px) rotate(135deg);
+}
+.center:hover:after {
+    transform: translateY(-12px) rotate(-135deg);
+}
+.center:hover div {
+    transform: scale(0);
+}

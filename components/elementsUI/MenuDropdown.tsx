@@ -23,10 +23,10 @@ export default function MenuDropdown() {
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
-                <Menu.Button className="inline-flex w-full justify-center rounded-md   bg-white px-2 py-2 transition ease-in-out delay-150  hover:scale-110  duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-violet-700">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
-                    </svg>
+                <Menu.Button className=" inline-flex w-full justify-center rounded-md   bg-white px-3 py-2 transition ease-in-out delay-150  hover:scale-110  duration-300">
+                    <div className="center text-violet-700 p-2">
+                        <div></div>
+                    </div>
                 </Menu.Button>
             </div>
 
