@@ -55,7 +55,7 @@ function Header() {
                                 <div>
                                     <Link href="/" className="flex items-center py-2 px-2">
                                         <div className="flex items-center py-2 px-2 ">
-                                            <img src="/logo.png" alt="Logo" className="h-12 w-12 mr-2 animation-button rounded"/>
+                                            <img src="/logo.svg" alt="Logo" className="h-12 w-12 mr-2 animation-footer rounded"/>
                                         </div>
                                     </Link>
                                 </div>
@@ -89,6 +89,14 @@ function Header() {
                                         className="py-4 px-2 text-gray-600 font-semibold hover:text-violet-700 hover:border-b-4 border-violet-700 ">
                                         <LanguageSwitcher/>
                                     </div>
+                                    {/*<div className={'bg-violet-700'}>*/}
+                                    {/*    <label htmlFor="check">*/}
+                                    {/*        <input type="checkbox" id="check"/>*/}
+                                    {/*        <span></span>*/}
+                                    {/*        <span></span>*/}
+                                    {/*        <span></span>*/}
+                                    {/*    </label>*/}
+                                    {/*</div>*/}
                                 </div>
 
                                 {session ? (

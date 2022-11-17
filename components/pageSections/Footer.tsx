@@ -14,14 +14,10 @@ const Footer = () => {
                     © 2022 <a href="https://cvmaker-gamma.vercel.app/" target="_blank" rel="noreferrer" className="hover:underline">{t('CV - online constructor')}</a>.   {t('All Rights Reserved.')}
                 </span>
                     <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
-                        <a href="components/pageSections/Footer#" className="text-gray-500 hover:text-gray-900 ">
-                            <img src='/facebook.svg' alt='facebook'/>
+                        <a href="https://www.figma.com/file/pVTfLw30EJGdAV1XgX2FIl/CV-project?t=TO5w7dPxEKaBqVZR-1" className=" mt-0.5 animation-footer" target="_blank">
+                            <img src='/figma.svg' alt='figma'/>
                         </a>
-                        <a href="components/pageSections/Footer#" className="text-gray-500 hover:text-gray-900 ">
-                            <img src='/twitter.svg' alt='twitter'/>
-
-                        </a>
-                        <a href="components/pageSections/Footer#" className="text-gray-500 hover:text-gray-900">
+                        <a href="https://github.com/v2262vsvs/cvmaker.git" className={'animation-footer'} target="_blank">
                             <img src='/github.svg' alt='github'/>
                         </a>
                     </div>

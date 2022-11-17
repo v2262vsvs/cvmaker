@@ -33,7 +33,7 @@ export default function Dropdown(props: any) {
             <div>
                 <Menu.Button
                     className={classNames(
-                        typeProfile ? 'inline-flex  w-full justify-between rounded-lg border border-gray-300 bg-violet-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:shadow-lg focus:outline-none ' +
+                        typeProfile ? 'inline-flex  w-full justify-between rounded-lg border  bg-violet-700 px-4 py-2 text-sm font-semibold text-white focus:outline-none ' +
                             'animation-button'
                             : 'inline-flex justify-center hover:text-violet-700'
                     )}
